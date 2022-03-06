@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.grpc.orderService";
+option java_outer_classname = "AutomateOrdersImpl";
+
+message orderRequest{
+  string item = 1;
+  int32 quantity = 2;
+}
+
+message orderResponse{
+  string message = 1;
+}
+
+message reportRequest{
+  string date_one = 1;
+  string date_two = 2;
+}
+
+message reportResponse{
+  string message = 1;
+}
+
+//Explain method & message payload for all
+service orderService{
+  //unary: Client sends 1 request, 1 response
+  /*
+    create an order request, respond with order confirmation
+  */
+  rpc createOrder(orderRequest) returns (orderResponse){};
+
+  //server Stream: 1 request, Many responses
+  /*
+    report completed orders
+  */
+  rpc generateReportStream(reportRequest) returns (stream reportResponse){}; //belongs in warehouse service
+
+  //Bi-direction: send multiple requests and responses
+  /*
+    send orders, responed with receipts
+  */
+
+
+  //write createOrder to csv file
+  //use the order id to generate receipt
+}

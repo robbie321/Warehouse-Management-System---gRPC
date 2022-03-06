@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.grpc.warehouseService";
+
+//Explain method & message payload for all
+service checkStock{
+  //unary
+  /*
+      login operation to access warehouse updater
+  */
+
+  //client Stream
+  /*
+      add products to warehouse
+  */
+
+  //server Stream
+  /*
+  remove some items
+  */
+
+  //Bi-direction
+  /*
+    check multiple items/categories
+  */
+}
