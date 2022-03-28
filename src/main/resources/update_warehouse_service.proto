@@ -3,25 +3,46 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "com.grpc.warehouseService";
 
+message reportRequest{
+  string date = 1;
+}
+
+message reportResponse{
+  string message = 1;
+}
+
+message orderRequest{
+  string orderNumber = 1;
+}
+
+message orderResponse{
+  string orderNumber = 1;
+  string order = 2;
+}
+
+message shippingResponse{
+  string name = 1;
+  string address = 2;
+  string country = 3;
+}
+
 //Explain method & message payload for all
-service checkStock{
-  //unary
+service warehouseService{
+  //server Stream: 1 request, Many responses
   /*
-      login operation to access warehouse updater
+    report completed orders
   */
+  rpc generateReportStream(reportRequest) returns (stream reportResponse){};
 
   //client Stream
   /*
-      add products to warehouse
+      search order number
   */
-
-  //server Stream
-  /*
-  remove some items
-  */
+  rpc reportAnOrder(orderRequest) returns (orderResponse){};
 
   //Bi-direction
   /*
-    check multiple items/categories
+    Send shipping information
   */
+  rpc sendShippingInfo(orderRequest) returns (shippingResponse){};
 }

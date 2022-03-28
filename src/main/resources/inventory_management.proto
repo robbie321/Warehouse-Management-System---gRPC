@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+import 'automate_orders.proto';
+
+option java_multiple_files = true;
+option java_package = "com.grpc.stockCheckerService";
+
+message lowStockRequest{
+  int32 quantity = 1;
+}
+
+message lowStockResponse{
+  string message = 1;
+  repeated product products = 2;
+}
+
+//Explain method & message payload for all
+service inventoryCheckerService{
+  //unary
+  /*
+    Add products to stock
+  */
+  rpc addProductsToStock(product) returns (product){};
+
+  //unary
+  /*
+    Update Stock info of a product
+  */
+  rpc updateProductInfo(product) returns (product){};
+
+
+  //server Stream
+  /*
+      check how many items have less than 10 items in stock, send back multiple items
+  */
+  rpc checkLowStock(lowStockRequest) returns (lowStockResponse){};
+
+
+}

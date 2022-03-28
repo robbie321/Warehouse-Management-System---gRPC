@@ -62,36 +62,68 @@ public final class orderServiceGrpc {
      return getCreateOrderMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.grpc.orderService.reportRequest,
-      com.grpc.orderService.reportResponse> getGenerateReportStreamMethod;
+  private static volatile io.grpc.MethodDescriptor<com.grpc.orderService.StockQuoteRequest,
+      com.grpc.orderService.StockQuoteResponse> getStreamStockQuoteMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "generateReportStream",
-      requestType = com.grpc.orderService.reportRequest.class,
-      responseType = com.grpc.orderService.reportResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<com.grpc.orderService.reportRequest,
-      com.grpc.orderService.reportResponse> getGenerateReportStreamMethod() {
-    io.grpc.MethodDescriptor<com.grpc.orderService.reportRequest, com.grpc.orderService.reportResponse> getGenerateReportStreamMethod;
-    if ((getGenerateReportStreamMethod = orderServiceGrpc.getGenerateReportStreamMethod) == null) {
+      fullMethodName = SERVICE_NAME + '/' + "streamStockQuote",
+      requestType = com.grpc.orderService.StockQuoteRequest.class,
+      responseType = com.grpc.orderService.StockQuoteResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+  public static io.grpc.MethodDescriptor<com.grpc.orderService.StockQuoteRequest,
+      com.grpc.orderService.StockQuoteResponse> getStreamStockQuoteMethod() {
+    io.grpc.MethodDescriptor<com.grpc.orderService.StockQuoteRequest, com.grpc.orderService.StockQuoteResponse> getStreamStockQuoteMethod;
+    if ((getStreamStockQuoteMethod = orderServiceGrpc.getStreamStockQuoteMethod) == null) {
       synchronized (orderServiceGrpc.class) {
-        if ((getGenerateReportStreamMethod = orderServiceGrpc.getGenerateReportStreamMethod) == null) {
-          orderServiceGrpc.getGenerateReportStreamMethod = getGenerateReportStreamMethod = 
-              io.grpc.MethodDescriptor.<com.grpc.orderService.reportRequest, com.grpc.orderService.reportResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+        if ((getStreamStockQuoteMethod = orderServiceGrpc.getStreamStockQuoteMethod) == null) {
+          orderServiceGrpc.getStreamStockQuoteMethod = getStreamStockQuoteMethod = 
+              io.grpc.MethodDescriptor.<com.grpc.orderService.StockQuoteRequest, com.grpc.orderService.StockQuoteResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
               .setFullMethodName(generateFullMethodName(
-                  "orderService", "generateReportStream"))
+                  "orderService", "streamStockQuote"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.grpc.orderService.reportRequest.getDefaultInstance()))
+                  com.grpc.orderService.StockQuoteRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.grpc.orderService.reportResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new orderServiceMethodDescriptorSupplier("generateReportStream"))
+                  com.grpc.orderService.StockQuoteResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new orderServiceMethodDescriptorSupplier("streamStockQuote"))
                   .build();
           }
         }
      }
-     return getGenerateReportStreamMethod;
+     return getStreamStockQuoteMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.grpc.orderService.product,
+      com.grpc.orderService.Cart> getTotalCartValueMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "totalCartValue",
+      requestType = com.grpc.orderService.product.class,
+      responseType = com.grpc.orderService.Cart.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+  public static io.grpc.MethodDescriptor<com.grpc.orderService.product,
+      com.grpc.orderService.Cart> getTotalCartValueMethod() {
+    io.grpc.MethodDescriptor<com.grpc.orderService.product, com.grpc.orderService.Cart> getTotalCartValueMethod;
+    if ((getTotalCartValueMethod = orderServiceGrpc.getTotalCartValueMethod) == null) {
+      synchronized (orderServiceGrpc.class) {
+        if ((getTotalCartValueMethod = orderServiceGrpc.getTotalCartValueMethod) == null) {
+          orderServiceGrpc.getTotalCartValueMethod = getTotalCartValueMethod = 
+              io.grpc.MethodDescriptor.<com.grpc.orderService.product, com.grpc.orderService.Cart>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+              .setFullMethodName(generateFullMethodName(
+                  "orderService", "totalCartValue"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.grpc.orderService.product.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.grpc.orderService.Cart.getDefaultInstance()))
+                  .setSchemaDescriptor(new orderServiceMethodDescriptorSupplier("totalCartValue"))
+                  .build();
+          }
+        }
+     }
+     return getTotalCartValueMethod;
   }
 
   /**
@@ -136,12 +168,24 @@ public final class orderServiceGrpc {
 
     /**
      * <pre>
-     *report completed orders
+     **
+     *Client sends 1 or multiple requests, server responds with 1 result
      * </pre>
      */
-    public void generateReportStream(com.grpc.orderService.reportRequest request,
-        io.grpc.stub.StreamObserver<com.grpc.orderService.reportResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getGenerateReportStreamMethod(), responseObserver);
+    public io.grpc.stub.StreamObserver<com.grpc.orderService.StockQuoteRequest> streamStockQuote(
+        io.grpc.stub.StreamObserver<com.grpc.orderService.StockQuoteResponse> responseObserver) {
+      return asyncUnimplementedStreamingCall(getStreamStockQuoteMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     **
+     *Client can send 1 or multiple requests, server responds with 1 cart result
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<com.grpc.orderService.product> totalCartValue(
+        io.grpc.stub.StreamObserver<com.grpc.orderService.Cart> responseObserver) {
+      return asyncUnimplementedStreamingCall(getTotalCartValueMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
@@ -154,12 +198,19 @@ public final class orderServiceGrpc {
                 com.grpc.orderService.orderResponse>(
                   this, METHODID_CREATE_ORDER)))
           .addMethod(
-            getGenerateReportStreamMethod(),
-            asyncServerStreamingCall(
+            getStreamStockQuoteMethod(),
+            asyncClientStreamingCall(
               new MethodHandlers<
-                com.grpc.orderService.reportRequest,
-                com.grpc.orderService.reportResponse>(
-                  this, METHODID_GENERATE_REPORT_STREAM)))
+                com.grpc.orderService.StockQuoteRequest,
+                com.grpc.orderService.StockQuoteResponse>(
+                  this, METHODID_STREAM_STOCK_QUOTE)))
+          .addMethod(
+            getTotalCartValueMethod(),
+            asyncClientStreamingCall(
+              new MethodHandlers<
+                com.grpc.orderService.product,
+                com.grpc.orderService.Cart>(
+                  this, METHODID_TOTAL_CART_VALUE)))
           .build();
     }
   }
@@ -198,13 +249,26 @@ public final class orderServiceGrpc {
 
     /**
      * <pre>
-     *report completed orders
+     **
+     *Client sends 1 or multiple requests, server responds with 1 result
      * </pre>
      */
-    public void generateReportStream(com.grpc.orderService.reportRequest request,
-        io.grpc.stub.StreamObserver<com.grpc.orderService.reportResponse> responseObserver) {
-      asyncServerStreamingCall(
-          getChannel().newCall(getGenerateReportStreamMethod(), getCallOptions()), request, responseObserver);
+    public io.grpc.stub.StreamObserver<com.grpc.orderService.StockQuoteRequest> streamStockQuote(
+        io.grpc.stub.StreamObserver<com.grpc.orderService.StockQuoteResponse> responseObserver) {
+      return asyncClientStreamingCall(
+          getChannel().newCall(getStreamStockQuoteMethod(), getCallOptions()), responseObserver);
+    }
+
+    /**
+     * <pre>
+     **
+     *Client can send 1 or multiple requests, server responds with 1 cart result
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<com.grpc.orderService.product> totalCartValue(
+        io.grpc.stub.StreamObserver<com.grpc.orderService.Cart> responseObserver) {
+      return asyncClientStreamingCall(
+          getChannel().newCall(getTotalCartValueMethod(), getCallOptions()), responseObserver);
     }
   }
 
@@ -237,17 +301,6 @@ public final class orderServiceGrpc {
     public com.grpc.orderService.orderResponse createOrder(com.grpc.orderService.orderRequest request) {
       return blockingUnaryCall(
           getChannel(), getCreateOrderMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
-     *report completed orders
-     * </pre>
-     */
-    public java.util.Iterator<com.grpc.orderService.reportResponse> generateReportStream(
-        com.grpc.orderService.reportRequest request) {
-      return blockingServerStreamingCall(
-          getChannel(), getGenerateReportStreamMethod(), getCallOptions(), request);
     }
   }
 
@@ -285,7 +338,8 @@ public final class orderServiceGrpc {
   }
 
   private static final int METHODID_CREATE_ORDER = 0;
-  private static final int METHODID_GENERATE_REPORT_STREAM = 1;
+  private static final int METHODID_STREAM_STOCK_QUOTE = 1;
+  private static final int METHODID_TOTAL_CART_VALUE = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -308,10 +362,6 @@ public final class orderServiceGrpc {
           serviceImpl.createOrder((com.grpc.orderService.orderRequest) request,
               (io.grpc.stub.StreamObserver<com.grpc.orderService.orderResponse>) responseObserver);
           break;
-        case METHODID_GENERATE_REPORT_STREAM:
-          serviceImpl.generateReportStream((com.grpc.orderService.reportRequest) request,
-              (io.grpc.stub.StreamObserver<com.grpc.orderService.reportResponse>) responseObserver);
-          break;
         default:
           throw new AssertionError();
       }
@@ -322,6 +372,12 @@ public final class orderServiceGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_STREAM_STOCK_QUOTE:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.streamStockQuote(
+              (io.grpc.stub.StreamObserver<com.grpc.orderService.StockQuoteResponse>) responseObserver);
+        case METHODID_TOTAL_CART_VALUE:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.totalCartValue(
+              (io.grpc.stub.StreamObserver<com.grpc.orderService.Cart>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -374,7 +430,8 @@ public final class orderServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new orderServiceFileDescriptorSupplier())
               .addMethod(getCreateOrderMethod())
-              .addMethod(getGenerateReportStreamMethod())
+              .addMethod(getStreamStockQuoteMethod())
+              .addMethod(getTotalCartValueMethod())
               .build();
         }
       }

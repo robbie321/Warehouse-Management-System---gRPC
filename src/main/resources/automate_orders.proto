@@ -13,14 +13,39 @@ message orderResponse{
   string message = 1;
 }
 
-message reportRequest{
-  string date_one = 1;
-  string date_two = 2;
+//product
+message product{
+  string title = 1;
+  int32 quantity = 2;
 }
 
-message reportResponse{
+//quote
+message StockQuoteResponse{
   string message = 1;
+  repeated product products = 2;
+  int32 price = 3;
 }
+
+message StockQuoteRequest{
+  repeated product products = 1;
+  int32 quantity = 2;
+}
+
+//cart
+message Cart{
+  string message = 1;
+  int32 total = 2;
+  repeated product products = 3;
+}
+
+//message reportRequest{
+//  string date_one = 1;
+//  string date_two = 2;
+//}
+//
+//message reportResponse{
+//  string message = 1;
+//}
 
 //Explain method & message payload for all
 service orderService{
@@ -30,11 +55,23 @@ service orderService{
   */
   rpc createOrder(orderRequest) returns (orderResponse){};
 
+  //Client streaming
+  /**
+  Client sends 1 or multiple requests, server responds with 1 result
+  */
+  rpc streamStockQuote(stream StockQuoteRequest) returns (StockQuoteResponse){};
+
+  //client streaming
+  /**
+  Client can send 1 or multiple requests, server responds with 1 cart result
+  */
+  rpc totalCartValue(stream product) returns (Cart){}
+
   //server Stream: 1 request, Many responses
   /*
     report completed orders
   */
-  rpc generateReportStream(reportRequest) returns (stream reportResponse){}; //belongs in warehouse service
+//  rpc generateReportStream(reportRequest) returns (stream reportResponse){};
 
   //Bi-direction: send multiple requests and responses
   /*
