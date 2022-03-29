@@ -8,6 +8,7 @@ C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\orderSe
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\warehouseService\shippingResponseOrBuilder.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\StockQuoteRequest.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\orderResponse.java
+C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\warehouseService\Stock.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\productOrBuilder.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\warehouseService\orderRequest.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\warehouseService\reportRequestOrBuilder.java
@@ -17,7 +18,9 @@ C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\warehouseService\ord
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\stockCheckerService\lowStockRequest.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\warehouseService\warehouseServiceGrpc.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\stockCheckerService\lowStockRequestOrBuilder.java
+C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\filterPriceResponseOrBuilder.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\product.java
+C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\filterPriceRequest.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\orderResponseOrBuilder.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\StockQuoteResponseOrBuilder.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\orderRequestOrBuilder.java
@@ -25,9 +28,12 @@ C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\warehouseService\shi
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\stockCheckerService\InventoryManagement.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\StockQuoteResponse.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\StockQuoteRequestOrBuilder.java
+C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\warehouseService\WarehouseServer.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\warehouseService\reportRequest.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\warehouseService\orderResponseOrBuilder.java
-C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\Cart.java
-C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\CartOrBuilder.java
+C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\filterPriceRequestOrBuilder.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\OrdersServer.java
+C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\client\ClientController.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\stockCheckerService\inventoryCheckerServiceGrpc.java
+C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\filterPriceResponse.java
+C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\stockCheckerService\inventoryCheckerServiceImpl.java

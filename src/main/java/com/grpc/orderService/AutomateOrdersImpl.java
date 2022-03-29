@@ -40,10 +40,15 @@ public final class AutomateOrdersImpl {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_StockQuoteRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Cart_descriptor;
+    internal_static_filterPriceRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Cart_fieldAccessorTable;
+      internal_static_filterPriceRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_filterPriceResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_filterPriceResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -55,19 +60,21 @@ public final class AutomateOrdersImpl {
     java.lang.String[] descriptorData = {
       "\n\025automate_orders.proto\".\n\014orderRequest\022" +
       "\014\n\004item\030\001 \001(\t\022\020\n\010quantity\030\002 \001(\005\" \n\rorder" +
-      "Response\022\017\n\007message\030\001 \001(\t\"*\n\007product\022\r\n\005" +
-      "title\030\001 \001(\t\022\020\n\010quantity\030\002 \001(\005\"P\n\022StockQu" +
-      "oteResponse\022\017\n\007message\030\001 \001(\t\022\032\n\010products" +
-      "\030\002 \003(\0132\010.product\022\r\n\005price\030\003 \001(\005\"A\n\021Stock" +
-      "QuoteRequest\022\032\n\010products\030\001 \003(\0132\010.product" +
-      "\022\020\n\010quantity\030\002 \001(\005\"B\n\004Cart\022\017\n\007message\030\001 " +
-      "\001(\t\022\r\n\005total\030\002 \001(\005\022\032\n\010products\030\003 \003(\0132\010.p" +
-      "roduct2\246\001\n\014orderService\022.\n\013createOrder\022\r" +
-      ".orderRequest\032\016.orderResponse\"\000\022?\n\020strea" +
-      "mStockQuote\022\022.StockQuoteRequest\032\023.StockQ" +
-      "uoteResponse\"\000(\001\022%\n\016totalCartValue\022\010.pro" +
-      "duct\032\005.Cart\"\000(\001B-\n\025com.grpc.orderService" +
-      "B\022AutomateOrdersImplP\001b\006proto3"
+      "Response\022\017\n\007message\030\001 \001(\t\"[\n\007product\022\020\n\010" +
+      "stock_id\030\001 \001(\005\022\014\n\004cost\030\002 \001(\002\022\024\n\014product_" +
+      "name\030\003 \001(\t\022\032\n\022quantity_available\030\004 \001(\005\"4" +
+      "\n\022StockQuoteResponse\022\017\n\007message\030\001 \001(\t\022\r\n" +
+      "\005price\030\003 \001(\002\"@\n\021StockQuoteRequest\022\031\n\007pro" +
+      "duct\030\001 \001(\0132\010.product\022\020\n\010quantity\030\002 \001(\005\"&" +
+      "\n\022filterPriceRequest\022\020\n\010maxPrice\030\001 \001(\005\"0" +
+      "\n\023filterPriceResponse\022\031\n\007product\030\001 \001(\0132\010" +
+      ".product2\275\001\n\014orderService\022.\n\013createOrder" +
+      "\022\r.orderRequest\032\016.orderResponse\"\000\022?\n\020str" +
+      "eamStockQuote\022\022.StockQuoteRequest\032\023.Stoc" +
+      "kQuoteResponse\"\000(\001\022<\n\013filterPrice\022\023.filt" +
+      "erPriceRequest\032\024.filterPriceResponse\"\0000\001" +
+      "B-\n\025com.grpc.orderServiceB\022AutomateOrder" +
+      "sImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -98,25 +105,31 @@ public final class AutomateOrdersImpl {
     internal_static_product_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_product_descriptor,
-        new java.lang.String[] { "Title", "Quantity", });
+        new java.lang.String[] { "StockId", "Cost", "ProductName", "QuantityAvailable", });
     internal_static_StockQuoteResponse_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_StockQuoteResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_StockQuoteResponse_descriptor,
-        new java.lang.String[] { "Message", "Products", "Price", });
+        new java.lang.String[] { "Message", "Price", });
     internal_static_StockQuoteRequest_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_StockQuoteRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_StockQuoteRequest_descriptor,
-        new java.lang.String[] { "Products", "Quantity", });
-    internal_static_Cart_descriptor =
+        new java.lang.String[] { "Product", "Quantity", });
+    internal_static_filterPriceRequest_descriptor =
       getDescriptor().getMessageTypes().get(5);
-    internal_static_Cart_fieldAccessorTable = new
+    internal_static_filterPriceRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Cart_descriptor,
-        new java.lang.String[] { "Message", "Total", "Products", });
+        internal_static_filterPriceRequest_descriptor,
+        new java.lang.String[] { "MaxPrice", });
+    internal_static_filterPriceResponse_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_filterPriceResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_filterPriceResponse_descriptor,
+        new java.lang.String[] { "Product", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

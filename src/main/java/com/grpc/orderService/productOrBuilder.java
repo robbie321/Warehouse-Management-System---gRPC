@@ -8,17 +8,27 @@ public interface productOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string title = 1;</code>
+   * <code>int32 stock_id = 1;</code>
    */
-  java.lang.String getTitle();
-  /**
-   * <code>string title = 1;</code>
-   */
-  com.google.protobuf.ByteString
-      getTitleBytes();
+  int getStockId();
 
   /**
-   * <code>int32 quantity = 2;</code>
+   * <code>float cost = 2;</code>
    */
-  int getQuantity();
+  float getCost();
+
+  /**
+   * <code>string product_name = 3;</code>
+   */
+  java.lang.String getProductName();
+  /**
+   * <code>string product_name = 3;</code>
+   */
+  com.google.protobuf.ByteString
+      getProductNameBytes();
+
+  /**
+   * <code>int32 quantity_available = 4;</code>
+   */
+  int getQuantityAvailable();
 }

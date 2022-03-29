@@ -20,8 +20,10 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private product() {
-    title_ = "";
-    quantity_ = 0;
+    stockId_ = 0;
+    cost_ = 0F;
+    productName_ = "";
+    quantityAvailable_ = 0;
   }
 
   @java.lang.Override
@@ -48,15 +50,25 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 10: {
-            java.lang.String s = input.readStringRequireUtf8();
+          case 8: {
 
-            title_ = s;
+            stockId_ = input.readInt32();
             break;
           }
-          case 16: {
+          case 21: {
 
-            quantity_ = input.readInt32();
+            cost_ = input.readFloat();
+            break;
+          }
+          case 26: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            productName_ = s;
+            break;
+          }
+          case 32: {
+
+            quantityAvailable_ = input.readInt32();
             break;
           }
           default: {
@@ -91,47 +103,65 @@ private static final long serialVersionUID = 0L;
             com.grpc.orderService.product.class, com.grpc.orderService.product.Builder.class);
   }
 
-  public static final int TITLE_FIELD_NUMBER = 1;
-  private volatile java.lang.Object title_;
+  public static final int STOCK_ID_FIELD_NUMBER = 1;
+  private int stockId_;
   /**
-   * <code>string title = 1;</code>
+   * <code>int32 stock_id = 1;</code>
    */
-  public java.lang.String getTitle() {
-    java.lang.Object ref = title_;
+  public int getStockId() {
+    return stockId_;
+  }
+
+  public static final int COST_FIELD_NUMBER = 2;
+  private float cost_;
+  /**
+   * <code>float cost = 2;</code>
+   */
+  public float getCost() {
+    return cost_;
+  }
+
+  public static final int PRODUCT_NAME_FIELD_NUMBER = 3;
+  private volatile java.lang.Object productName_;
+  /**
+   * <code>string product_name = 3;</code>
+   */
+  public java.lang.String getProductName() {
+    java.lang.Object ref = productName_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      title_ = s;
+      productName_ = s;
       return s;
     }
   }
   /**
-   * <code>string title = 1;</code>
+   * <code>string product_name = 3;</code>
    */
   public com.google.protobuf.ByteString
-      getTitleBytes() {
-    java.lang.Object ref = title_;
+      getProductNameBytes() {
+    java.lang.Object ref = productName_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      title_ = b;
+      productName_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int QUANTITY_FIELD_NUMBER = 2;
-  private int quantity_;
+  public static final int QUANTITY_AVAILABLE_FIELD_NUMBER = 4;
+  private int quantityAvailable_;
   /**
-   * <code>int32 quantity = 2;</code>
+   * <code>int32 quantity_available = 4;</code>
    */
-  public int getQuantity() {
-    return quantity_;
+  public int getQuantityAvailable() {
+    return quantityAvailable_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -148,11 +178,17 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getTitleBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, title_);
+    if (stockId_ != 0) {
+      output.writeInt32(1, stockId_);
     }
-    if (quantity_ != 0) {
-      output.writeInt32(2, quantity_);
+    if (cost_ != 0F) {
+      output.writeFloat(2, cost_);
+    }
+    if (!getProductNameBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, productName_);
+    }
+    if (quantityAvailable_ != 0) {
+      output.writeInt32(4, quantityAvailable_);
     }
     unknownFields.writeTo(output);
   }
@@ -163,12 +199,20 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getTitleBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, title_);
-    }
-    if (quantity_ != 0) {
+    if (stockId_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(2, quantity_);
+        .computeInt32Size(1, stockId_);
+    }
+    if (cost_ != 0F) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeFloatSize(2, cost_);
+    }
+    if (!getProductNameBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, productName_);
+    }
+    if (quantityAvailable_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(4, quantityAvailable_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -186,10 +230,16 @@ private static final long serialVersionUID = 0L;
     com.grpc.orderService.product other = (com.grpc.orderService.product) obj;
 
     boolean result = true;
-    result = result && getTitle()
-        .equals(other.getTitle());
-    result = result && (getQuantity()
-        == other.getQuantity());
+    result = result && (getStockId()
+        == other.getStockId());
+    result = result && (
+        java.lang.Float.floatToIntBits(getCost())
+        == java.lang.Float.floatToIntBits(
+            other.getCost()));
+    result = result && getProductName()
+        .equals(other.getProductName());
+    result = result && (getQuantityAvailable()
+        == other.getQuantityAvailable());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -201,10 +251,15 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + TITLE_FIELD_NUMBER;
-    hash = (53 * hash) + getTitle().hashCode();
-    hash = (37 * hash) + QUANTITY_FIELD_NUMBER;
-    hash = (53 * hash) + getQuantity();
+    hash = (37 * hash) + STOCK_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getStockId();
+    hash = (37 * hash) + COST_FIELD_NUMBER;
+    hash = (53 * hash) + java.lang.Float.floatToIntBits(
+        getCost());
+    hash = (37 * hash) + PRODUCT_NAME_FIELD_NUMBER;
+    hash = (53 * hash) + getProductName().hashCode();
+    hash = (37 * hash) + QUANTITY_AVAILABLE_FIELD_NUMBER;
+    hash = (53 * hash) + getQuantityAvailable();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -342,9 +397,13 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      title_ = "";
+      stockId_ = 0;
 
-      quantity_ = 0;
+      cost_ = 0F;
+
+      productName_ = "";
+
+      quantityAvailable_ = 0;
 
       return this;
     }
@@ -372,8 +431,10 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.grpc.orderService.product buildPartial() {
       com.grpc.orderService.product result = new com.grpc.orderService.product(this);
-      result.title_ = title_;
-      result.quantity_ = quantity_;
+      result.stockId_ = stockId_;
+      result.cost_ = cost_;
+      result.productName_ = productName_;
+      result.quantityAvailable_ = quantityAvailable_;
       onBuilt();
       return result;
     }
@@ -422,12 +483,18 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.grpc.orderService.product other) {
       if (other == com.grpc.orderService.product.getDefaultInstance()) return this;
-      if (!other.getTitle().isEmpty()) {
-        title_ = other.title_;
+      if (other.getStockId() != 0) {
+        setStockId(other.getStockId());
+      }
+      if (other.getCost() != 0F) {
+        setCost(other.getCost());
+      }
+      if (!other.getProductName().isEmpty()) {
+        productName_ = other.productName_;
         onChanged();
       }
-      if (other.getQuantity() != 0) {
-        setQuantity(other.getQuantity());
+      if (other.getQuantityAvailable() != 0) {
+        setQuantityAvailable(other.getQuantityAvailable());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -458,97 +525,149 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object title_ = "";
+    private int stockId_ ;
     /**
-     * <code>string title = 1;</code>
+     * <code>int32 stock_id = 1;</code>
      */
-    public java.lang.String getTitle() {
-      java.lang.Object ref = title_;
+    public int getStockId() {
+      return stockId_;
+    }
+    /**
+     * <code>int32 stock_id = 1;</code>
+     */
+    public Builder setStockId(int value) {
+      
+      stockId_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 stock_id = 1;</code>
+     */
+    public Builder clearStockId() {
+      
+      stockId_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private float cost_ ;
+    /**
+     * <code>float cost = 2;</code>
+     */
+    public float getCost() {
+      return cost_;
+    }
+    /**
+     * <code>float cost = 2;</code>
+     */
+    public Builder setCost(float value) {
+      
+      cost_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>float cost = 2;</code>
+     */
+    public Builder clearCost() {
+      
+      cost_ = 0F;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object productName_ = "";
+    /**
+     * <code>string product_name = 3;</code>
+     */
+    public java.lang.String getProductName() {
+      java.lang.Object ref = productName_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        title_ = s;
+        productName_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string title = 1;</code>
+     * <code>string product_name = 3;</code>
      */
     public com.google.protobuf.ByteString
-        getTitleBytes() {
-      java.lang.Object ref = title_;
+        getProductNameBytes() {
+      java.lang.Object ref = productName_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        title_ = b;
+        productName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string title = 1;</code>
+     * <code>string product_name = 3;</code>
      */
-    public Builder setTitle(
+    public Builder setProductName(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      title_ = value;
+      productName_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string title = 1;</code>
+     * <code>string product_name = 3;</code>
      */
-    public Builder clearTitle() {
+    public Builder clearProductName() {
       
-      title_ = getDefaultInstance().getTitle();
+      productName_ = getDefaultInstance().getProductName();
       onChanged();
       return this;
     }
     /**
-     * <code>string title = 1;</code>
+     * <code>string product_name = 3;</code>
      */
-    public Builder setTitleBytes(
+    public Builder setProductNameBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      title_ = value;
+      productName_ = value;
       onChanged();
       return this;
     }
 
-    private int quantity_ ;
+    private int quantityAvailable_ ;
     /**
-     * <code>int32 quantity = 2;</code>
+     * <code>int32 quantity_available = 4;</code>
      */
-    public int getQuantity() {
-      return quantity_;
+    public int getQuantityAvailable() {
+      return quantityAvailable_;
     }
     /**
-     * <code>int32 quantity = 2;</code>
+     * <code>int32 quantity_available = 4;</code>
      */
-    public Builder setQuantity(int value) {
+    public Builder setQuantityAvailable(int value) {
       
-      quantity_ = value;
+      quantityAvailable_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>int32 quantity = 2;</code>
+     * <code>int32 quantity_available = 4;</code>
      */
-    public Builder clearQuantity() {
+    public Builder clearQuantityAvailable() {
       
-      quantity_ = 0;
+      quantityAvailable_ = 0;
       onChanged();
       return this;
     }

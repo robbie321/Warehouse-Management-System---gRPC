@@ -94,36 +94,36 @@ public final class orderServiceGrpc {
      return getStreamStockQuoteMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.grpc.orderService.product,
-      com.grpc.orderService.Cart> getTotalCartValueMethod;
+  private static volatile io.grpc.MethodDescriptor<com.grpc.orderService.filterPriceRequest,
+      com.grpc.orderService.filterPriceResponse> getFilterPriceMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "totalCartValue",
-      requestType = com.grpc.orderService.product.class,
-      responseType = com.grpc.orderService.Cart.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
-  public static io.grpc.MethodDescriptor<com.grpc.orderService.product,
-      com.grpc.orderService.Cart> getTotalCartValueMethod() {
-    io.grpc.MethodDescriptor<com.grpc.orderService.product, com.grpc.orderService.Cart> getTotalCartValueMethod;
-    if ((getTotalCartValueMethod = orderServiceGrpc.getTotalCartValueMethod) == null) {
+      fullMethodName = SERVICE_NAME + '/' + "filterPrice",
+      requestType = com.grpc.orderService.filterPriceRequest.class,
+      responseType = com.grpc.orderService.filterPriceResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<com.grpc.orderService.filterPriceRequest,
+      com.grpc.orderService.filterPriceResponse> getFilterPriceMethod() {
+    io.grpc.MethodDescriptor<com.grpc.orderService.filterPriceRequest, com.grpc.orderService.filterPriceResponse> getFilterPriceMethod;
+    if ((getFilterPriceMethod = orderServiceGrpc.getFilterPriceMethod) == null) {
       synchronized (orderServiceGrpc.class) {
-        if ((getTotalCartValueMethod = orderServiceGrpc.getTotalCartValueMethod) == null) {
-          orderServiceGrpc.getTotalCartValueMethod = getTotalCartValueMethod = 
-              io.grpc.MethodDescriptor.<com.grpc.orderService.product, com.grpc.orderService.Cart>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+        if ((getFilterPriceMethod = orderServiceGrpc.getFilterPriceMethod) == null) {
+          orderServiceGrpc.getFilterPriceMethod = getFilterPriceMethod = 
+              io.grpc.MethodDescriptor.<com.grpc.orderService.filterPriceRequest, com.grpc.orderService.filterPriceResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(
-                  "orderService", "totalCartValue"))
+                  "orderService", "filterPrice"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.grpc.orderService.product.getDefaultInstance()))
+                  com.grpc.orderService.filterPriceRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.grpc.orderService.Cart.getDefaultInstance()))
-                  .setSchemaDescriptor(new orderServiceMethodDescriptorSupplier("totalCartValue"))
+                  com.grpc.orderService.filterPriceResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new orderServiceMethodDescriptorSupplier("filterPrice"))
                   .build();
           }
         }
      }
-     return getTotalCartValueMethod;
+     return getFilterPriceMethod;
   }
 
   /**
@@ -183,9 +183,9 @@ public final class orderServiceGrpc {
      *Client can send 1 or multiple requests, server responds with 1 cart result
      * </pre>
      */
-    public io.grpc.stub.StreamObserver<com.grpc.orderService.product> totalCartValue(
-        io.grpc.stub.StreamObserver<com.grpc.orderService.Cart> responseObserver) {
-      return asyncUnimplementedStreamingCall(getTotalCartValueMethod(), responseObserver);
+    public void filterPrice(com.grpc.orderService.filterPriceRequest request,
+        io.grpc.stub.StreamObserver<com.grpc.orderService.filterPriceResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getFilterPriceMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
@@ -205,12 +205,12 @@ public final class orderServiceGrpc {
                 com.grpc.orderService.StockQuoteResponse>(
                   this, METHODID_STREAM_STOCK_QUOTE)))
           .addMethod(
-            getTotalCartValueMethod(),
-            asyncClientStreamingCall(
+            getFilterPriceMethod(),
+            asyncServerStreamingCall(
               new MethodHandlers<
-                com.grpc.orderService.product,
-                com.grpc.orderService.Cart>(
-                  this, METHODID_TOTAL_CART_VALUE)))
+                com.grpc.orderService.filterPriceRequest,
+                com.grpc.orderService.filterPriceResponse>(
+                  this, METHODID_FILTER_PRICE)))
           .build();
     }
   }
@@ -265,10 +265,10 @@ public final class orderServiceGrpc {
      *Client can send 1 or multiple requests, server responds with 1 cart result
      * </pre>
      */
-    public io.grpc.stub.StreamObserver<com.grpc.orderService.product> totalCartValue(
-        io.grpc.stub.StreamObserver<com.grpc.orderService.Cart> responseObserver) {
-      return asyncClientStreamingCall(
-          getChannel().newCall(getTotalCartValueMethod(), getCallOptions()), responseObserver);
+    public void filterPrice(com.grpc.orderService.filterPriceRequest request,
+        io.grpc.stub.StreamObserver<com.grpc.orderService.filterPriceResponse> responseObserver) {
+      asyncServerStreamingCall(
+          getChannel().newCall(getFilterPriceMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -301,6 +301,18 @@ public final class orderServiceGrpc {
     public com.grpc.orderService.orderResponse createOrder(com.grpc.orderService.orderRequest request) {
       return blockingUnaryCall(
           getChannel(), getCreateOrderMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     **
+     *Client can send 1 or multiple requests, server responds with 1 cart result
+     * </pre>
+     */
+    public java.util.Iterator<com.grpc.orderService.filterPriceResponse> filterPrice(
+        com.grpc.orderService.filterPriceRequest request) {
+      return blockingServerStreamingCall(
+          getChannel(), getFilterPriceMethod(), getCallOptions(), request);
     }
   }
 
@@ -338,8 +350,8 @@ public final class orderServiceGrpc {
   }
 
   private static final int METHODID_CREATE_ORDER = 0;
-  private static final int METHODID_STREAM_STOCK_QUOTE = 1;
-  private static final int METHODID_TOTAL_CART_VALUE = 2;
+  private static final int METHODID_FILTER_PRICE = 1;
+  private static final int METHODID_STREAM_STOCK_QUOTE = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -362,6 +374,10 @@ public final class orderServiceGrpc {
           serviceImpl.createOrder((com.grpc.orderService.orderRequest) request,
               (io.grpc.stub.StreamObserver<com.grpc.orderService.orderResponse>) responseObserver);
           break;
+        case METHODID_FILTER_PRICE:
+          serviceImpl.filterPrice((com.grpc.orderService.filterPriceRequest) request,
+              (io.grpc.stub.StreamObserver<com.grpc.orderService.filterPriceResponse>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -375,9 +391,6 @@ public final class orderServiceGrpc {
         case METHODID_STREAM_STOCK_QUOTE:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.streamStockQuote(
               (io.grpc.stub.StreamObserver<com.grpc.orderService.StockQuoteResponse>) responseObserver);
-        case METHODID_TOTAL_CART_VALUE:
-          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.totalCartValue(
-              (io.grpc.stub.StreamObserver<com.grpc.orderService.Cart>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -431,7 +444,7 @@ public final class orderServiceGrpc {
               .setSchemaDescriptor(new orderServiceFileDescriptorSupplier())
               .addMethod(getCreateOrderMethod())
               .addMethod(getStreamStockQuoteMethod())
-              .addMethod(getTotalCartValueMethod())
+              .addMethod(getFilterPriceMethod())
               .build();
         }
       }

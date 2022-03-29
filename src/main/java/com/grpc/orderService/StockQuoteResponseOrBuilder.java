@@ -18,31 +18,7 @@ public interface StockQuoteResponseOrBuilder extends
       getMessageBytes();
 
   /**
-   * <code>repeated .product products = 2;</code>
+   * <code>float price = 3;</code>
    */
-  java.util.List<com.grpc.orderService.product> 
-      getProductsList();
-  /**
-   * <code>repeated .product products = 2;</code>
-   */
-  com.grpc.orderService.product getProducts(int index);
-  /**
-   * <code>repeated .product products = 2;</code>
-   */
-  int getProductsCount();
-  /**
-   * <code>repeated .product products = 2;</code>
-   */
-  java.util.List<? extends com.grpc.orderService.productOrBuilder> 
-      getProductsOrBuilderList();
-  /**
-   * <code>repeated .product products = 2;</code>
-   */
-  com.grpc.orderService.productOrBuilder getProductsOrBuilder(
-      int index);
-
-  /**
-   * <code>int32 price = 3;</code>
-   */
-  int getPrice();
+  float getPrice();
 }

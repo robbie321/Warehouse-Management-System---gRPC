@@ -15,37 +15,32 @@ message orderResponse{
 
 //product
 message product{
-  string title = 1;
-  int32 quantity = 2;
+  int32  stock_id = 1;
+  float cost = 2;
+  string product_name = 3;
+  int32 quantity_available = 4;
 }
 
 //quote
 message StockQuoteResponse{
   string message = 1;
-  repeated product products = 2;
-  int32 price = 3;
+  float price = 3;
 }
 
 message StockQuoteRequest{
-  repeated product products = 1;
+  product product = 1;
   int32 quantity = 2;
 }
 
-//cart
-message Cart{
-  string message = 1;
-  int32 total = 2;
-  repeated product products = 3;
+//filter price
+message filterPriceRequest{
+  int32 maxPrice = 1;
 }
 
-//message reportRequest{
-//  string date_one = 1;
-//  string date_two = 2;
-//}
-//
-//message reportResponse{
-//  string message = 1;
-//}
+message filterPriceResponse{
+  product product = 1;
+}
+
 
 //Explain method & message payload for all
 service orderService{
@@ -65,7 +60,7 @@ service orderService{
   /**
   Client can send 1 or multiple requests, server responds with 1 cart result
   */
-  rpc totalCartValue(stream product) returns (Cart){}
+  rpc filterPrice(filterPriceRequest) returns (stream filterPriceResponse){}
 
   //server Stream: 1 request, Many responses
   /*

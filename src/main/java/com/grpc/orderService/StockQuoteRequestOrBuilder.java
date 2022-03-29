@@ -8,28 +8,17 @@ public interface StockQuoteRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>repeated .product products = 1;</code>
+   * <code>.product product = 1;</code>
    */
-  java.util.List<com.grpc.orderService.product> 
-      getProductsList();
+  boolean hasProduct();
   /**
-   * <code>repeated .product products = 1;</code>
+   * <code>.product product = 1;</code>
    */
-  com.grpc.orderService.product getProducts(int index);
+  com.grpc.orderService.product getProduct();
   /**
-   * <code>repeated .product products = 1;</code>
+   * <code>.product product = 1;</code>
    */
-  int getProductsCount();
-  /**
-   * <code>repeated .product products = 1;</code>
-   */
-  java.util.List<? extends com.grpc.orderService.productOrBuilder> 
-      getProductsOrBuilderList();
-  /**
-   * <code>repeated .product products = 1;</code>
-   */
-  com.grpc.orderService.productOrBuilder getProductsOrBuilder(
-      int index);
+  com.grpc.orderService.productOrBuilder getProductOrBuilder();
 
   /**
    * <code>int32 quantity = 2;</code>
