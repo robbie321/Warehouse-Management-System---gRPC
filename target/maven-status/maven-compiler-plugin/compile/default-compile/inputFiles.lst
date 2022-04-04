@@ -18,9 +18,9 @@ C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\warehouseService\ord
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\stockCheckerService\lowStockRequest.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\warehouseService\warehouseServiceGrpc.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\stockCheckerService\lowStockRequestOrBuilder.java
-C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\filterPriceResponseOrBuilder.java
+C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\FilterPriceResponseOrBuilder.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\product.java
-C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\filterPriceRequest.java
+C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\FilterPriceRequest.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\orderResponseOrBuilder.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\StockQuoteResponseOrBuilder.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\orderRequestOrBuilder.java
@@ -31,9 +31,9 @@ C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\StockQu
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\warehouseService\WarehouseServer.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\warehouseService\reportRequest.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\warehouseService\orderResponseOrBuilder.java
-C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\filterPriceRequestOrBuilder.java
+C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\FilterPriceRequestOrBuilder.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\OrdersServer.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\client\ClientController.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\stockCheckerService\inventoryCheckerServiceGrpc.java
-C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\filterPriceResponse.java
+C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\FilterPriceResponse.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\stockCheckerService\inventoryCheckerServiceImpl.java

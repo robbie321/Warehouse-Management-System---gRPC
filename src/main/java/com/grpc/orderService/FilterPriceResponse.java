@@ -4,18 +4,19 @@
 package com.grpc.orderService;
 
 /**
- * Protobuf type {@code filterPriceResponse}
+ * Protobuf type {@code FilterPriceResponse}
  */
-public  final class filterPriceResponse extends
+public  final class FilterPriceResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:filterPriceResponse)
-    filterPriceResponseOrBuilder {
+    // @@protoc_insertion_point(message_implements:FilterPriceResponse)
+    FilterPriceResponseOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use filterPriceResponse.newBuilder() to construct.
-  private filterPriceResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use FilterPriceResponse.newBuilder() to construct.
+  private FilterPriceResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private filterPriceResponse() {
+  private FilterPriceResponse() {
+    product_ = "";
   }
 
   @java.lang.Override
@@ -23,7 +24,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private filterPriceResponse(
+  private FilterPriceResponse(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -43,16 +44,9 @@ private static final long serialVersionUID = 0L;
             done = true;
             break;
           case 10: {
-            com.grpc.orderService.product.Builder subBuilder = null;
-            if (product_ != null) {
-              subBuilder = product_.toBuilder();
-            }
-            product_ = input.readMessage(com.grpc.orderService.product.parser(), extensionRegistry);
-            if (subBuilder != null) {
-              subBuilder.mergeFrom(product_);
-              product_ = subBuilder.buildPartial();
-            }
+            java.lang.String s = input.readStringRequireUtf8();
 
+            product_ = s;
             break;
           }
           default: {
@@ -76,36 +70,49 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.grpc.orderService.AutomateOrdersImpl.internal_static_filterPriceResponse_descriptor;
+    return com.grpc.orderService.AutomateOrdersImpl.internal_static_FilterPriceResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.grpc.orderService.AutomateOrdersImpl.internal_static_filterPriceResponse_fieldAccessorTable
+    return com.grpc.orderService.AutomateOrdersImpl.internal_static_FilterPriceResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.grpc.orderService.filterPriceResponse.class, com.grpc.orderService.filterPriceResponse.Builder.class);
+            com.grpc.orderService.FilterPriceResponse.class, com.grpc.orderService.FilterPriceResponse.Builder.class);
   }
 
   public static final int PRODUCT_FIELD_NUMBER = 1;
-  private com.grpc.orderService.product product_;
+  private volatile java.lang.Object product_;
   /**
-   * <code>.product product = 1;</code>
+   * <code>string product = 1;</code>
    */
-  public boolean hasProduct() {
-    return product_ != null;
+  public java.lang.String getProduct() {
+    java.lang.Object ref = product_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      product_ = s;
+      return s;
+    }
   }
   /**
-   * <code>.product product = 1;</code>
+   * <code>string product = 1;</code>
    */
-  public com.grpc.orderService.product getProduct() {
-    return product_ == null ? com.grpc.orderService.product.getDefaultInstance() : product_;
-  }
-  /**
-   * <code>.product product = 1;</code>
-   */
-  public com.grpc.orderService.productOrBuilder getProductOrBuilder() {
-    return getProduct();
+  public com.google.protobuf.ByteString
+      getProductBytes() {
+    java.lang.Object ref = product_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      product_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   private byte memoizedIsInitialized = -1;
@@ -122,8 +129,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (product_ != null) {
-      output.writeMessage(1, getProduct());
+    if (!getProductBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, product_);
     }
     unknownFields.writeTo(output);
   }
@@ -134,9 +141,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (product_ != null) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(1, getProduct());
+    if (!getProductBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, product_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -148,17 +154,14 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.grpc.orderService.filterPriceResponse)) {
+    if (!(obj instanceof com.grpc.orderService.FilterPriceResponse)) {
       return super.equals(obj);
     }
-    com.grpc.orderService.filterPriceResponse other = (com.grpc.orderService.filterPriceResponse) obj;
+    com.grpc.orderService.FilterPriceResponse other = (com.grpc.orderService.FilterPriceResponse) obj;
 
     boolean result = true;
-    result = result && (hasProduct() == other.hasProduct());
-    if (hasProduct()) {
-      result = result && getProduct()
-          .equals(other.getProduct());
-    }
+    result = result && getProduct()
+        .equals(other.getProduct());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -170,78 +173,76 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    if (hasProduct()) {
-      hash = (37 * hash) + PRODUCT_FIELD_NUMBER;
-      hash = (53 * hash) + getProduct().hashCode();
-    }
+    hash = (37 * hash) + PRODUCT_FIELD_NUMBER;
+    hash = (53 * hash) + getProduct().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static com.grpc.orderService.filterPriceResponse parseFrom(
+  public static com.grpc.orderService.FilterPriceResponse parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.grpc.orderService.filterPriceResponse parseFrom(
+  public static com.grpc.orderService.FilterPriceResponse parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.grpc.orderService.filterPriceResponse parseFrom(
+  public static com.grpc.orderService.FilterPriceResponse parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.grpc.orderService.filterPriceResponse parseFrom(
+  public static com.grpc.orderService.FilterPriceResponse parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.grpc.orderService.filterPriceResponse parseFrom(byte[] data)
+  public static com.grpc.orderService.FilterPriceResponse parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.grpc.orderService.filterPriceResponse parseFrom(
+  public static com.grpc.orderService.FilterPriceResponse parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.grpc.orderService.filterPriceResponse parseFrom(java.io.InputStream input)
+  public static com.grpc.orderService.FilterPriceResponse parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.grpc.orderService.filterPriceResponse parseFrom(
+  public static com.grpc.orderService.FilterPriceResponse parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.grpc.orderService.filterPriceResponse parseDelimitedFrom(java.io.InputStream input)
+  public static com.grpc.orderService.FilterPriceResponse parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static com.grpc.orderService.filterPriceResponse parseDelimitedFrom(
+  public static com.grpc.orderService.FilterPriceResponse parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.grpc.orderService.filterPriceResponse parseFrom(
+  public static com.grpc.orderService.FilterPriceResponse parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.grpc.orderService.filterPriceResponse parseFrom(
+  public static com.grpc.orderService.FilterPriceResponse parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -254,7 +255,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.grpc.orderService.filterPriceResponse prototype) {
+  public static Builder newBuilder(com.grpc.orderService.FilterPriceResponse prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -270,26 +271,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code filterPriceResponse}
+   * Protobuf type {@code FilterPriceResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:filterPriceResponse)
-      com.grpc.orderService.filterPriceResponseOrBuilder {
+      // @@protoc_insertion_point(builder_implements:FilterPriceResponse)
+      com.grpc.orderService.FilterPriceResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.grpc.orderService.AutomateOrdersImpl.internal_static_filterPriceResponse_descriptor;
+      return com.grpc.orderService.AutomateOrdersImpl.internal_static_FilterPriceResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.grpc.orderService.AutomateOrdersImpl.internal_static_filterPriceResponse_fieldAccessorTable
+      return com.grpc.orderService.AutomateOrdersImpl.internal_static_FilterPriceResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.grpc.orderService.filterPriceResponse.class, com.grpc.orderService.filterPriceResponse.Builder.class);
+              com.grpc.orderService.FilterPriceResponse.class, com.grpc.orderService.FilterPriceResponse.Builder.class);
     }
 
-    // Construct using com.grpc.orderService.filterPriceResponse.newBuilder()
+    // Construct using com.grpc.orderService.FilterPriceResponse.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -307,29 +308,25 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      if (productBuilder_ == null) {
-        product_ = null;
-      } else {
-        product_ = null;
-        productBuilder_ = null;
-      }
+      product_ = "";
+
       return this;
     }
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.grpc.orderService.AutomateOrdersImpl.internal_static_filterPriceResponse_descriptor;
+      return com.grpc.orderService.AutomateOrdersImpl.internal_static_FilterPriceResponse_descriptor;
     }
 
     @java.lang.Override
-    public com.grpc.orderService.filterPriceResponse getDefaultInstanceForType() {
-      return com.grpc.orderService.filterPriceResponse.getDefaultInstance();
+    public com.grpc.orderService.FilterPriceResponse getDefaultInstanceForType() {
+      return com.grpc.orderService.FilterPriceResponse.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.grpc.orderService.filterPriceResponse build() {
-      com.grpc.orderService.filterPriceResponse result = buildPartial();
+    public com.grpc.orderService.FilterPriceResponse build() {
+      com.grpc.orderService.FilterPriceResponse result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -337,13 +334,9 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.grpc.orderService.filterPriceResponse buildPartial() {
-      com.grpc.orderService.filterPriceResponse result = new com.grpc.orderService.filterPriceResponse(this);
-      if (productBuilder_ == null) {
-        result.product_ = product_;
-      } else {
-        result.product_ = productBuilder_.build();
-      }
+    public com.grpc.orderService.FilterPriceResponse buildPartial() {
+      com.grpc.orderService.FilterPriceResponse result = new com.grpc.orderService.FilterPriceResponse(this);
+      result.product_ = product_;
       onBuilt();
       return result;
     }
@@ -382,18 +375,19 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.grpc.orderService.filterPriceResponse) {
-        return mergeFrom((com.grpc.orderService.filterPriceResponse)other);
+      if (other instanceof com.grpc.orderService.FilterPriceResponse) {
+        return mergeFrom((com.grpc.orderService.FilterPriceResponse)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.grpc.orderService.filterPriceResponse other) {
-      if (other == com.grpc.orderService.filterPriceResponse.getDefaultInstance()) return this;
-      if (other.hasProduct()) {
-        mergeProduct(other.getProduct());
+    public Builder mergeFrom(com.grpc.orderService.FilterPriceResponse other) {
+      if (other == com.grpc.orderService.FilterPriceResponse.getDefaultInstance()) return this;
+      if (!other.getProduct().isEmpty()) {
+        product_ = other.product_;
+        onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -410,11 +404,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      com.grpc.orderService.filterPriceResponse parsedMessage = null;
+      com.grpc.orderService.FilterPriceResponse parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (com.grpc.orderService.filterPriceResponse) e.getUnfinishedMessage();
+        parsedMessage = (com.grpc.orderService.FilterPriceResponse) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -424,121 +418,73 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private com.grpc.orderService.product product_ = null;
-    private com.google.protobuf.SingleFieldBuilderV3<
-        com.grpc.orderService.product, com.grpc.orderService.product.Builder, com.grpc.orderService.productOrBuilder> productBuilder_;
+    private java.lang.Object product_ = "";
     /**
-     * <code>.product product = 1;</code>
+     * <code>string product = 1;</code>
      */
-    public boolean hasProduct() {
-      return productBuilder_ != null || product_ != null;
-    }
-    /**
-     * <code>.product product = 1;</code>
-     */
-    public com.grpc.orderService.product getProduct() {
-      if (productBuilder_ == null) {
-        return product_ == null ? com.grpc.orderService.product.getDefaultInstance() : product_;
+    public java.lang.String getProduct() {
+      java.lang.Object ref = product_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        product_ = s;
+        return s;
       } else {
-        return productBuilder_.getMessage();
+        return (java.lang.String) ref;
       }
     }
     /**
-     * <code>.product product = 1;</code>
+     * <code>string product = 1;</code>
      */
-    public Builder setProduct(com.grpc.orderService.product value) {
-      if (productBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        product_ = value;
-        onChanged();
+    public com.google.protobuf.ByteString
+        getProductBytes() {
+      java.lang.Object ref = product_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        product_ = b;
+        return b;
       } else {
-        productBuilder_.setMessage(value);
+        return (com.google.protobuf.ByteString) ref;
       }
-
-      return this;
     }
     /**
-     * <code>.product product = 1;</code>
+     * <code>string product = 1;</code>
      */
     public Builder setProduct(
-        com.grpc.orderService.product.Builder builderForValue) {
-      if (productBuilder_ == null) {
-        product_ = builderForValue.build();
-        onChanged();
-      } else {
-        productBuilder_.setMessage(builderForValue.build());
-      }
-
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      product_ = value;
+      onChanged();
       return this;
     }
     /**
-     * <code>.product product = 1;</code>
-     */
-    public Builder mergeProduct(com.grpc.orderService.product value) {
-      if (productBuilder_ == null) {
-        if (product_ != null) {
-          product_ =
-            com.grpc.orderService.product.newBuilder(product_).mergeFrom(value).buildPartial();
-        } else {
-          product_ = value;
-        }
-        onChanged();
-      } else {
-        productBuilder_.mergeFrom(value);
-      }
-
-      return this;
-    }
-    /**
-     * <code>.product product = 1;</code>
+     * <code>string product = 1;</code>
      */
     public Builder clearProduct() {
-      if (productBuilder_ == null) {
-        product_ = null;
-        onChanged();
-      } else {
-        product_ = null;
-        productBuilder_ = null;
-      }
-
+      
+      product_ = getDefaultInstance().getProduct();
+      onChanged();
       return this;
     }
     /**
-     * <code>.product product = 1;</code>
+     * <code>string product = 1;</code>
      */
-    public com.grpc.orderService.product.Builder getProductBuilder() {
+    public Builder setProductBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
       
+      product_ = value;
       onChanged();
-      return getProductFieldBuilder().getBuilder();
-    }
-    /**
-     * <code>.product product = 1;</code>
-     */
-    public com.grpc.orderService.productOrBuilder getProductOrBuilder() {
-      if (productBuilder_ != null) {
-        return productBuilder_.getMessageOrBuilder();
-      } else {
-        return product_ == null ?
-            com.grpc.orderService.product.getDefaultInstance() : product_;
-      }
-    }
-    /**
-     * <code>.product product = 1;</code>
-     */
-    private com.google.protobuf.SingleFieldBuilderV3<
-        com.grpc.orderService.product, com.grpc.orderService.product.Builder, com.grpc.orderService.productOrBuilder> 
-        getProductFieldBuilder() {
-      if (productBuilder_ == null) {
-        productBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            com.grpc.orderService.product, com.grpc.orderService.product.Builder, com.grpc.orderService.productOrBuilder>(
-                getProduct(),
-                getParentForChildren(),
-                isClean());
-        product_ = null;
-      }
-      return productBuilder_;
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(
@@ -553,41 +499,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:filterPriceResponse)
+    // @@protoc_insertion_point(builder_scope:FilterPriceResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:filterPriceResponse)
-  private static final com.grpc.orderService.filterPriceResponse DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:FilterPriceResponse)
+  private static final com.grpc.orderService.FilterPriceResponse DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.grpc.orderService.filterPriceResponse();
+    DEFAULT_INSTANCE = new com.grpc.orderService.FilterPriceResponse();
   }
 
-  public static com.grpc.orderService.filterPriceResponse getDefaultInstance() {
+  public static com.grpc.orderService.FilterPriceResponse getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<filterPriceResponse>
-      PARSER = new com.google.protobuf.AbstractParser<filterPriceResponse>() {
+  private static final com.google.protobuf.Parser<FilterPriceResponse>
+      PARSER = new com.google.protobuf.AbstractParser<FilterPriceResponse>() {
     @java.lang.Override
-    public filterPriceResponse parsePartialFrom(
+    public FilterPriceResponse parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new filterPriceResponse(input, extensionRegistry);
+      return new FilterPriceResponse(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<filterPriceResponse> parser() {
+  public static com.google.protobuf.Parser<FilterPriceResponse> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<filterPriceResponse> getParserForType() {
+  public com.google.protobuf.Parser<FilterPriceResponse> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.grpc.orderService.filterPriceResponse getDefaultInstanceForType() {
+  public com.grpc.orderService.FilterPriceResponse getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

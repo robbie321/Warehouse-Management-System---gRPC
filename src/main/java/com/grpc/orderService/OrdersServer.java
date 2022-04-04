@@ -1,26 +1,27 @@
 package com.grpc.orderService;
 
 
+import com.grpc.warehouseService.Stock;
+import com.grpc.warehouseService.WarehouseServer;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Logger;
 
 public class OrdersServer extends orderServiceGrpc.orderServiceImplBase {
+    public static Stock[] stock;
     public static void main(String[] args) {
         //set logging
         final Logger logger = Logger.getLogger(OrdersServer.class.getName());
 
         //create instance of this class
         OrdersServer ordersServer = new OrdersServer();
+
+        //get stock list
+        WarehouseServer ws = new WarehouseServer();
+        stock = ws.makeDatabase();
 
         //make a channel available for communication
         int port = 50051;
@@ -86,15 +87,21 @@ public class OrdersServer extends orderServiceGrpc.orderServiceImplBase {
             public void onNext(StockQuoteRequest value) {
 
                 //client sends a message
+
+                //multiply cost of product by quantity to get price
                 productSum = value.getProduct().getCost() * value.getQuantity();
+
+                //add product sum to total sum to keep track of total cost
                 totalSum += value.getProduct().getCost() * value.getQuantity();
-                item += value.getProduct().getProductName() + "€"+value.getProduct().getCost() + " x " + value.getQuantity()
+
+                //add response to item
+                item += value.getProduct().getProductName() + "€"+value.getProduct().getCost() + " x " + "€" + value.getQuantity()
                 + " = " + productSum + "\n";
             }
 
             @Override
             public void onError(Throwable t) {
-
+                System.out.println(t.getMessage());
             }
 
             @Override
@@ -114,10 +121,34 @@ public class OrdersServer extends orderServiceGrpc.orderServiceImplBase {
         return  requestStreamObserver;
     }
 
-    @Override
-    public void filterPrice(filterPriceRequest request, StreamObserver<filterPriceResponse> responseObserver) {
-        super.filterPrice(request, responseObserver);
+    public void filterPrice(FilterPriceRequest request, StreamObserver<FilterPriceResponse> responseObserver) {
+        //users max price
+        int maxPrice = request.getMaxPrice();
 
-        //user sends max price, server finds all objects for less or equal to the price and displays
+        //result
+        try{
+            for(int i = 0; i < stock.length; i++){
+                String result = "";
+                //if stock price is less than max price
+                if(stock[i].getCost() <= maxPrice) {
+                    //let reuslt equal to stock listing
+                    result = stock[i].getProductName() + " costs: €"+stock[i].getCost();
+
+                    //build response
+                    FilterPriceResponse response = FilterPriceResponse.newBuilder()
+                            .setProduct(result)
+                            .build();
+
+                    //observe next response
+                    responseObserver.onNext(response);
+                    Thread.sleep(10L);
+                }
+            }
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }finally {
+            responseObserver.onCompleted();
+        }
     }
+
 }

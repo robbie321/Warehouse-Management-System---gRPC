@@ -77,7 +77,7 @@ public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBa
 
 
         //add each row to result
-        String result = "Report generated from \" + from_date + \"" ;
+        String result = "";
 
         //set file path
         String file = "src/main/java/com/grpc/mock_data.csv";
@@ -92,28 +92,26 @@ public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBa
                 //split the columns by comma
                 String[] sales = line.split(",");
                 //add row to array if matches condition
-                if(sales[0].contains(from_date))
-                    result += "\nProduct: " + sales[1] + ", Sold: " + sales[2];
-                else
-                    result = "There were no products sold on " + from_date;
+                if(sales[0].contains(from_date)){
+                    result = "\nProduct: " + sales[1] + ", Sold: " + sales[2] + " on " + sales[0];
 
+                    //create the response
+                    reportResponse response = reportResponse.newBuilder()
+                            .setMessage(result)
+                            .build();
+
+                    //call onNext by the observer
+                    responseObserver.onNext(response);
+                }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            //call completed by the observer
+            responseObserver.onCompleted();
         }
-
-        //create the response
-        reportResponse response = reportResponse.newBuilder()
-                .setMessage(result)
-                .build();
-
-        //call onNext by the observer
-        responseObserver.onNext(response);
-
-        //call completed by the observer
-        responseObserver.onCompleted();
     }
 
     @Override

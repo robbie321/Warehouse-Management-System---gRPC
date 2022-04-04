@@ -3,8 +3,8 @@
 
 package com.grpc.orderService;
 
-public interface filterPriceRequestOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:filterPriceRequest)
+public interface FilterPriceRequestOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:FilterPriceRequest)
     com.google.protobuf.MessageOrBuilder {
 
   /**

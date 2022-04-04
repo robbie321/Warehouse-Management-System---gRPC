@@ -33,12 +33,12 @@ message StockQuoteRequest{
 }
 
 //filter price
-message filterPriceRequest{
+message FilterPriceRequest{
   int32 maxPrice = 1;
 }
 
-message filterPriceResponse{
-  product product = 1;
+message FilterPriceResponse{
+  string product = 1;
 }
 
 
@@ -60,7 +60,7 @@ service orderService{
   /**
   Client can send 1 or multiple requests, server responds with 1 cart result
   */
-  rpc filterPrice(filterPriceRequest) returns (stream filterPriceResponse){}
+  rpc FilterPrice(FilterPriceRequest) returns (stream FilterPriceResponse){}
 
   //server Stream: 1 request, Many responses
   /*

@@ -94,31 +94,31 @@ public final class orderServiceGrpc {
      return getStreamStockQuoteMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.grpc.orderService.filterPriceRequest,
-      com.grpc.orderService.filterPriceResponse> getFilterPriceMethod;
+  private static volatile io.grpc.MethodDescriptor<com.grpc.orderService.FilterPriceRequest,
+      com.grpc.orderService.FilterPriceResponse> getFilterPriceMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "filterPrice",
-      requestType = com.grpc.orderService.filterPriceRequest.class,
-      responseType = com.grpc.orderService.filterPriceResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "FilterPrice",
+      requestType = com.grpc.orderService.FilterPriceRequest.class,
+      responseType = com.grpc.orderService.FilterPriceResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<com.grpc.orderService.filterPriceRequest,
-      com.grpc.orderService.filterPriceResponse> getFilterPriceMethod() {
-    io.grpc.MethodDescriptor<com.grpc.orderService.filterPriceRequest, com.grpc.orderService.filterPriceResponse> getFilterPriceMethod;
+  public static io.grpc.MethodDescriptor<com.grpc.orderService.FilterPriceRequest,
+      com.grpc.orderService.FilterPriceResponse> getFilterPriceMethod() {
+    io.grpc.MethodDescriptor<com.grpc.orderService.FilterPriceRequest, com.grpc.orderService.FilterPriceResponse> getFilterPriceMethod;
     if ((getFilterPriceMethod = orderServiceGrpc.getFilterPriceMethod) == null) {
       synchronized (orderServiceGrpc.class) {
         if ((getFilterPriceMethod = orderServiceGrpc.getFilterPriceMethod) == null) {
           orderServiceGrpc.getFilterPriceMethod = getFilterPriceMethod = 
-              io.grpc.MethodDescriptor.<com.grpc.orderService.filterPriceRequest, com.grpc.orderService.filterPriceResponse>newBuilder()
+              io.grpc.MethodDescriptor.<com.grpc.orderService.FilterPriceRequest, com.grpc.orderService.FilterPriceResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(
-                  "orderService", "filterPrice"))
+                  "orderService", "FilterPrice"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.grpc.orderService.filterPriceRequest.getDefaultInstance()))
+                  com.grpc.orderService.FilterPriceRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.grpc.orderService.filterPriceResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new orderServiceMethodDescriptorSupplier("filterPrice"))
+                  com.grpc.orderService.FilterPriceResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new orderServiceMethodDescriptorSupplier("FilterPrice"))
                   .build();
           }
         }
@@ -183,8 +183,8 @@ public final class orderServiceGrpc {
      *Client can send 1 or multiple requests, server responds with 1 cart result
      * </pre>
      */
-    public void filterPrice(com.grpc.orderService.filterPriceRequest request,
-        io.grpc.stub.StreamObserver<com.grpc.orderService.filterPriceResponse> responseObserver) {
+    public void filterPrice(com.grpc.orderService.FilterPriceRequest request,
+        io.grpc.stub.StreamObserver<com.grpc.orderService.FilterPriceResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getFilterPriceMethod(), responseObserver);
     }
 
@@ -208,8 +208,8 @@ public final class orderServiceGrpc {
             getFilterPriceMethod(),
             asyncServerStreamingCall(
               new MethodHandlers<
-                com.grpc.orderService.filterPriceRequest,
-                com.grpc.orderService.filterPriceResponse>(
+                com.grpc.orderService.FilterPriceRequest,
+                com.grpc.orderService.FilterPriceResponse>(
                   this, METHODID_FILTER_PRICE)))
           .build();
     }
@@ -265,8 +265,8 @@ public final class orderServiceGrpc {
      *Client can send 1 or multiple requests, server responds with 1 cart result
      * </pre>
      */
-    public void filterPrice(com.grpc.orderService.filterPriceRequest request,
-        io.grpc.stub.StreamObserver<com.grpc.orderService.filterPriceResponse> responseObserver) {
+    public void filterPrice(com.grpc.orderService.FilterPriceRequest request,
+        io.grpc.stub.StreamObserver<com.grpc.orderService.FilterPriceResponse> responseObserver) {
       asyncServerStreamingCall(
           getChannel().newCall(getFilterPriceMethod(), getCallOptions()), request, responseObserver);
     }
@@ -309,8 +309,8 @@ public final class orderServiceGrpc {
      *Client can send 1 or multiple requests, server responds with 1 cart result
      * </pre>
      */
-    public java.util.Iterator<com.grpc.orderService.filterPriceResponse> filterPrice(
-        com.grpc.orderService.filterPriceRequest request) {
+    public java.util.Iterator<com.grpc.orderService.FilterPriceResponse> filterPrice(
+        com.grpc.orderService.FilterPriceRequest request) {
       return blockingServerStreamingCall(
           getChannel(), getFilterPriceMethod(), getCallOptions(), request);
     }
@@ -375,8 +375,8 @@ public final class orderServiceGrpc {
               (io.grpc.stub.StreamObserver<com.grpc.orderService.orderResponse>) responseObserver);
           break;
         case METHODID_FILTER_PRICE:
-          serviceImpl.filterPrice((com.grpc.orderService.filterPriceRequest) request,
-              (io.grpc.stub.StreamObserver<com.grpc.orderService.filterPriceResponse>) responseObserver);
+          serviceImpl.filterPrice((com.grpc.orderService.FilterPriceRequest) request,
+              (io.grpc.stub.StreamObserver<com.grpc.orderService.FilterPriceResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
