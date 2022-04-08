@@ -64,7 +64,7 @@ public final class AutomateOrdersImpl {
       "stock_id\030\001 \001(\005\022\014\n\004cost\030\002 \001(\002\022\024\n\014product_" +
       "name\030\003 \001(\t\022\032\n\022quantity_available\030\004 \001(\005\"4" +
       "\n\022StockQuoteResponse\022\017\n\007message\030\001 \001(\t\022\r\n" +
-      "\005price\030\003 \001(\002\"@\n\021StockQuoteRequest\022\031\n\007pro" +
+      "\005price\030\002 \001(\002\"@\n\021StockQuoteRequest\022\031\n\007pro" +
       "duct\030\001 \001(\0132\010.product\022\020\n\010quantity\030\002 \001(\005\"&" +
       "\n\022FilterPriceRequest\022\020\n\010maxPrice\030\001 \001(\005\"&" +
       "\n\023FilterPriceResponse\022\017\n\007product\030\001 \001(\t2\275" +

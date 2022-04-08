@@ -14,16 +14,7 @@ public class inventoryCheckerServiceImpl extends inventoryCheckerServiceGrpc.inv
         //append details to file
     }
 
-    @Override
-    public void updateProductInfo(product request, StreamObserver<product> responseObserver) {
-        //delete old product & add the updated one
-        String newTitle = request.getProductName();
-        int quantityAvailable = request.getQuantityAvailable();
 
-        //append details to file
-
-
-    }
 
     @Override
     public void checkLowStock(lowStockRequest request, StreamObserver<lowStockResponse> responseObserver) {

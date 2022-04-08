@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class OrdersServer extends orderServiceGrpc.orderServiceImplBase {
     public static Stock[] stock;
     public static Orders[] orders;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         //set logging
         final Logger logger = Logger.getLogger(OrdersServer.class.getName());
 

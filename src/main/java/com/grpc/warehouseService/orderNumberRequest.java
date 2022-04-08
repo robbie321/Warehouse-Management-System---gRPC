@@ -4,18 +4,18 @@
 package com.grpc.warehouseService;
 
 /**
- * Protobuf type {@code orderRequest}
+ * Protobuf type {@code orderNumberRequest}
  */
-public  final class orderRequest extends
+public  final class orderNumberRequest extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:orderRequest)
-    orderRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:orderNumberRequest)
+    orderNumberRequestOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use orderRequest.newBuilder() to construct.
-  private orderRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use orderNumberRequest.newBuilder() to construct.
+  private orderNumberRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private orderRequest() {
+  private orderNumberRequest() {
     orderNumber_ = "";
   }
 
@@ -24,7 +24,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private orderRequest(
+  private orderNumberRequest(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -70,15 +70,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.grpc.warehouseService.UpdateWarehouseService.internal_static_orderRequest_descriptor;
+    return com.grpc.warehouseService.UpdateWarehouseService.internal_static_orderNumberRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.grpc.warehouseService.UpdateWarehouseService.internal_static_orderRequest_fieldAccessorTable
+    return com.grpc.warehouseService.UpdateWarehouseService.internal_static_orderNumberRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.grpc.warehouseService.orderRequest.class, com.grpc.warehouseService.orderRequest.Builder.class);
+            com.grpc.warehouseService.orderNumberRequest.class, com.grpc.warehouseService.orderNumberRequest.Builder.class);
   }
 
   public static final int ORDERNUMBER_FIELD_NUMBER = 1;
@@ -154,10 +154,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.grpc.warehouseService.orderRequest)) {
+    if (!(obj instanceof com.grpc.warehouseService.orderNumberRequest)) {
       return super.equals(obj);
     }
-    com.grpc.warehouseService.orderRequest other = (com.grpc.warehouseService.orderRequest) obj;
+    com.grpc.warehouseService.orderNumberRequest other = (com.grpc.warehouseService.orderNumberRequest) obj;
 
     boolean result = true;
     result = result && getOrderNumber()
@@ -180,69 +180,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static com.grpc.warehouseService.orderRequest parseFrom(
+  public static com.grpc.warehouseService.orderNumberRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.grpc.warehouseService.orderRequest parseFrom(
+  public static com.grpc.warehouseService.orderNumberRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.grpc.warehouseService.orderRequest parseFrom(
+  public static com.grpc.warehouseService.orderNumberRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.grpc.warehouseService.orderRequest parseFrom(
+  public static com.grpc.warehouseService.orderNumberRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.grpc.warehouseService.orderRequest parseFrom(byte[] data)
+  public static com.grpc.warehouseService.orderNumberRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.grpc.warehouseService.orderRequest parseFrom(
+  public static com.grpc.warehouseService.orderNumberRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.grpc.warehouseService.orderRequest parseFrom(java.io.InputStream input)
+  public static com.grpc.warehouseService.orderNumberRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.grpc.warehouseService.orderRequest parseFrom(
+  public static com.grpc.warehouseService.orderNumberRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.grpc.warehouseService.orderRequest parseDelimitedFrom(java.io.InputStream input)
+  public static com.grpc.warehouseService.orderNumberRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static com.grpc.warehouseService.orderRequest parseDelimitedFrom(
+  public static com.grpc.warehouseService.orderNumberRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.grpc.warehouseService.orderRequest parseFrom(
+  public static com.grpc.warehouseService.orderNumberRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.grpc.warehouseService.orderRequest parseFrom(
+  public static com.grpc.warehouseService.orderNumberRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -255,7 +255,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.grpc.warehouseService.orderRequest prototype) {
+  public static Builder newBuilder(com.grpc.warehouseService.orderNumberRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -271,26 +271,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code orderRequest}
+   * Protobuf type {@code orderNumberRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:orderRequest)
-      com.grpc.warehouseService.orderRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:orderNumberRequest)
+      com.grpc.warehouseService.orderNumberRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.grpc.warehouseService.UpdateWarehouseService.internal_static_orderRequest_descriptor;
+      return com.grpc.warehouseService.UpdateWarehouseService.internal_static_orderNumberRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.grpc.warehouseService.UpdateWarehouseService.internal_static_orderRequest_fieldAccessorTable
+      return com.grpc.warehouseService.UpdateWarehouseService.internal_static_orderNumberRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.grpc.warehouseService.orderRequest.class, com.grpc.warehouseService.orderRequest.Builder.class);
+              com.grpc.warehouseService.orderNumberRequest.class, com.grpc.warehouseService.orderNumberRequest.Builder.class);
     }
 
-    // Construct using com.grpc.warehouseService.orderRequest.newBuilder()
+    // Construct using com.grpc.warehouseService.orderNumberRequest.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -316,17 +316,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.grpc.warehouseService.UpdateWarehouseService.internal_static_orderRequest_descriptor;
+      return com.grpc.warehouseService.UpdateWarehouseService.internal_static_orderNumberRequest_descriptor;
     }
 
     @java.lang.Override
-    public com.grpc.warehouseService.orderRequest getDefaultInstanceForType() {
-      return com.grpc.warehouseService.orderRequest.getDefaultInstance();
+    public com.grpc.warehouseService.orderNumberRequest getDefaultInstanceForType() {
+      return com.grpc.warehouseService.orderNumberRequest.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.grpc.warehouseService.orderRequest build() {
-      com.grpc.warehouseService.orderRequest result = buildPartial();
+    public com.grpc.warehouseService.orderNumberRequest build() {
+      com.grpc.warehouseService.orderNumberRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -334,8 +334,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.grpc.warehouseService.orderRequest buildPartial() {
-      com.grpc.warehouseService.orderRequest result = new com.grpc.warehouseService.orderRequest(this);
+    public com.grpc.warehouseService.orderNumberRequest buildPartial() {
+      com.grpc.warehouseService.orderNumberRequest result = new com.grpc.warehouseService.orderNumberRequest(this);
       result.orderNumber_ = orderNumber_;
       onBuilt();
       return result;
@@ -375,16 +375,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.grpc.warehouseService.orderRequest) {
-        return mergeFrom((com.grpc.warehouseService.orderRequest)other);
+      if (other instanceof com.grpc.warehouseService.orderNumberRequest) {
+        return mergeFrom((com.grpc.warehouseService.orderNumberRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.grpc.warehouseService.orderRequest other) {
-      if (other == com.grpc.warehouseService.orderRequest.getDefaultInstance()) return this;
+    public Builder mergeFrom(com.grpc.warehouseService.orderNumberRequest other) {
+      if (other == com.grpc.warehouseService.orderNumberRequest.getDefaultInstance()) return this;
       if (!other.getOrderNumber().isEmpty()) {
         orderNumber_ = other.orderNumber_;
         onChanged();
@@ -404,11 +404,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      com.grpc.warehouseService.orderRequest parsedMessage = null;
+      com.grpc.warehouseService.orderNumberRequest parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (com.grpc.warehouseService.orderRequest) e.getUnfinishedMessage();
+        parsedMessage = (com.grpc.warehouseService.orderNumberRequest) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -499,41 +499,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:orderRequest)
+    // @@protoc_insertion_point(builder_scope:orderNumberRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:orderRequest)
-  private static final com.grpc.warehouseService.orderRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:orderNumberRequest)
+  private static final com.grpc.warehouseService.orderNumberRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.grpc.warehouseService.orderRequest();
+    DEFAULT_INSTANCE = new com.grpc.warehouseService.orderNumberRequest();
   }
 
-  public static com.grpc.warehouseService.orderRequest getDefaultInstance() {
+  public static com.grpc.warehouseService.orderNumberRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<orderRequest>
-      PARSER = new com.google.protobuf.AbstractParser<orderRequest>() {
+  private static final com.google.protobuf.Parser<orderNumberRequest>
+      PARSER = new com.google.protobuf.AbstractParser<orderNumberRequest>() {
     @java.lang.Override
-    public orderRequest parsePartialFrom(
+    public orderNumberRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new orderRequest(input, extensionRegistry);
+      return new orderNumberRequest(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<orderRequest> parser() {
+  public static com.google.protobuf.Parser<orderNumberRequest> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<orderRequest> getParserForType() {
+  public com.google.protobuf.Parser<orderNumberRequest> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.grpc.warehouseService.orderRequest getDefaultInstanceForType() {
+  public com.grpc.warehouseService.orderNumberRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

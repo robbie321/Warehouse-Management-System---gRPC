@@ -1,8 +1,8 @@
 package com.grpc.client;
 
-import com.grpc.orderService.OrdersServer;
 import com.grpc.orderService.orderRequest;
 import com.grpc.orderService.orderResponse;
+import com.grpc.stockCheckerService.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
@@ -16,6 +16,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.time.DateTimeException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -41,32 +43,40 @@ public  static Stock[] stock;
 
         products = new String[stock.length];
 
-
-//        for(int i = 0; i < stock.length; i++){
-//            products[i] = stock[i].getProductName();
-//        }
-
-
-//        main.build();
         main.run();
     }
 
     private void run() {
 
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051)
+//        ManagedChannel orderServiceChannel = ManagedChannelBuilder.forAddress("localhost", 50051)
+//                .usePlaintext() //forces ssl to stop (do not use during development
+//                .build();
+
+        ManagedChannel inventoryServiceChannel = ManagedChannelBuilder.forAddress("localhost", 50053)
+                .usePlaintext() //forces ssl to stop (do not use during development
+                .build();
+
+        ManagedChannel warehouseServiceChannel = ManagedChannelBuilder.forAddress("localhost", 50052)
                 .usePlaintext() //forces ssl to stop (do not use during development
                 .build();
 
 //        System.out.println(WarehouseServer.stocks[10]);
 
-        createOrder(channel);
-//        filterPrice(channel);
-//        checkStockLevels(channel);
-//        generateWarehouseReport(channel);
 
-        //do something
-        System.out.println("\nShutting down channel");
-        channel.shutdown();
+        //OrderService
+//        createOrder(orderServiceChannel);
+//        filterPrice(orderServiceChannel);
+//        produceQuote(orderServiceChannel);
+
+        //InventoryService
+//        addProductToStock(inventoryServiceChannel);
+//        checkLowStock(inventoryServiceChannel);
+
+        //WarehouseService
+//        generateWarehouseReport(warehouseServiceChannel);
+        findOrderByOrderNumber(warehouseServiceChannel);
+
+
     }
 
     //Automate Orders Service
@@ -98,10 +108,9 @@ public  static Stock[] stock;
 
     }
 
-    private void checkStockLevels(ManagedChannel channel) {
+    private void produceQuote(ManagedChannel channel) {
         //create a client or stub
-        //do not use blocking stub becasue LongGreet is streaming so it needs to be asynchronas
-        //just use serviceStub
+        //do not use blocking stub because LongGreet is streaming so, it needs to be async
 
         //countdown latch
         CountDownLatch latch = new CountDownLatch(1);
@@ -149,23 +158,6 @@ public  static Stock[] stock;
         }
 
 
-
-//        System.out.println("Sending message 2");
-//        requestObserver.onNext(StockQuoteRequest.newBuilder()
-//                        .setProduct(product.newBuilder()
-//                                .setCost(200.99f)
-//                                .build())
-//                .setQuantity(20)
-//                .build());
-//
-//        System.out.println("Sending message 3");
-//        requestObserver.onNext(StockQuoteRequest.newBuilder()
-//                .setProduct(product.newBuilder()
-//                        .setCost(20.99f)
-//                        .build())
-//                .setQuantity(20)
-//                .build());
-
         //tell the server that the client is done streaming
         requestObserver.onCompleted();
 
@@ -191,20 +183,170 @@ public  static Stock[] stock;
         });
     }
 
+    //Inventory Management Service
+    private void checkLowStock(ManagedChannel inventoryServiceChannel) {
+
+        Scanner in = new Scanner(System.in);
+
+        //create stub
+        inventoryCheckerServiceGrpc.inventoryCheckerServiceBlockingStub stub = inventoryCheckerServiceGrpc.newBlockingStub(inventoryServiceChannel);
+
+        int quantity = 0;
+
+        System.out.println("Enter quantity of stock: ");
+        quantity = in.nextInt();
+
+        //prepare request
+        lowStockRequest request = lowStockRequest.newBuilder()
+                .setQuantity(quantity)
+                .build();
+
+        //respond
+        stub.checkLowStock(request).forEachRemaining(lowStockResponse -> {
+            System.out.println(lowStockResponse.getMessage());
+        });
+
+        //do something
+        System.out.println("\nShutting down channel");
+        inventoryServiceChannel.shutdown();
+    }
+
+    private void addProductToStock(ManagedChannel inventoryServiceChannel) {
+        //create stub
+        inventoryCheckerServiceGrpc.inventoryCheckerServiceBlockingStub stub
+                = inventoryCheckerServiceGrpc.newBlockingStub(inventoryServiceChannel);
+
+        Scanner sc = new Scanner(System.in);
+
+        //regex to check if user entered values meet criteria
+        String regex = "^[a-zA-Z]+$";
+        String floatRegex = "^[+-]?([0-9]*[.])?[0-9]+$";
+
+        String productName = "";
+        String cost = "";
+        String quantityAvailable = "";
+
+        float cst=0;
+        int quantity = 0;
+
+
+        System.out.println("Product name: ");
+        productName = sc.nextLine();
+        validate(regex, productName);
+
+
+        System.out.println("Product cost: ");
+        cost = sc.nextLine();
+        validate(floatRegex,cost);
+        cst = Float.parseFloat(cost);
+
+
+        System.out.println("How many in stock: ");
+        quantityAvailable = sc.nextLine();
+        validate(floatRegex,quantityAvailable);
+        quantity = Integer.parseInt(quantityAvailable);
+
+
+        //prepare request
+        addStockRequest request = addStockRequest.newBuilder()
+                .setProductName(productName)
+                .setCost(cst)
+                .setQuantityAvailable(quantity)
+                .build();
+
+        //response
+        addStockResponse response = stub.addProductsToStock(request);
+
+        System.out.println(response.getMessage());
+
+
+        //do something
+        System.out.println("\nShutting down channel");
+        inventoryServiceChannel.shutdown();
+    }
+
+    private void validate(String regex, String string) {
+        //throw error if condition is met
+        if(!string.matches(regex))
+            throw new RuntimeException(string + " is not a valid entry!");
+
+    }
+
     //Update Warehouse Service
     private void generateWarehouseReport(ManagedChannel channel){
         //create the stub
         warehouseServiceGrpc.warehouseServiceBlockingStub stub = warehouseServiceGrpc.newBlockingStub(channel);
 
+        Scanner sc = new Scanner(System.in);
+
+        String date = "";
+        String dateRegex = "^\\d{2}/\\d{2}/\\d{4}$";
+
+        System.out.println("Enter a date dd/mm/yyyy");
+        date = sc.nextLine();
+
+        //valid date
+        boolean valid = false;
+
+        //if checkDate completes, set valid to true,
+        //else print error message and ask again
+        while (!valid){
+            try{
+                validateDate(dateRegex, date);
+                valid = true;
+            }catch (InputMismatchException e){
+                System.out.println(e.getLocalizedMessage());
+                date = sc.nextLine();
+            }
+        }
+
+        sc.close();
+
         //prepare request
         reportRequest request = reportRequest.newBuilder()
-                .setDate("13/01/2022")
+                .setDate(date)
                 .build();
 
         //generate response
         stub.generateReportStream(request).forEachRemaining(reportResponse -> {
             System.out.print(reportResponse.getMessage()); //let this equal text field
         });
+    }
+
+    //validate, custom error (Question 2.3)
+    private void validateDate(String regex, String string) {
+        //throw error if condition is met
+        if(!string.matches(regex))
+            throw new InputMismatchException(string + " does not match the format dd/mm/yyyy");
+    }
+
+    private void findOrderByOrderNumber(ManagedChannel warehouseServiceChannel) {
+
+        //create stub
+        warehouseServiceGrpc.warehouseServiceBlockingStub stub = warehouseServiceGrpc.newBlockingStub(warehouseServiceChannel);
+
+        Scanner sc = new Scanner(System.in);
+
+        String orderNumber = "";
+
+        System.out.println("Enter order number: ");
+        orderNumber = sc.nextLine();
+
+        sc.close();
+
+        //prepare request
+        orderNumberRequest request = orderNumberRequest.newBuilder()
+                .setOrderNumber(orderNumber)
+                .build();
+
+        //prepare response
+        orderNumberResponse response = stub.reportAnOrder(request);
+
+        System.out.println(response.getOrder());
+
+        //do something
+        System.out.println("\nShutting down channel");
+        warehouseServiceChannel.shutdown();
     }
 
     private void build(){
@@ -261,13 +403,7 @@ public  static Stock[] stock;
         copyButton = new JButton("Move selected items");
         panel.add(copyButton);
 
-        copyButton.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jListForCopy.setListData(jList.getSelectedValues());
-            }
-        });
 
 
 

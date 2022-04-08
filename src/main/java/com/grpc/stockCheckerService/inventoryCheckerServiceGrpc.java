@@ -62,38 +62,6 @@ public final class inventoryCheckerServiceGrpc {
      return getAddProductsToStockMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.grpc.orderService.product,
-      com.grpc.orderService.product> getUpdateProductInfoMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "updateProductInfo",
-      requestType = com.grpc.orderService.product.class,
-      responseType = com.grpc.orderService.product.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.grpc.orderService.product,
-      com.grpc.orderService.product> getUpdateProductInfoMethod() {
-    io.grpc.MethodDescriptor<com.grpc.orderService.product, com.grpc.orderService.product> getUpdateProductInfoMethod;
-    if ((getUpdateProductInfoMethod = inventoryCheckerServiceGrpc.getUpdateProductInfoMethod) == null) {
-      synchronized (inventoryCheckerServiceGrpc.class) {
-        if ((getUpdateProductInfoMethod = inventoryCheckerServiceGrpc.getUpdateProductInfoMethod) == null) {
-          inventoryCheckerServiceGrpc.getUpdateProductInfoMethod = getUpdateProductInfoMethod = 
-              io.grpc.MethodDescriptor.<com.grpc.orderService.product, com.grpc.orderService.product>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "inventoryCheckerService", "updateProductInfo"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.grpc.orderService.product.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.grpc.orderService.product.getDefaultInstance()))
-                  .setSchemaDescriptor(new inventoryCheckerServiceMethodDescriptorSupplier("updateProductInfo"))
-                  .build();
-          }
-        }
-     }
-     return getUpdateProductInfoMethod;
-  }
-
   private static volatile io.grpc.MethodDescriptor<com.grpc.stockCheckerService.lowStockRequest,
       com.grpc.stockCheckerService.lowStockResponse> getCheckLowStockMethod;
 
@@ -168,16 +136,6 @@ public final class inventoryCheckerServiceGrpc {
 
     /**
      * <pre>
-     *Update Stock info of a product
-     * </pre>
-     */
-    public void updateProductInfo(com.grpc.orderService.product request,
-        io.grpc.stub.StreamObserver<com.grpc.orderService.product> responseObserver) {
-      asyncUnimplementedUnaryCall(getUpdateProductInfoMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
      *check how many items have less than 10 items in stock, send back multiple items
      * </pre>
      */
@@ -195,13 +153,6 @@ public final class inventoryCheckerServiceGrpc {
                 com.grpc.stockCheckerService.addStockRequest,
                 com.grpc.stockCheckerService.addStockResponse>(
                   this, METHODID_ADD_PRODUCTS_TO_STOCK)))
-          .addMethod(
-            getUpdateProductInfoMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                com.grpc.orderService.product,
-                com.grpc.orderService.product>(
-                  this, METHODID_UPDATE_PRODUCT_INFO)))
           .addMethod(
             getCheckLowStockMethod(),
             asyncServerStreamingCall(
@@ -243,17 +194,6 @@ public final class inventoryCheckerServiceGrpc {
         io.grpc.stub.StreamObserver<com.grpc.stockCheckerService.addStockResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getAddProductsToStockMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
-     *Update Stock info of a product
-     * </pre>
-     */
-    public void updateProductInfo(com.grpc.orderService.product request,
-        io.grpc.stub.StreamObserver<com.grpc.orderService.product> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getUpdateProductInfoMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -301,16 +241,6 @@ public final class inventoryCheckerServiceGrpc {
 
     /**
      * <pre>
-     *Update Stock info of a product
-     * </pre>
-     */
-    public com.grpc.orderService.product updateProductInfo(com.grpc.orderService.product request) {
-      return blockingUnaryCall(
-          getChannel(), getUpdateProductInfoMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
      *check how many items have less than 10 items in stock, send back multiple items
      * </pre>
      */
@@ -352,22 +282,10 @@ public final class inventoryCheckerServiceGrpc {
       return futureUnaryCall(
           getChannel().newCall(getAddProductsToStockMethod(), getCallOptions()), request);
     }
-
-    /**
-     * <pre>
-     *Update Stock info of a product
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.grpc.orderService.product> updateProductInfo(
-        com.grpc.orderService.product request) {
-      return futureUnaryCall(
-          getChannel().newCall(getUpdateProductInfoMethod(), getCallOptions()), request);
-    }
   }
 
   private static final int METHODID_ADD_PRODUCTS_TO_STOCK = 0;
-  private static final int METHODID_UPDATE_PRODUCT_INFO = 1;
-  private static final int METHODID_CHECK_LOW_STOCK = 2;
+  private static final int METHODID_CHECK_LOW_STOCK = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -389,10 +307,6 @@ public final class inventoryCheckerServiceGrpc {
         case METHODID_ADD_PRODUCTS_TO_STOCK:
           serviceImpl.addProductsToStock((com.grpc.stockCheckerService.addStockRequest) request,
               (io.grpc.stub.StreamObserver<com.grpc.stockCheckerService.addStockResponse>) responseObserver);
-          break;
-        case METHODID_UPDATE_PRODUCT_INFO:
-          serviceImpl.updateProductInfo((com.grpc.orderService.product) request,
-              (io.grpc.stub.StreamObserver<com.grpc.orderService.product>) responseObserver);
           break;
         case METHODID_CHECK_LOW_STOCK:
           serviceImpl.checkLowStock((com.grpc.stockCheckerService.lowStockRequest) request,
@@ -460,7 +374,6 @@ public final class inventoryCheckerServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new inventoryCheckerServiceFileDescriptorSupplier())
               .addMethod(getAddProductsToStockMethod())
-              .addMethod(getUpdateProductInfoMethod())
               .addMethod(getCheckLowStockMethod())
               .build();
         }

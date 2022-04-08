@@ -3,6 +3,8 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "com.grpc.warehouseService";
 
+import "automate_orders.proto";
+
 message reportRequest{
   string date = 1;
 }
@@ -11,18 +13,20 @@ message reportResponse{
   string message = 1;
 }
 
-message orderRequest{
+message orderNumberRequest{
   string orderNumber = 1;
 }
 
-message orderResponse{
+message orderNumberResponse{
   string order = 1;
 }
 
-message shippingResponse{
-  string name = 1;
-  string address = 2;
-  string country = 3;
+message lastOrdersRequest{
+  int32 amountOfOrdersToSearch = 1;
+}
+
+message lastOrdersResponse{
+  product product = 1;
 }
 
 //Explain method & message payload for all
@@ -37,11 +41,11 @@ service warehouseService{
   /*
       search order number
   */
-  rpc reportAnOrder(orderRequest) returns (orderResponse){};
+  rpc reportAnOrder(orderNumberRequest) returns (orderNumberResponse){};
 
   //Bi-direction
   /*
     Send shipping information
   */
-  rpc sendShippingInfo(orderRequest) returns (shippingResponse){};
+  rpc checkLastOrders(lastOrdersRequest) returns (lastOrdersResponse){};
 }

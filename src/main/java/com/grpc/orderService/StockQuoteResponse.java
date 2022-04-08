@@ -54,7 +54,7 @@ private static final long serialVersionUID = 0L;
             message_ = s;
             break;
           }
-          case 29: {
+          case 21: {
 
             price_ = input.readFloat();
             break;
@@ -125,10 +125,10 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int PRICE_FIELD_NUMBER = 3;
+  public static final int PRICE_FIELD_NUMBER = 2;
   private float price_;
   /**
-   * <code>float price = 3;</code>
+   * <code>float price = 2;</code>
    */
   public float getPrice() {
     return price_;
@@ -152,7 +152,7 @@ private static final long serialVersionUID = 0L;
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, message_);
     }
     if (price_ != 0F) {
-      output.writeFloat(3, price_);
+      output.writeFloat(2, price_);
     }
     unknownFields.writeTo(output);
   }
@@ -168,7 +168,7 @@ private static final long serialVersionUID = 0L;
     }
     if (price_ != 0F) {
       size += com.google.protobuf.CodedOutputStream
-        .computeFloatSize(3, price_);
+        .computeFloatSize(2, price_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -532,13 +532,13 @@ private static final long serialVersionUID = 0L;
 
     private float price_ ;
     /**
-     * <code>float price = 3;</code>
+     * <code>float price = 2;</code>
      */
     public float getPrice() {
       return price_;
     }
     /**
-     * <code>float price = 3;</code>
+     * <code>float price = 2;</code>
      */
     public Builder setPrice(float value) {
       
@@ -547,7 +547,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>float price = 3;</code>
+     * <code>float price = 2;</code>
      */
     public Builder clearPrice() {
       

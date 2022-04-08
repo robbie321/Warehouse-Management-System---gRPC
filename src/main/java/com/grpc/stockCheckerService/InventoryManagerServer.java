@@ -8,15 +8,12 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.logging.Logger;
 
 public class InventoryManagerServer extends inventoryCheckerServiceGrpc.inventoryCheckerServiceImplBase{
     public static Stock[] stock;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 //set logging
         final Logger logger = Logger.getLogger(OrdersServer.class.getName());
         //create instance of this class
@@ -53,8 +50,10 @@ public class InventoryManagerServer extends inventoryCheckerServiceGrpc.inventor
         float cost = request.getCost();
         int quantity = request.getQuantityAvailable();
 
+        System.out.println("Array " + stock.length);
+
         //last stock number + 1
-        int stock_no = stock[stock.length - 1].getStockNo() + 1;
+        int stock_no = stock[stock.length -1].getStockNo() + 1;
 
         try{
             //write to a file
@@ -73,6 +72,7 @@ public class InventoryManagerServer extends inventoryCheckerServiceGrpc.inventor
             //close the writer
             writer.close();
         } catch (IOException e) {
+            System.out.println("Input/Output error");
             e.printStackTrace();
         }
 
@@ -89,10 +89,6 @@ public class InventoryManagerServer extends inventoryCheckerServiceGrpc.inventor
         responseObserver.onCompleted();
     }
 
-    @Override
-    public void updateProductInfo(product request, StreamObserver<product> responseObserver) {
-        super.updateProductInfo(request, responseObserver);
-    }
 
     @Override
     public void checkLowStock(lowStockRequest request, StreamObserver<lowStockResponse> responseObserver) {

@@ -3,8 +3,8 @@
 
 package com.grpc.warehouseService;
 
-public interface orderRequestOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:orderRequest)
+public interface orderNumberRequestOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:orderNumberRequest)
     com.google.protobuf.MessageOrBuilder {
 
   /**

@@ -49,12 +49,11 @@ public final class InventoryManagement {
       "ailable\030\003 \001(\005\"#\n\020addStockResponse\022\017\n\007mes" +
       "sage\030\001 \001(\t\"#\n\017lowStockRequest\022\020\n\010quantit" +
       "y\030\001 \001(\005\"#\n\020lowStockResponse\022\017\n\007message\030\001" +
-      " \001(\t2\273\001\n\027inventoryCheckerService\022;\n\022addP" +
+      " \001(\t2\220\001\n\027inventoryCheckerService\022;\n\022addP" +
       "roductsToStock\022\020.addStockRequest\032\021.addSt" +
-      "ockResponse\"\000\022)\n\021updateProductInfo\022\010.pro" +
-      "duct\032\010.product\"\000\0228\n\rcheckLowStock\022\020.lowS" +
-      "tockRequest\032\021.lowStockResponse\"\0000\001B \n\034co" +
-      "m.grpc.stockCheckerServiceP\001b\006proto3"
+      "ockResponse\"\000\0228\n\rcheckLowStock\022\020.lowStoc" +
+      "kRequest\032\021.lowStockResponse\"\0000\001B \n\034com.g" +
+      "rpc.stockCheckerServiceP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

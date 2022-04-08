@@ -31,12 +31,6 @@ service inventoryCheckerService{
   */
   rpc addProductsToStock(addStockRequest) returns (addStockResponse){};
 
-  //unary
-  /*
-    Update Stock info of a product
-  */
-  rpc updateProductInfo(product) returns (product){};
-
 
   //server Stream
   /*

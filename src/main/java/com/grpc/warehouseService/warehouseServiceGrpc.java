@@ -62,30 +62,30 @@ public final class warehouseServiceGrpc {
      return getGenerateReportStreamMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.grpc.warehouseService.orderRequest,
-      com.grpc.warehouseService.orderResponse> getReportAnOrderMethod;
+  private static volatile io.grpc.MethodDescriptor<com.grpc.warehouseService.orderNumberRequest,
+      com.grpc.warehouseService.orderNumberResponse> getReportAnOrderMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "reportAnOrder",
-      requestType = com.grpc.warehouseService.orderRequest.class,
-      responseType = com.grpc.warehouseService.orderResponse.class,
+      requestType = com.grpc.warehouseService.orderNumberRequest.class,
+      responseType = com.grpc.warehouseService.orderNumberResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.grpc.warehouseService.orderRequest,
-      com.grpc.warehouseService.orderResponse> getReportAnOrderMethod() {
-    io.grpc.MethodDescriptor<com.grpc.warehouseService.orderRequest, com.grpc.warehouseService.orderResponse> getReportAnOrderMethod;
+  public static io.grpc.MethodDescriptor<com.grpc.warehouseService.orderNumberRequest,
+      com.grpc.warehouseService.orderNumberResponse> getReportAnOrderMethod() {
+    io.grpc.MethodDescriptor<com.grpc.warehouseService.orderNumberRequest, com.grpc.warehouseService.orderNumberResponse> getReportAnOrderMethod;
     if ((getReportAnOrderMethod = warehouseServiceGrpc.getReportAnOrderMethod) == null) {
       synchronized (warehouseServiceGrpc.class) {
         if ((getReportAnOrderMethod = warehouseServiceGrpc.getReportAnOrderMethod) == null) {
           warehouseServiceGrpc.getReportAnOrderMethod = getReportAnOrderMethod = 
-              io.grpc.MethodDescriptor.<com.grpc.warehouseService.orderRequest, com.grpc.warehouseService.orderResponse>newBuilder()
+              io.grpc.MethodDescriptor.<com.grpc.warehouseService.orderNumberRequest, com.grpc.warehouseService.orderNumberResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "warehouseService", "reportAnOrder"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.grpc.warehouseService.orderRequest.getDefaultInstance()))
+                  com.grpc.warehouseService.orderNumberRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.grpc.warehouseService.orderResponse.getDefaultInstance()))
+                  com.grpc.warehouseService.orderNumberResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new warehouseServiceMethodDescriptorSupplier("reportAnOrder"))
                   .build();
           }
@@ -94,36 +94,36 @@ public final class warehouseServiceGrpc {
      return getReportAnOrderMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.grpc.warehouseService.orderRequest,
-      com.grpc.warehouseService.shippingResponse> getSendShippingInfoMethod;
+  private static volatile io.grpc.MethodDescriptor<com.grpc.warehouseService.lastOrdersRequest,
+      com.grpc.warehouseService.lastOrdersResponse> getCheckLastOrdersMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "sendShippingInfo",
-      requestType = com.grpc.warehouseService.orderRequest.class,
-      responseType = com.grpc.warehouseService.shippingResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "checkLastOrders",
+      requestType = com.grpc.warehouseService.lastOrdersRequest.class,
+      responseType = com.grpc.warehouseService.lastOrdersResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.grpc.warehouseService.orderRequest,
-      com.grpc.warehouseService.shippingResponse> getSendShippingInfoMethod() {
-    io.grpc.MethodDescriptor<com.grpc.warehouseService.orderRequest, com.grpc.warehouseService.shippingResponse> getSendShippingInfoMethod;
-    if ((getSendShippingInfoMethod = warehouseServiceGrpc.getSendShippingInfoMethod) == null) {
+  public static io.grpc.MethodDescriptor<com.grpc.warehouseService.lastOrdersRequest,
+      com.grpc.warehouseService.lastOrdersResponse> getCheckLastOrdersMethod() {
+    io.grpc.MethodDescriptor<com.grpc.warehouseService.lastOrdersRequest, com.grpc.warehouseService.lastOrdersResponse> getCheckLastOrdersMethod;
+    if ((getCheckLastOrdersMethod = warehouseServiceGrpc.getCheckLastOrdersMethod) == null) {
       synchronized (warehouseServiceGrpc.class) {
-        if ((getSendShippingInfoMethod = warehouseServiceGrpc.getSendShippingInfoMethod) == null) {
-          warehouseServiceGrpc.getSendShippingInfoMethod = getSendShippingInfoMethod = 
-              io.grpc.MethodDescriptor.<com.grpc.warehouseService.orderRequest, com.grpc.warehouseService.shippingResponse>newBuilder()
+        if ((getCheckLastOrdersMethod = warehouseServiceGrpc.getCheckLastOrdersMethod) == null) {
+          warehouseServiceGrpc.getCheckLastOrdersMethod = getCheckLastOrdersMethod = 
+              io.grpc.MethodDescriptor.<com.grpc.warehouseService.lastOrdersRequest, com.grpc.warehouseService.lastOrdersResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "warehouseService", "sendShippingInfo"))
+                  "warehouseService", "checkLastOrders"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.grpc.warehouseService.orderRequest.getDefaultInstance()))
+                  com.grpc.warehouseService.lastOrdersRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.grpc.warehouseService.shippingResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new warehouseServiceMethodDescriptorSupplier("sendShippingInfo"))
+                  com.grpc.warehouseService.lastOrdersResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new warehouseServiceMethodDescriptorSupplier("checkLastOrders"))
                   .build();
           }
         }
      }
-     return getSendShippingInfoMethod;
+     return getCheckLastOrdersMethod;
   }
 
   /**
@@ -171,8 +171,8 @@ public final class warehouseServiceGrpc {
      *search order number
      * </pre>
      */
-    public void reportAnOrder(com.grpc.warehouseService.orderRequest request,
-        io.grpc.stub.StreamObserver<com.grpc.warehouseService.orderResponse> responseObserver) {
+    public void reportAnOrder(com.grpc.warehouseService.orderNumberRequest request,
+        io.grpc.stub.StreamObserver<com.grpc.warehouseService.orderNumberResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getReportAnOrderMethod(), responseObserver);
     }
 
@@ -181,9 +181,9 @@ public final class warehouseServiceGrpc {
      *Send shipping information
      * </pre>
      */
-    public void sendShippingInfo(com.grpc.warehouseService.orderRequest request,
-        io.grpc.stub.StreamObserver<com.grpc.warehouseService.shippingResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getSendShippingInfoMethod(), responseObserver);
+    public void checkLastOrders(com.grpc.warehouseService.lastOrdersRequest request,
+        io.grpc.stub.StreamObserver<com.grpc.warehouseService.lastOrdersResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getCheckLastOrdersMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
@@ -199,16 +199,16 @@ public final class warehouseServiceGrpc {
             getReportAnOrderMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.grpc.warehouseService.orderRequest,
-                com.grpc.warehouseService.orderResponse>(
+                com.grpc.warehouseService.orderNumberRequest,
+                com.grpc.warehouseService.orderNumberResponse>(
                   this, METHODID_REPORT_AN_ORDER)))
           .addMethod(
-            getSendShippingInfoMethod(),
+            getCheckLastOrdersMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.grpc.warehouseService.orderRequest,
-                com.grpc.warehouseService.shippingResponse>(
-                  this, METHODID_SEND_SHIPPING_INFO)))
+                com.grpc.warehouseService.lastOrdersRequest,
+                com.grpc.warehouseService.lastOrdersResponse>(
+                  this, METHODID_CHECK_LAST_ORDERS)))
           .build();
     }
   }
@@ -250,8 +250,8 @@ public final class warehouseServiceGrpc {
      *search order number
      * </pre>
      */
-    public void reportAnOrder(com.grpc.warehouseService.orderRequest request,
-        io.grpc.stub.StreamObserver<com.grpc.warehouseService.orderResponse> responseObserver) {
+    public void reportAnOrder(com.grpc.warehouseService.orderNumberRequest request,
+        io.grpc.stub.StreamObserver<com.grpc.warehouseService.orderNumberResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getReportAnOrderMethod(), getCallOptions()), request, responseObserver);
     }
@@ -261,10 +261,10 @@ public final class warehouseServiceGrpc {
      *Send shipping information
      * </pre>
      */
-    public void sendShippingInfo(com.grpc.warehouseService.orderRequest request,
-        io.grpc.stub.StreamObserver<com.grpc.warehouseService.shippingResponse> responseObserver) {
+    public void checkLastOrders(com.grpc.warehouseService.lastOrdersRequest request,
+        io.grpc.stub.StreamObserver<com.grpc.warehouseService.lastOrdersResponse> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(getSendShippingInfoMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getCheckLastOrdersMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -305,7 +305,7 @@ public final class warehouseServiceGrpc {
      *search order number
      * </pre>
      */
-    public com.grpc.warehouseService.orderResponse reportAnOrder(com.grpc.warehouseService.orderRequest request) {
+    public com.grpc.warehouseService.orderNumberResponse reportAnOrder(com.grpc.warehouseService.orderNumberRequest request) {
       return blockingUnaryCall(
           getChannel(), getReportAnOrderMethod(), getCallOptions(), request);
     }
@@ -315,9 +315,9 @@ public final class warehouseServiceGrpc {
      *Send shipping information
      * </pre>
      */
-    public com.grpc.warehouseService.shippingResponse sendShippingInfo(com.grpc.warehouseService.orderRequest request) {
+    public com.grpc.warehouseService.lastOrdersResponse checkLastOrders(com.grpc.warehouseService.lastOrdersRequest request) {
       return blockingUnaryCall(
-          getChannel(), getSendShippingInfoMethod(), getCallOptions(), request);
+          getChannel(), getCheckLastOrdersMethod(), getCallOptions(), request);
     }
   }
 
@@ -347,8 +347,8 @@ public final class warehouseServiceGrpc {
      *search order number
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.grpc.warehouseService.orderResponse> reportAnOrder(
-        com.grpc.warehouseService.orderRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.grpc.warehouseService.orderNumberResponse> reportAnOrder(
+        com.grpc.warehouseService.orderNumberRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getReportAnOrderMethod(), getCallOptions()), request);
     }
@@ -358,16 +358,16 @@ public final class warehouseServiceGrpc {
      *Send shipping information
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.grpc.warehouseService.shippingResponse> sendShippingInfo(
-        com.grpc.warehouseService.orderRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.grpc.warehouseService.lastOrdersResponse> checkLastOrders(
+        com.grpc.warehouseService.lastOrdersRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(getSendShippingInfoMethod(), getCallOptions()), request);
+          getChannel().newCall(getCheckLastOrdersMethod(), getCallOptions()), request);
     }
   }
 
   private static final int METHODID_GENERATE_REPORT_STREAM = 0;
   private static final int METHODID_REPORT_AN_ORDER = 1;
-  private static final int METHODID_SEND_SHIPPING_INFO = 2;
+  private static final int METHODID_CHECK_LAST_ORDERS = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -391,12 +391,12 @@ public final class warehouseServiceGrpc {
               (io.grpc.stub.StreamObserver<com.grpc.warehouseService.reportResponse>) responseObserver);
           break;
         case METHODID_REPORT_AN_ORDER:
-          serviceImpl.reportAnOrder((com.grpc.warehouseService.orderRequest) request,
-              (io.grpc.stub.StreamObserver<com.grpc.warehouseService.orderResponse>) responseObserver);
+          serviceImpl.reportAnOrder((com.grpc.warehouseService.orderNumberRequest) request,
+              (io.grpc.stub.StreamObserver<com.grpc.warehouseService.orderNumberResponse>) responseObserver);
           break;
-        case METHODID_SEND_SHIPPING_INFO:
-          serviceImpl.sendShippingInfo((com.grpc.warehouseService.orderRequest) request,
-              (io.grpc.stub.StreamObserver<com.grpc.warehouseService.shippingResponse>) responseObserver);
+        case METHODID_CHECK_LAST_ORDERS:
+          serviceImpl.checkLastOrders((com.grpc.warehouseService.lastOrdersRequest) request,
+              (io.grpc.stub.StreamObserver<com.grpc.warehouseService.lastOrdersResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -461,7 +461,7 @@ public final class warehouseServiceGrpc {
               .setSchemaDescriptor(new warehouseServiceFileDescriptorSupplier())
               .addMethod(getGenerateReportStreamMethod())
               .addMethod(getReportAnOrderMethod())
-              .addMethod(getSendShippingInfoMethod())
+              .addMethod(getCheckLastOrdersMethod())
               .build();
         }
       }

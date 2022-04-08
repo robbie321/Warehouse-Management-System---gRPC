@@ -18,7 +18,7 @@ public interface StockQuoteResponseOrBuilder extends
       getMessageBytes();
 
   /**
-   * <code>float price = 3;</code>
+   * <code>float price = 2;</code>
    */
   float getPrice();
 }

@@ -6,8 +6,10 @@ import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Logger;
+
 
 public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBase {
 
@@ -41,8 +43,11 @@ public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBa
 
     }
 
-    public Stock[] makeDatabase(){
-        Stock[] stocks= new Stock[1000];
+    public Stock[] makeDatabase() throws FileNotFoundException {
+
+        int count = -1;
+        String row;
+
 
         //parsing and reading the CSV file data into the film (object) array
         // provide the path here...
@@ -54,6 +59,21 @@ public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBa
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        //use this to count rows in file before parsing
+        //needed for when new lines are added
+        BufferedReader reader = new BufferedReader(new FileReader(name));
+
+        while (true) {
+            try {
+                if (!((row = reader.readLine()) != null)) break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            count++;
+        }
+
+        Stock[] stocks= new Stock[count];
 
         // this will just print the header in CSV file
         sc.nextLine();
@@ -130,6 +150,10 @@ public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBa
         //get data from request
         String from_date = request.getDate();
 
+        String dateRegex = "^\\d{2}/\\d{2}/\\d{4}$";
+
+
+        validateDate(dateRegex,from_date);
 
         //add each row to result
         String result = "";
@@ -163,14 +187,23 @@ public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBa
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
+        }catch (InputMismatchException e){
+            e.getLocalizedMessage();
+        }finally {
             //call completed by the observer
             responseObserver.onCompleted();
         }
     }
 
+    //validate, custom error (Question 2.3)
+    private void validateDate(String regex, String string) {
+        //throw error if condition is met
+        if(!string.matches(regex))
+            throw new InputMismatchException(string + " does not match the format dd/mm/yyyy");
+    }
+
     @Override
-    public void reportAnOrder(orderRequest request, StreamObserver<orderResponse> responseObserver) {
+    public void reportAnOrder(orderNumberRequest request, StreamObserver<orderNumberResponse> responseObserver) {
         //get order number from user
         String orderNumber = request.getOrderNumber();
 
@@ -189,10 +222,11 @@ public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBa
             while((line = br.readLine()) != null){
                 //split the columns by comma
                 String[] orders = line.split(",");
+                System.out.println(orders[0]);
                 //add row to array if matches condition
-                if(orders[0].contains(orderNumber)){
+                if(orders[0].equals(orderNumber)){
                     result ="Order# " + orders[0]+  "\nProduct: " + orders[1] + ", Quantity: " + orders[2];
-
+                    break; //stop the loop if found as stockNo is unique
                 }else
                     result = "There is no record of this order: " + orderNumber;
             }
@@ -203,7 +237,7 @@ public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBa
         }
 
         //create the response
-        orderResponse response = orderResponse.newBuilder()
+        orderNumberResponse response = orderNumberResponse.newBuilder()
                 .setOrder(result)
                 .build();
 
@@ -215,7 +249,7 @@ public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBa
     }
 
     @Override
-    public void sendShippingInfo(orderRequest request, StreamObserver<shippingResponse> responseObserver) {
-        super.sendShippingInfo(request, responseObserver);
+    public void checkLastOrders(lastOrdersRequest request, StreamObserver<lastOrdersResponse> responseObserver) {
+        super.checkLastOrders(request, responseObserver);
     }
 }
