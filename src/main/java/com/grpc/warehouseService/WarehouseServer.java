@@ -70,6 +70,61 @@ public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBa
         return stocks;
     }
 
+    public Orders[] parseFile() {
+        // parsing and reading the CSV file data into the film (object) array
+        // provide the path here...
+
+        int count = -1;
+        String row;
+
+        //parsing and reading the CSV file data into the film (object) array
+        // provide the path here...
+        File directory = new File("src/main/java/com/grpc");
+        String file = directory.getAbsolutePath() + "//orders.csv";
+
+        //use this to count rows in file before parsing
+        //needed for when new lines are added
+
+            //read file
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(file));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        //count number of lines in file
+            while (true) {
+                try {
+                    if (!((row = reader.readLine()) != null)) break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                count++;
+            }
+
+        Scanner sc = null;
+        try {
+            sc = new Scanner(new File(file));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Orders[] orders = new Orders[count];
+
+            sc.nextLine();
+
+            int i = 0;
+            String st = "";
+            while (sc.hasNextLine()) // returns a boolean value
+            {
+                st = sc.nextLine();
+                String[] data = st.split(",");
+                orders[i++] = new Orders(Integer.parseInt(data[0]), data[1].toLowerCase(), Integer.parseInt(data[2]));
+            }
+
+            return orders;
+    }
+
     @Override
     public void generateReportStream(reportRequest request, StreamObserver<reportResponse> responseObserver) {
         //get data from request
@@ -116,7 +171,47 @@ public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBa
 
     @Override
     public void reportAnOrder(orderRequest request, StreamObserver<orderResponse> responseObserver) {
-        super.reportAnOrder(request, responseObserver);
+        //get order number from user
+        String orderNumber = request.getOrderNumber();
+
+        //add each row to result
+        String result = "";
+
+        //set file path
+        String file = "src/main/java/com/grpc/orders.csv";
+        String line = "";
+
+        try{
+            //read file
+            BufferedReader br = new BufferedReader(new FileReader(file));
+
+            //loop until the next line is null
+            while((line = br.readLine()) != null){
+                //split the columns by comma
+                String[] orders = line.split(",");
+                //add row to array if matches condition
+                if(orders[0].contains(orderNumber)){
+                    result ="Order# " + orders[0]+  "\nProduct: " + orders[1] + ", Quantity: " + orders[2];
+
+                }else
+                    result = "There is no record of this order: " + orderNumber;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //create the response
+        orderResponse response = orderResponse.newBuilder()
+                .setOrder(result)
+                .build();
+
+        //call onNext by the observer
+        responseObserver.onNext(response);
+
+        //call completed by the observer
+        responseObserver.onCompleted();
     }
 
     @Override

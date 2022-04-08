@@ -56,7 +56,7 @@ service orderService{
   */
   rpc streamStockQuote(stream StockQuoteRequest) returns (StockQuoteResponse){};
 
-  //client streaming
+  //server streaming
   /**
   Client can send 1 or multiple requests, server responds with 1 cart result
   */

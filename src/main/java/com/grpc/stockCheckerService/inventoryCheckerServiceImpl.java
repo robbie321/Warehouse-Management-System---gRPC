@@ -6,7 +6,7 @@ import io.grpc.stub.StreamObserver;
 public class inventoryCheckerServiceImpl extends inventoryCheckerServiceGrpc.inventoryCheckerServiceImplBase{
 
     @Override
-    public void addProductsToStock(product request, StreamObserver<product> responseObserver) {
+    public void addProductsToStock(addStockRequest request, StreamObserver<addStockResponse> responseObserver) {
         //get product details and assign to data type
         String title = request.getProductName();
         int quantityAvailable = request.getQuantityAvailable();

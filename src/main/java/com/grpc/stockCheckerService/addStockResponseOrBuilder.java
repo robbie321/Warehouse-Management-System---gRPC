@@ -3,8 +3,8 @@
 
 package com.grpc.stockCheckerService;
 
-public interface lowStockResponseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:lowStockResponse)
+public interface addStockResponseOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:addStockResponse)
     com.google.protobuf.MessageOrBuilder {
 
   /**

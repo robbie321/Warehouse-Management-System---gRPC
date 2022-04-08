@@ -16,7 +16,6 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private orderResponse() {
-    orderNumber_ = "";
     order_ = "";
   }
 
@@ -45,12 +44,6 @@ private static final long serialVersionUID = 0L;
             done = true;
             break;
           case 10: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            orderNumber_ = s;
-            break;
-          }
-          case 18: {
             java.lang.String s = input.readStringRequireUtf8();
 
             order_ = s;
@@ -88,44 +81,10 @@ private static final long serialVersionUID = 0L;
             com.grpc.warehouseService.orderResponse.class, com.grpc.warehouseService.orderResponse.Builder.class);
   }
 
-  public static final int ORDERNUMBER_FIELD_NUMBER = 1;
-  private volatile java.lang.Object orderNumber_;
-  /**
-   * <code>string orderNumber = 1;</code>
-   */
-  public java.lang.String getOrderNumber() {
-    java.lang.Object ref = orderNumber_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      orderNumber_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string orderNumber = 1;</code>
-   */
-  public com.google.protobuf.ByteString
-      getOrderNumberBytes() {
-    java.lang.Object ref = orderNumber_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      orderNumber_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int ORDER_FIELD_NUMBER = 2;
+  public static final int ORDER_FIELD_NUMBER = 1;
   private volatile java.lang.Object order_;
   /**
-   * <code>string order = 2;</code>
+   * <code>string order = 1;</code>
    */
   public java.lang.String getOrder() {
     java.lang.Object ref = order_;
@@ -140,7 +99,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string order = 2;</code>
+   * <code>string order = 1;</code>
    */
   public com.google.protobuf.ByteString
       getOrderBytes() {
@@ -170,11 +129,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getOrderNumberBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, orderNumber_);
-    }
     if (!getOrderBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, order_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, order_);
     }
     unknownFields.writeTo(output);
   }
@@ -185,11 +141,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getOrderNumberBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, orderNumber_);
-    }
     if (!getOrderBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, order_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, order_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -207,8 +160,6 @@ private static final long serialVersionUID = 0L;
     com.grpc.warehouseService.orderResponse other = (com.grpc.warehouseService.orderResponse) obj;
 
     boolean result = true;
-    result = result && getOrderNumber()
-        .equals(other.getOrderNumber());
     result = result && getOrder()
         .equals(other.getOrder());
     result = result && unknownFields.equals(other.unknownFields);
@@ -222,8 +173,6 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + ORDERNUMBER_FIELD_NUMBER;
-    hash = (53 * hash) + getOrderNumber().hashCode();
     hash = (37 * hash) + ORDER_FIELD_NUMBER;
     hash = (53 * hash) + getOrder().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
@@ -359,8 +308,6 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      orderNumber_ = "";
-
       order_ = "";
 
       return this;
@@ -389,7 +336,6 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.grpc.warehouseService.orderResponse buildPartial() {
       com.grpc.warehouseService.orderResponse result = new com.grpc.warehouseService.orderResponse(this);
-      result.orderNumber_ = orderNumber_;
       result.order_ = order_;
       onBuilt();
       return result;
@@ -439,10 +385,6 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.grpc.warehouseService.orderResponse other) {
       if (other == com.grpc.warehouseService.orderResponse.getDefaultInstance()) return this;
-      if (!other.getOrderNumber().isEmpty()) {
-        orderNumber_ = other.orderNumber_;
-        onChanged();
-      }
       if (!other.getOrder().isEmpty()) {
         order_ = other.order_;
         onChanged();
@@ -476,78 +418,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object orderNumber_ = "";
-    /**
-     * <code>string orderNumber = 1;</code>
-     */
-    public java.lang.String getOrderNumber() {
-      java.lang.Object ref = orderNumber_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        orderNumber_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string orderNumber = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getOrderNumberBytes() {
-      java.lang.Object ref = orderNumber_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        orderNumber_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string orderNumber = 1;</code>
-     */
-    public Builder setOrderNumber(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      orderNumber_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string orderNumber = 1;</code>
-     */
-    public Builder clearOrderNumber() {
-      
-      orderNumber_ = getDefaultInstance().getOrderNumber();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string orderNumber = 1;</code>
-     */
-    public Builder setOrderNumberBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      orderNumber_ = value;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object order_ = "";
     /**
-     * <code>string order = 2;</code>
+     * <code>string order = 1;</code>
      */
     public java.lang.String getOrder() {
       java.lang.Object ref = order_;
@@ -562,7 +435,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string order = 2;</code>
+     * <code>string order = 1;</code>
      */
     public com.google.protobuf.ByteString
         getOrderBytes() {
@@ -578,7 +451,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string order = 2;</code>
+     * <code>string order = 1;</code>
      */
     public Builder setOrder(
         java.lang.String value) {
@@ -591,7 +464,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string order = 2;</code>
+     * <code>string order = 1;</code>
      */
     public Builder clearOrder() {
       
@@ -600,7 +473,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string order = 2;</code>
+     * <code>string order = 1;</code>
      */
     public Builder setOrderBytes(
         com.google.protobuf.ByteString value) {

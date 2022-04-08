@@ -4,18 +4,18 @@
 package com.grpc.stockCheckerService;
 
 /**
- * Protobuf type {@code lowStockResponse}
+ * Protobuf type {@code addStockResponse}
  */
-public  final class lowStockResponse extends
+public  final class addStockResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:lowStockResponse)
-    lowStockResponseOrBuilder {
+    // @@protoc_insertion_point(message_implements:addStockResponse)
+    addStockResponseOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use lowStockResponse.newBuilder() to construct.
-  private lowStockResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use addStockResponse.newBuilder() to construct.
+  private addStockResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private lowStockResponse() {
+  private addStockResponse() {
     message_ = "";
   }
 
@@ -24,7 +24,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private lowStockResponse(
+  private addStockResponse(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -70,15 +70,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.grpc.stockCheckerService.InventoryManagement.internal_static_lowStockResponse_descriptor;
+    return com.grpc.stockCheckerService.InventoryManagement.internal_static_addStockResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.grpc.stockCheckerService.InventoryManagement.internal_static_lowStockResponse_fieldAccessorTable
+    return com.grpc.stockCheckerService.InventoryManagement.internal_static_addStockResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.grpc.stockCheckerService.lowStockResponse.class, com.grpc.stockCheckerService.lowStockResponse.Builder.class);
+            com.grpc.stockCheckerService.addStockResponse.class, com.grpc.stockCheckerService.addStockResponse.Builder.class);
   }
 
   public static final int MESSAGE_FIELD_NUMBER = 1;
@@ -154,10 +154,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.grpc.stockCheckerService.lowStockResponse)) {
+    if (!(obj instanceof com.grpc.stockCheckerService.addStockResponse)) {
       return super.equals(obj);
     }
-    com.grpc.stockCheckerService.lowStockResponse other = (com.grpc.stockCheckerService.lowStockResponse) obj;
+    com.grpc.stockCheckerService.addStockResponse other = (com.grpc.stockCheckerService.addStockResponse) obj;
 
     boolean result = true;
     result = result && getMessage()
@@ -180,69 +180,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static com.grpc.stockCheckerService.lowStockResponse parseFrom(
+  public static com.grpc.stockCheckerService.addStockResponse parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.grpc.stockCheckerService.lowStockResponse parseFrom(
+  public static com.grpc.stockCheckerService.addStockResponse parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.grpc.stockCheckerService.lowStockResponse parseFrom(
+  public static com.grpc.stockCheckerService.addStockResponse parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.grpc.stockCheckerService.lowStockResponse parseFrom(
+  public static com.grpc.stockCheckerService.addStockResponse parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.grpc.stockCheckerService.lowStockResponse parseFrom(byte[] data)
+  public static com.grpc.stockCheckerService.addStockResponse parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.grpc.stockCheckerService.lowStockResponse parseFrom(
+  public static com.grpc.stockCheckerService.addStockResponse parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.grpc.stockCheckerService.lowStockResponse parseFrom(java.io.InputStream input)
+  public static com.grpc.stockCheckerService.addStockResponse parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.grpc.stockCheckerService.lowStockResponse parseFrom(
+  public static com.grpc.stockCheckerService.addStockResponse parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.grpc.stockCheckerService.lowStockResponse parseDelimitedFrom(java.io.InputStream input)
+  public static com.grpc.stockCheckerService.addStockResponse parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static com.grpc.stockCheckerService.lowStockResponse parseDelimitedFrom(
+  public static com.grpc.stockCheckerService.addStockResponse parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.grpc.stockCheckerService.lowStockResponse parseFrom(
+  public static com.grpc.stockCheckerService.addStockResponse parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.grpc.stockCheckerService.lowStockResponse parseFrom(
+  public static com.grpc.stockCheckerService.addStockResponse parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -255,7 +255,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.grpc.stockCheckerService.lowStockResponse prototype) {
+  public static Builder newBuilder(com.grpc.stockCheckerService.addStockResponse prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -271,26 +271,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code lowStockResponse}
+   * Protobuf type {@code addStockResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:lowStockResponse)
-      com.grpc.stockCheckerService.lowStockResponseOrBuilder {
+      // @@protoc_insertion_point(builder_implements:addStockResponse)
+      com.grpc.stockCheckerService.addStockResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.grpc.stockCheckerService.InventoryManagement.internal_static_lowStockResponse_descriptor;
+      return com.grpc.stockCheckerService.InventoryManagement.internal_static_addStockResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.grpc.stockCheckerService.InventoryManagement.internal_static_lowStockResponse_fieldAccessorTable
+      return com.grpc.stockCheckerService.InventoryManagement.internal_static_addStockResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.grpc.stockCheckerService.lowStockResponse.class, com.grpc.stockCheckerService.lowStockResponse.Builder.class);
+              com.grpc.stockCheckerService.addStockResponse.class, com.grpc.stockCheckerService.addStockResponse.Builder.class);
     }
 
-    // Construct using com.grpc.stockCheckerService.lowStockResponse.newBuilder()
+    // Construct using com.grpc.stockCheckerService.addStockResponse.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -316,17 +316,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.grpc.stockCheckerService.InventoryManagement.internal_static_lowStockResponse_descriptor;
+      return com.grpc.stockCheckerService.InventoryManagement.internal_static_addStockResponse_descriptor;
     }
 
     @java.lang.Override
-    public com.grpc.stockCheckerService.lowStockResponse getDefaultInstanceForType() {
-      return com.grpc.stockCheckerService.lowStockResponse.getDefaultInstance();
+    public com.grpc.stockCheckerService.addStockResponse getDefaultInstanceForType() {
+      return com.grpc.stockCheckerService.addStockResponse.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.grpc.stockCheckerService.lowStockResponse build() {
-      com.grpc.stockCheckerService.lowStockResponse result = buildPartial();
+    public com.grpc.stockCheckerService.addStockResponse build() {
+      com.grpc.stockCheckerService.addStockResponse result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -334,8 +334,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.grpc.stockCheckerService.lowStockResponse buildPartial() {
-      com.grpc.stockCheckerService.lowStockResponse result = new com.grpc.stockCheckerService.lowStockResponse(this);
+    public com.grpc.stockCheckerService.addStockResponse buildPartial() {
+      com.grpc.stockCheckerService.addStockResponse result = new com.grpc.stockCheckerService.addStockResponse(this);
       result.message_ = message_;
       onBuilt();
       return result;
@@ -375,16 +375,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.grpc.stockCheckerService.lowStockResponse) {
-        return mergeFrom((com.grpc.stockCheckerService.lowStockResponse)other);
+      if (other instanceof com.grpc.stockCheckerService.addStockResponse) {
+        return mergeFrom((com.grpc.stockCheckerService.addStockResponse)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.grpc.stockCheckerService.lowStockResponse other) {
-      if (other == com.grpc.stockCheckerService.lowStockResponse.getDefaultInstance()) return this;
+    public Builder mergeFrom(com.grpc.stockCheckerService.addStockResponse other) {
+      if (other == com.grpc.stockCheckerService.addStockResponse.getDefaultInstance()) return this;
       if (!other.getMessage().isEmpty()) {
         message_ = other.message_;
         onChanged();
@@ -404,11 +404,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      com.grpc.stockCheckerService.lowStockResponse parsedMessage = null;
+      com.grpc.stockCheckerService.addStockResponse parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (com.grpc.stockCheckerService.lowStockResponse) e.getUnfinishedMessage();
+        parsedMessage = (com.grpc.stockCheckerService.addStockResponse) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -499,41 +499,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:lowStockResponse)
+    // @@protoc_insertion_point(builder_scope:addStockResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:lowStockResponse)
-  private static final com.grpc.stockCheckerService.lowStockResponse DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:addStockResponse)
+  private static final com.grpc.stockCheckerService.addStockResponse DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.grpc.stockCheckerService.lowStockResponse();
+    DEFAULT_INSTANCE = new com.grpc.stockCheckerService.addStockResponse();
   }
 
-  public static com.grpc.stockCheckerService.lowStockResponse getDefaultInstance() {
+  public static com.grpc.stockCheckerService.addStockResponse getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<lowStockResponse>
-      PARSER = new com.google.protobuf.AbstractParser<lowStockResponse>() {
+  private static final com.google.protobuf.Parser<addStockResponse>
+      PARSER = new com.google.protobuf.AbstractParser<addStockResponse>() {
     @java.lang.Override
-    public lowStockResponse parsePartialFrom(
+    public addStockResponse parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new lowStockResponse(input, extensionRegistry);
+      return new addStockResponse(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<lowStockResponse> parser() {
+  public static com.google.protobuf.Parser<addStockResponse> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<lowStockResponse> getParserForType() {
+  public com.google.protobuf.Parser<addStockResponse> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.grpc.stockCheckerService.lowStockResponse getDefaultInstanceForType() {
+  public com.grpc.stockCheckerService.addStockResponse getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

@@ -15,6 +15,16 @@ public final class InventoryManagement {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_addStockRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_addStockRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_addStockResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_addStockResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_lowStockRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -34,15 +44,17 @@ public final class InventoryManagement {
   static {
     java.lang.String[] descriptorData = {
       "\n\032inventory_management.proto\032\025automate_o" +
-      "rders.proto\"#\n\017lowStockRequest\022\020\n\010quanti" +
-      "ty\030\001 \001(\005\"?\n\020lowStockResponse\022\017\n\007message\030" +
-      "\001 \001(\t\022\032\n\010products\030\002 \003(\0132\010.product2\250\001\n\027in" +
-      "ventoryCheckerService\022*\n\022addProductsToSt" +
-      "ock\022\010.product\032\010.product\"\000\022)\n\021updateProdu" +
-      "ctInfo\022\010.product\032\010.product\"\000\0226\n\rcheckLow" +
-      "Stock\022\020.lowStockRequest\032\021.lowStockRespon" +
-      "se\"\000B \n\034com.grpc.stockCheckerServiceP\001b\006" +
-      "proto3"
+      "rders.proto\"P\n\017addStockRequest\022\023\n\013produc" +
+      "tName\030\001 \001(\t\022\014\n\004cost\030\002 \001(\002\022\032\n\022quantity_av" +
+      "ailable\030\003 \001(\005\"#\n\020addStockResponse\022\017\n\007mes" +
+      "sage\030\001 \001(\t\"#\n\017lowStockRequest\022\020\n\010quantit" +
+      "y\030\001 \001(\005\"#\n\020lowStockResponse\022\017\n\007message\030\001" +
+      " \001(\t2\273\001\n\027inventoryCheckerService\022;\n\022addP" +
+      "roductsToStock\022\020.addStockRequest\032\021.addSt" +
+      "ockResponse\"\000\022)\n\021updateProductInfo\022\010.pro" +
+      "duct\032\010.product\"\000\0228\n\rcheckLowStock\022\020.lowS" +
+      "tockRequest\032\021.lowStockResponse\"\0000\001B \n\034co" +
+      "m.grpc.stockCheckerServiceP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -57,18 +69,30 @@ public final class InventoryManagement {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.grpc.orderService.AutomateOrdersImpl.getDescriptor(),
         }, assigner);
-    internal_static_lowStockRequest_descriptor =
+    internal_static_addStockRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_addStockRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_addStockRequest_descriptor,
+        new java.lang.String[] { "ProductName", "Cost", "QuantityAvailable", });
+    internal_static_addStockResponse_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_addStockResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_addStockResponse_descriptor,
+        new java.lang.String[] { "Message", });
+    internal_static_lowStockRequest_descriptor =
+      getDescriptor().getMessageTypes().get(2);
     internal_static_lowStockRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_lowStockRequest_descriptor,
         new java.lang.String[] { "Quantity", });
     internal_static_lowStockResponse_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_lowStockResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_lowStockResponse_descriptor,
-        new java.lang.String[] { "Message", "Products", });
+        new java.lang.String[] { "Message", });
     com.grpc.orderService.AutomateOrdersImpl.getDescriptor();
   }
 

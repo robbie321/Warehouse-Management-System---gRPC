@@ -1,17 +1,22 @@
 package com.grpc.orderService;
 
 
+import com.grpc.warehouseService.Orders;
 import com.grpc.warehouseService.Stock;
 import com.grpc.warehouseService.WarehouseServer;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 
-import java.io.IOException;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class OrdersServer extends orderServiceGrpc.orderServiceImplBase {
     public static Stock[] stock;
+    public static Orders[] orders;
     public static void main(String[] args) {
         //set logging
         final Logger logger = Logger.getLogger(OrdersServer.class.getName());
@@ -22,7 +27,7 @@ public class OrdersServer extends orderServiceGrpc.orderServiceImplBase {
         //get stock list
         WarehouseServer ws = new WarehouseServer();
         stock = ws.makeDatabase();
-
+        orders = ws.parseFile();
         //make a channel available for communication
         int port = 50051;
 
@@ -51,7 +56,28 @@ public class OrdersServer extends orderServiceGrpc.orderServiceImplBase {
         String item = request.getItem();
         int quantity = request.getQuantity();
 
-        //wite to a file
+        try{
+            //write to a file
+            File directory = new File("src/main/java/com/grpc");
+            String name = directory.getAbsolutePath() + "//orders.csv";
+
+            //TODO: Parse file again to get updated stock number
+            int nextOrderNumber = orders[orders.length - 1].getOrderNumber() + 1;
+            //convert stock num to string
+            String stockNo = String.valueOf(nextOrderNumber);
+
+            //initialise bufferedWriter
+            BufferedWriter writer = new BufferedWriter(new FileWriter(name, true));
+
+            //append to end of file
+            writer.append("\n"+stockNo + ","+item.toLowerCase() + "," + quantity);
+
+            //close the writer
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         //create the response
         orderResponse response = orderResponse.newBuilder()
@@ -66,6 +92,8 @@ public class OrdersServer extends orderServiceGrpc.orderServiceImplBase {
         responseObserver.onCompleted();
 
     }
+
+
 
     @Override
     public StreamObserver<StockQuoteRequest> streamStockQuote(StreamObserver<StockQuoteResponse> responseObserver) {

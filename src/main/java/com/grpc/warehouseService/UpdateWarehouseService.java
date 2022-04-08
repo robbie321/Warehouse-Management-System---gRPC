@@ -51,16 +51,15 @@ public final class UpdateWarehouseService {
       "\n\036update_warehouse_service.proto\"\035\n\rrepo" +
       "rtRequest\022\014\n\004date\030\001 \001(\t\"!\n\016reportRespons" +
       "e\022\017\n\007message\030\001 \001(\t\"#\n\014orderRequest\022\023\n\013or" +
-      "derNumber\030\001 \001(\t\"3\n\rorderResponse\022\023\n\013orde" +
-      "rNumber\030\001 \001(\t\022\r\n\005order\030\002 \001(\t\"B\n\020shipping" +
-      "Response\022\014\n\004name\030\001 \001(\t\022\017\n\007address\030\002 \001(\t\022" +
-      "\017\n\007country\030\003 \001(\t2\271\001\n\020warehouseService\022;\n" +
-      "\024generateReportStream\022\016.reportRequest\032\017." +
-      "reportResponse\"\0000\001\0220\n\rreportAnOrder\022\r.or" +
-      "derRequest\032\016.orderResponse\"\000\0226\n\020sendShip" +
-      "pingInfo\022\r.orderRequest\032\021.shippingRespon" +
-      "se\"\000B\035\n\031com.grpc.warehouseServiceP\001b\006pro" +
-      "to3"
+      "derNumber\030\001 \001(\t\"\036\n\rorderResponse\022\r\n\005orde" +
+      "r\030\001 \001(\t\"B\n\020shippingResponse\022\014\n\004name\030\001 \001(" +
+      "\t\022\017\n\007address\030\002 \001(\t\022\017\n\007country\030\003 \001(\t2\271\001\n\020" +
+      "warehouseService\022;\n\024generateReportStream" +
+      "\022\016.reportRequest\032\017.reportResponse\"\0000\001\0220\n" +
+      "\rreportAnOrder\022\r.orderRequest\032\016.orderRes" +
+      "ponse\"\000\0226\n\020sendShippingInfo\022\r.orderReque" +
+      "st\032\021.shippingResponse\"\000B\035\n\031com.grpc.ware" +
+      "houseServiceP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -97,7 +96,7 @@ public final class UpdateWarehouseService {
     internal_static_orderResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_orderResponse_descriptor,
-        new java.lang.String[] { "OrderNumber", "Order", });
+        new java.lang.String[] { "Order", });
     internal_static_shippingResponse_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_shippingResponse_fieldAccessorTable = new

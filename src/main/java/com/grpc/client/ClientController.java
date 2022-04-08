@@ -16,6 +16,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -52,16 +53,16 @@ public  static Stock[] stock;
 
     private void run() {
 
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50052)
+        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051)
                 .usePlaintext() //forces ssl to stop (do not use during development
                 .build();
 
 //        System.out.println(WarehouseServer.stocks[10]);
 
-//        createOrder(channel);
+        createOrder(channel);
 //        filterPrice(channel);
 //        checkStockLevels(channel);
-        generateWarehouseReport(channel);
+//        generateWarehouseReport(channel);
 
         //do something
         System.out.println("\nShutting down channel");
@@ -74,10 +75,20 @@ public  static Stock[] stock;
         //create the stub
         orderServiceGrpc.orderServiceBlockingStub stub = orderServiceGrpc.newBlockingStub(channel);
 
+        Scanner in = new Scanner(System.in);
+        String product = "";
+        int quantity = 0;
+
+        //replace this with a JPanel showing a list the user can choose from
+        System.out.print("What product: ");
+        product = in.nextLine();
+        System.out.print("How many: ");
+        quantity = in.nextInt();
+
         //prepare request
         orderRequest request = orderRequest.newBuilder()
-                .setItem(stock[22].getProductName())
-                .setQuantity(10)
+                .setItem(product)
+                .setQuantity(quantity)
                 .build();
 
         //response in blocking manner
@@ -176,7 +187,7 @@ public  static Stock[] stock;
 
         //stream response in blocking manner
         stub.filterPrice(priceRequest).forEachRemaining(filterPriceResponse -> {
-            System.out.println(filterPriceResponse.getProduct());
+            System.out.println(filterPriceResponse.getProduct()); //let this equal text field to display
         });
     }
 
@@ -192,7 +203,7 @@ public  static Stock[] stock;
 
         //generate response
         stub.generateReportStream(request).forEachRemaining(reportResponse -> {
-            System.out.print(reportResponse.getMessage());
+            System.out.print(reportResponse.getMessage()); //let this equal text field
         });
     }
 

@@ -999,3 +999,6 @@ stock_id,cost,product_name,quanity_available
 998,418.83,cot,91
 999,97.47,dining table,50
 1000,404.85,wine,56
+1001,1.1,hello,10
+1001,1.1,hello,10
+1001,1100.0,newtest,50

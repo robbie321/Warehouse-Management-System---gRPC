@@ -16,8 +16,7 @@ message orderRequest{
 }
 
 message orderResponse{
-  string orderNumber = 1;
-  string order = 2;
+  string order = 1;
 }
 
 message shippingResponse{
@@ -34,7 +33,7 @@ service warehouseService{
   */
   rpc generateReportStream(reportRequest) returns (stream reportResponse){};
 
-  //client Stream
+  //Unary Stream
   /*
       search order number
   */

@@ -8,21 +8,11 @@ public interface orderResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string orderNumber = 1;</code>
-   */
-  java.lang.String getOrderNumber();
-  /**
-   * <code>string orderNumber = 1;</code>
-   */
-  com.google.protobuf.ByteString
-      getOrderNumberBytes();
-
-  /**
-   * <code>string order = 2;</code>
+   * <code>string order = 1;</code>
    */
   java.lang.String getOrder();
   /**
-   * <code>string order = 2;</code>
+   * <code>string order = 1;</code>
    */
   com.google.protobuf.ByteString
       getOrderBytes();
