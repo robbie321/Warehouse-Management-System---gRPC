@@ -16,7 +16,6 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private lastOrdersRequest() {
-    amountOfOrdersToSearch_ = 0;
   }
 
   @java.lang.Override
@@ -43,9 +42,17 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 8: {
+          case 10: {
+            com.grpc.orderService.product.Builder subBuilder = null;
+            if (product_ != null) {
+              subBuilder = product_.toBuilder();
+            }
+            product_ = input.readMessage(com.grpc.orderService.product.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(product_);
+              product_ = subBuilder.buildPartial();
+            }
 
-            amountOfOrdersToSearch_ = input.readInt32();
             break;
           }
           default: {
@@ -80,13 +87,25 @@ private static final long serialVersionUID = 0L;
             com.grpc.warehouseService.lastOrdersRequest.class, com.grpc.warehouseService.lastOrdersRequest.Builder.class);
   }
 
-  public static final int AMOUNTOFORDERSTOSEARCH_FIELD_NUMBER = 1;
-  private int amountOfOrdersToSearch_;
+  public static final int PRODUCT_FIELD_NUMBER = 1;
+  private com.grpc.orderService.product product_;
   /**
-   * <code>int32 amountOfOrdersToSearch = 1;</code>
+   * <code>.product product = 1;</code>
    */
-  public int getAmountOfOrdersToSearch() {
-    return amountOfOrdersToSearch_;
+  public boolean hasProduct() {
+    return product_ != null;
+  }
+  /**
+   * <code>.product product = 1;</code>
+   */
+  public com.grpc.orderService.product getProduct() {
+    return product_ == null ? com.grpc.orderService.product.getDefaultInstance() : product_;
+  }
+  /**
+   * <code>.product product = 1;</code>
+   */
+  public com.grpc.orderService.productOrBuilder getProductOrBuilder() {
+    return getProduct();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -103,8 +122,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (amountOfOrdersToSearch_ != 0) {
-      output.writeInt32(1, amountOfOrdersToSearch_);
+    if (product_ != null) {
+      output.writeMessage(1, getProduct());
     }
     unknownFields.writeTo(output);
   }
@@ -115,9 +134,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (amountOfOrdersToSearch_ != 0) {
+    if (product_ != null) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(1, amountOfOrdersToSearch_);
+        .computeMessageSize(1, getProduct());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -135,8 +154,11 @@ private static final long serialVersionUID = 0L;
     com.grpc.warehouseService.lastOrdersRequest other = (com.grpc.warehouseService.lastOrdersRequest) obj;
 
     boolean result = true;
-    result = result && (getAmountOfOrdersToSearch()
-        == other.getAmountOfOrdersToSearch());
+    result = result && (hasProduct() == other.hasProduct());
+    if (hasProduct()) {
+      result = result && getProduct()
+          .equals(other.getProduct());
+    }
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -148,8 +170,10 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + AMOUNTOFORDERSTOSEARCH_FIELD_NUMBER;
-    hash = (53 * hash) + getAmountOfOrdersToSearch();
+    if (hasProduct()) {
+      hash = (37 * hash) + PRODUCT_FIELD_NUMBER;
+      hash = (53 * hash) + getProduct().hashCode();
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -283,8 +307,12 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      amountOfOrdersToSearch_ = 0;
-
+      if (productBuilder_ == null) {
+        product_ = null;
+      } else {
+        product_ = null;
+        productBuilder_ = null;
+      }
       return this;
     }
 
@@ -311,7 +339,11 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.grpc.warehouseService.lastOrdersRequest buildPartial() {
       com.grpc.warehouseService.lastOrdersRequest result = new com.grpc.warehouseService.lastOrdersRequest(this);
-      result.amountOfOrdersToSearch_ = amountOfOrdersToSearch_;
+      if (productBuilder_ == null) {
+        result.product_ = product_;
+      } else {
+        result.product_ = productBuilder_.build();
+      }
       onBuilt();
       return result;
     }
@@ -360,8 +392,8 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.grpc.warehouseService.lastOrdersRequest other) {
       if (other == com.grpc.warehouseService.lastOrdersRequest.getDefaultInstance()) return this;
-      if (other.getAmountOfOrdersToSearch() != 0) {
-        setAmountOfOrdersToSearch(other.getAmountOfOrdersToSearch());
+      if (other.hasProduct()) {
+        mergeProduct(other.getProduct());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -392,30 +424,121 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private int amountOfOrdersToSearch_ ;
+    private com.grpc.orderService.product product_ = null;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.grpc.orderService.product, com.grpc.orderService.product.Builder, com.grpc.orderService.productOrBuilder> productBuilder_;
     /**
-     * <code>int32 amountOfOrdersToSearch = 1;</code>
+     * <code>.product product = 1;</code>
      */
-    public int getAmountOfOrdersToSearch() {
-      return amountOfOrdersToSearch_;
+    public boolean hasProduct() {
+      return productBuilder_ != null || product_ != null;
     }
     /**
-     * <code>int32 amountOfOrdersToSearch = 1;</code>
+     * <code>.product product = 1;</code>
      */
-    public Builder setAmountOfOrdersToSearch(int value) {
-      
-      amountOfOrdersToSearch_ = value;
-      onChanged();
+    public com.grpc.orderService.product getProduct() {
+      if (productBuilder_ == null) {
+        return product_ == null ? com.grpc.orderService.product.getDefaultInstance() : product_;
+      } else {
+        return productBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.product product = 1;</code>
+     */
+    public Builder setProduct(com.grpc.orderService.product value) {
+      if (productBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        product_ = value;
+        onChanged();
+      } else {
+        productBuilder_.setMessage(value);
+      }
+
       return this;
     }
     /**
-     * <code>int32 amountOfOrdersToSearch = 1;</code>
+     * <code>.product product = 1;</code>
      */
-    public Builder clearAmountOfOrdersToSearch() {
-      
-      amountOfOrdersToSearch_ = 0;
-      onChanged();
+    public Builder setProduct(
+        com.grpc.orderService.product.Builder builderForValue) {
+      if (productBuilder_ == null) {
+        product_ = builderForValue.build();
+        onChanged();
+      } else {
+        productBuilder_.setMessage(builderForValue.build());
+      }
+
       return this;
+    }
+    /**
+     * <code>.product product = 1;</code>
+     */
+    public Builder mergeProduct(com.grpc.orderService.product value) {
+      if (productBuilder_ == null) {
+        if (product_ != null) {
+          product_ =
+            com.grpc.orderService.product.newBuilder(product_).mergeFrom(value).buildPartial();
+        } else {
+          product_ = value;
+        }
+        onChanged();
+      } else {
+        productBuilder_.mergeFrom(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.product product = 1;</code>
+     */
+    public Builder clearProduct() {
+      if (productBuilder_ == null) {
+        product_ = null;
+        onChanged();
+      } else {
+        product_ = null;
+        productBuilder_ = null;
+      }
+
+      return this;
+    }
+    /**
+     * <code>.product product = 1;</code>
+     */
+    public com.grpc.orderService.product.Builder getProductBuilder() {
+      
+      onChanged();
+      return getProductFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.product product = 1;</code>
+     */
+    public com.grpc.orderService.productOrBuilder getProductOrBuilder() {
+      if (productBuilder_ != null) {
+        return productBuilder_.getMessageOrBuilder();
+      } else {
+        return product_ == null ?
+            com.grpc.orderService.product.getDefaultInstance() : product_;
+      }
+    }
+    /**
+     * <code>.product product = 1;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.grpc.orderService.product, com.grpc.orderService.product.Builder, com.grpc.orderService.productOrBuilder> 
+        getProductFieldBuilder() {
+      if (productBuilder_ == null) {
+        productBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.grpc.orderService.product, com.grpc.orderService.product.Builder, com.grpc.orderService.productOrBuilder>(
+                getProduct(),
+                getParentForChildren(),
+                isClean());
+        product_ = null;
+      }
+      return productBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

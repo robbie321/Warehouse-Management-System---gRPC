@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.DateTimeException;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
@@ -74,8 +75,8 @@ public  static Stock[] stock;
 
         //WarehouseService
 //        generateWarehouseReport(warehouseServiceChannel);
-        findOrderByOrderNumber(warehouseServiceChannel);
-
+//        findOrderByOrderNumber(warehouseServiceChannel);
+        checkLastOrders(warehouseServiceChannel);
 
     }
 
@@ -347,6 +348,71 @@ public  static Stock[] stock;
         //do something
         System.out.println("\nShutting down channel");
         warehouseServiceChannel.shutdown();
+    }
+
+    private void checkLastOrders(ManagedChannel warehouseServiceChannel){
+            CountDownLatch latch = new CountDownLatch(1);
+
+        Scanner sc = new Scanner(System.in);
+
+        int amountOfOrders = 0;
+
+        System.out.print("Enter the amount of orders to print: ");
+        amountOfOrders = sc.nextInt();
+
+        sc.close();
+
+        //async client
+        warehouseServiceGrpc.warehouseServiceStub asyncStub = warehouseServiceGrpc.newStub(warehouseServiceChannel);
+
+        StreamObserver<lastOrdersRequest> requestObserver = asyncStub.checkLastOrders(
+                new StreamObserver<lastOrdersResponse>() {
+                    @Override
+                    public void onNext(lastOrdersResponse value) {
+                        System.out.println(value.getProducts());
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.getMessage();
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        System.out.println("Server finished sending data!");
+                        latch.countDown();
+                    }
+                }
+        );
+
+        String result = "";
+
+        for(int i = stock.length - amountOfOrders; i <= stock.length - 1; i++){
+//            System.out.println("Sending product: " + stock[i]);
+
+            requestObserver.onNext(lastOrdersRequest.newBuilder().setProduct(product.newBuilder()
+                    .setProductName(stock[i].getProductName())
+                    .setCost(stock[i].getCost())
+                    .setQuantityAvailable(stock[i].getQuantity_available()))
+                    .build());
+
+        }
+
+        System.out.println("The last " + amountOfOrders + " orders are: ");
+
+
+        requestObserver.onCompleted();
+
+        try {
+            latch.await(2, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //do something
+        System.out.println("\nShutting down channel");
+        warehouseServiceChannel.shutdown();
+
     }
 
     private void build(){

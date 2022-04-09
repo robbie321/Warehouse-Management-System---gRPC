@@ -31,6 +31,7 @@ com\grpc\warehouseService\lastOrdersRequest$1.class
 com\grpc\warehouseService\lastOrdersResponse$1.class
 com\grpc\stockCheckerService\inventoryCheckerServiceGrpc$inventoryCheckerServiceImplBase.class
 com\grpc\orderService\StockQuoteResponse$1.class
+com\grpc\warehouseService\WarehouseServer$1.class
 com\grpc\stockCheckerService\addStockRequestOrBuilder.class
 com\grpc\stockCheckerService\inventoryCheckerServiceGrpc$inventoryCheckerServiceBlockingStub.class
 com\grpc\orderService\orderServiceGrpc$MethodHandlers.class
@@ -100,6 +101,7 @@ com\grpc\orderService\StockQuoteRequest$Builder.class
 com\grpc\orderService\orderServiceGrpc$orderServiceImplBase.class
 com\grpc\warehouseService\lastOrdersRequestOrBuilder.class
 com\grpc\stockCheckerService\addStockResponse$Builder.class
+com\grpc\client\ClientController$2.class
 com\grpc\orderService\orderServiceGrpc$orderServiceBlockingStub.class
 com\grpc\stockCheckerService\lowStockResponse$1.class
 com\grpc\warehouseService\warehouseServiceGrpc$1.class

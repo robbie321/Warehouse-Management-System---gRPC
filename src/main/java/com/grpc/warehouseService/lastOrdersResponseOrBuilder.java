@@ -8,15 +8,12 @@ public interface lastOrdersResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.product product = 1;</code>
+   * <code>string products = 1;</code>
    */
-  boolean hasProduct();
+  java.lang.String getProducts();
   /**
-   * <code>.product product = 1;</code>
+   * <code>string products = 1;</code>
    */
-  com.grpc.orderService.product getProduct();
-  /**
-   * <code>.product product = 1;</code>
-   */
-  com.grpc.orderService.productOrBuilder getProductOrBuilder();
+  com.google.protobuf.ByteString
+      getProductsBytes();
 }

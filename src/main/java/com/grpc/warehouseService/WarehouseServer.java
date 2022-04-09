@@ -249,7 +249,34 @@ public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBa
     }
 
     @Override
-    public void checkLastOrders(lastOrdersRequest request, StreamObserver<lastOrdersResponse> responseObserver) {
-        super.checkLastOrders(request, responseObserver);
+    public StreamObserver<lastOrdersRequest> checkLastOrders(StreamObserver<lastOrdersResponse> responseObserver) {
+
+
+        StreamObserver<lastOrdersRequest> requestObserver = new StreamObserver<lastOrdersRequest>() {
+            @Override
+            public void onNext(lastOrdersRequest value) {
+                String result = "Product: " + value.getProduct().getProductName()
+                        + "\nCost: " + value.getProduct().getCost()
+                        +"\nStock available: " + value.getProduct().getQuantityAvailable() +"\n";
+
+                lastOrdersResponse response = lastOrdersResponse.newBuilder()
+                        .setProducts(result)
+                        .build();
+
+                responseObserver.onNext(response);
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                t.getMessage();
+            }
+
+            @Override
+            public void onCompleted() {
+                responseObserver.onCompleted();
+            }
+        };
+
+        return requestObserver;
     }
 }

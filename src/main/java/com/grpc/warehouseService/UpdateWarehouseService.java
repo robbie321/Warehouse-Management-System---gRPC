@@ -58,15 +58,15 @@ public final class UpdateWarehouseService {
       "\030\001 \001(\t\"!\n\016reportResponse\022\017\n\007message\030\001 \001(" +
       "\t\")\n\022orderNumberRequest\022\023\n\013orderNumber\030\001" +
       " \001(\t\"$\n\023orderNumberResponse\022\r\n\005order\030\001 \001" +
-      "(\t\"3\n\021lastOrdersRequest\022\036\n\026amountOfOrder" +
-      "sToSearch\030\001 \001(\005\"/\n\022lastOrdersResponse\022\031\n" +
-      "\007product\030\001 \001(\0132\010.product2\313\001\n\020warehouseSe" +
-      "rvice\022;\n\024generateReportStream\022\016.reportRe" +
-      "quest\032\017.reportResponse\"\0000\001\022<\n\rreportAnOr" +
-      "der\022\023.orderNumberRequest\032\024.orderNumberRe" +
-      "sponse\"\000\022<\n\017checkLastOrders\022\022.lastOrders" +
-      "Request\032\023.lastOrdersResponse\"\000B\035\n\031com.gr" +
-      "pc.warehouseServiceP\001b\006proto3"
+      "(\t\".\n\021lastOrdersRequest\022\031\n\007product\030\001 \001(\013" +
+      "2\010.product\"&\n\022lastOrdersResponse\022\020\n\010prod" +
+      "ucts\030\001 \001(\t2\317\001\n\020warehouseService\022;\n\024gener" +
+      "ateReportStream\022\016.reportRequest\032\017.report" +
+      "Response\"\0000\001\022<\n\rreportAnOrder\022\023.orderNum" +
+      "berRequest\032\024.orderNumberResponse\"\000\022@\n\017ch" +
+      "eckLastOrders\022\022.lastOrdersRequest\032\023.last" +
+      "OrdersResponse\"\000(\0010\001B\035\n\031com.grpc.warehou" +
+      "seServiceP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -110,13 +110,13 @@ public final class UpdateWarehouseService {
     internal_static_lastOrdersRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_lastOrdersRequest_descriptor,
-        new java.lang.String[] { "AmountOfOrdersToSearch", });
+        new java.lang.String[] { "Product", });
     internal_static_lastOrdersResponse_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_lastOrdersResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_lastOrdersResponse_descriptor,
-        new java.lang.String[] { "Product", });
+        new java.lang.String[] { "Products", });
     com.grpc.orderService.AutomateOrdersImpl.getDescriptor();
   }
 

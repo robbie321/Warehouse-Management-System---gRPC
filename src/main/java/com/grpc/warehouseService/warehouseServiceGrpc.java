@@ -101,7 +101,7 @@ public final class warehouseServiceGrpc {
       fullMethodName = SERVICE_NAME + '/' + "checkLastOrders",
       requestType = com.grpc.warehouseService.lastOrdersRequest.class,
       responseType = com.grpc.warehouseService.lastOrdersResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
   public static io.grpc.MethodDescriptor<com.grpc.warehouseService.lastOrdersRequest,
       com.grpc.warehouseService.lastOrdersResponse> getCheckLastOrdersMethod() {
     io.grpc.MethodDescriptor<com.grpc.warehouseService.lastOrdersRequest, com.grpc.warehouseService.lastOrdersResponse> getCheckLastOrdersMethod;
@@ -110,7 +110,7 @@ public final class warehouseServiceGrpc {
         if ((getCheckLastOrdersMethod = warehouseServiceGrpc.getCheckLastOrdersMethod) == null) {
           warehouseServiceGrpc.getCheckLastOrdersMethod = getCheckLastOrdersMethod = 
               io.grpc.MethodDescriptor.<com.grpc.warehouseService.lastOrdersRequest, com.grpc.warehouseService.lastOrdersResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
               .setFullMethodName(generateFullMethodName(
                   "warehouseService", "checkLastOrders"))
               .setSampledToLocalTracing(true)
@@ -181,9 +181,9 @@ public final class warehouseServiceGrpc {
      *Send shipping information
      * </pre>
      */
-    public void checkLastOrders(com.grpc.warehouseService.lastOrdersRequest request,
+    public io.grpc.stub.StreamObserver<com.grpc.warehouseService.lastOrdersRequest> checkLastOrders(
         io.grpc.stub.StreamObserver<com.grpc.warehouseService.lastOrdersResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getCheckLastOrdersMethod(), responseObserver);
+      return asyncUnimplementedStreamingCall(getCheckLastOrdersMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
@@ -204,7 +204,7 @@ public final class warehouseServiceGrpc {
                   this, METHODID_REPORT_AN_ORDER)))
           .addMethod(
             getCheckLastOrdersMethod(),
-            asyncUnaryCall(
+            asyncBidiStreamingCall(
               new MethodHandlers<
                 com.grpc.warehouseService.lastOrdersRequest,
                 com.grpc.warehouseService.lastOrdersResponse>(
@@ -261,10 +261,10 @@ public final class warehouseServiceGrpc {
      *Send shipping information
      * </pre>
      */
-    public void checkLastOrders(com.grpc.warehouseService.lastOrdersRequest request,
+    public io.grpc.stub.StreamObserver<com.grpc.warehouseService.lastOrdersRequest> checkLastOrders(
         io.grpc.stub.StreamObserver<com.grpc.warehouseService.lastOrdersResponse> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getCheckLastOrdersMethod(), getCallOptions()), request, responseObserver);
+      return asyncBidiStreamingCall(
+          getChannel().newCall(getCheckLastOrdersMethod(), getCallOptions()), responseObserver);
     }
   }
 
@@ -309,16 +309,6 @@ public final class warehouseServiceGrpc {
       return blockingUnaryCall(
           getChannel(), getReportAnOrderMethod(), getCallOptions(), request);
     }
-
-    /**
-     * <pre>
-     *Send shipping information
-     * </pre>
-     */
-    public com.grpc.warehouseService.lastOrdersResponse checkLastOrders(com.grpc.warehouseService.lastOrdersRequest request) {
-      return blockingUnaryCall(
-          getChannel(), getCheckLastOrdersMethod(), getCallOptions(), request);
-    }
   }
 
   /**
@@ -352,17 +342,6 @@ public final class warehouseServiceGrpc {
       return futureUnaryCall(
           getChannel().newCall(getReportAnOrderMethod(), getCallOptions()), request);
     }
-
-    /**
-     * <pre>
-     *Send shipping information
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.grpc.warehouseService.lastOrdersResponse> checkLastOrders(
-        com.grpc.warehouseService.lastOrdersRequest request) {
-      return futureUnaryCall(
-          getChannel().newCall(getCheckLastOrdersMethod(), getCallOptions()), request);
-    }
   }
 
   private static final int METHODID_GENERATE_REPORT_STREAM = 0;
@@ -394,10 +373,6 @@ public final class warehouseServiceGrpc {
           serviceImpl.reportAnOrder((com.grpc.warehouseService.orderNumberRequest) request,
               (io.grpc.stub.StreamObserver<com.grpc.warehouseService.orderNumberResponse>) responseObserver);
           break;
-        case METHODID_CHECK_LAST_ORDERS:
-          serviceImpl.checkLastOrders((com.grpc.warehouseService.lastOrdersRequest) request,
-              (io.grpc.stub.StreamObserver<com.grpc.warehouseService.lastOrdersResponse>) responseObserver);
-          break;
         default:
           throw new AssertionError();
       }
@@ -408,6 +383,9 @@ public final class warehouseServiceGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_CHECK_LAST_ORDERS:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.checkLastOrders(
+              (io.grpc.stub.StreamObserver<com.grpc.warehouseService.lastOrdersResponse>) responseObserver);
         default:
           throw new AssertionError();
       }

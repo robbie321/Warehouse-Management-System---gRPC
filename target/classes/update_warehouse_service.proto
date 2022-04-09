@@ -22,11 +22,11 @@ message orderNumberResponse{
 }
 
 message lastOrdersRequest{
-  int32 amountOfOrdersToSearch = 1;
+  product product = 1;
 }
 
 message lastOrdersResponse{
-  product product = 1;
+  string products = 1;
 }
 
 //Explain method & message payload for all
@@ -47,5 +47,5 @@ service warehouseService{
   /*
     Send shipping information
   */
-  rpc checkLastOrders(lastOrdersRequest) returns (lastOrdersResponse){};
+  rpc checkLastOrders(stream lastOrdersRequest) returns (stream lastOrdersResponse){};
 }

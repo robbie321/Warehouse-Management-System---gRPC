@@ -16,6 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private lastOrdersResponse() {
+    products_ = "";
   }
 
   @java.lang.Override
@@ -43,16 +44,9 @@ private static final long serialVersionUID = 0L;
             done = true;
             break;
           case 10: {
-            com.grpc.orderService.product.Builder subBuilder = null;
-            if (product_ != null) {
-              subBuilder = product_.toBuilder();
-            }
-            product_ = input.readMessage(com.grpc.orderService.product.parser(), extensionRegistry);
-            if (subBuilder != null) {
-              subBuilder.mergeFrom(product_);
-              product_ = subBuilder.buildPartial();
-            }
+            java.lang.String s = input.readStringRequireUtf8();
 
+            products_ = s;
             break;
           }
           default: {
@@ -87,25 +81,38 @@ private static final long serialVersionUID = 0L;
             com.grpc.warehouseService.lastOrdersResponse.class, com.grpc.warehouseService.lastOrdersResponse.Builder.class);
   }
 
-  public static final int PRODUCT_FIELD_NUMBER = 1;
-  private com.grpc.orderService.product product_;
+  public static final int PRODUCTS_FIELD_NUMBER = 1;
+  private volatile java.lang.Object products_;
   /**
-   * <code>.product product = 1;</code>
+   * <code>string products = 1;</code>
    */
-  public boolean hasProduct() {
-    return product_ != null;
+  public java.lang.String getProducts() {
+    java.lang.Object ref = products_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      products_ = s;
+      return s;
+    }
   }
   /**
-   * <code>.product product = 1;</code>
+   * <code>string products = 1;</code>
    */
-  public com.grpc.orderService.product getProduct() {
-    return product_ == null ? com.grpc.orderService.product.getDefaultInstance() : product_;
-  }
-  /**
-   * <code>.product product = 1;</code>
-   */
-  public com.grpc.orderService.productOrBuilder getProductOrBuilder() {
-    return getProduct();
+  public com.google.protobuf.ByteString
+      getProductsBytes() {
+    java.lang.Object ref = products_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      products_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   private byte memoizedIsInitialized = -1;
@@ -122,8 +129,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (product_ != null) {
-      output.writeMessage(1, getProduct());
+    if (!getProductsBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, products_);
     }
     unknownFields.writeTo(output);
   }
@@ -134,9 +141,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (product_ != null) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(1, getProduct());
+    if (!getProductsBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, products_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -154,11 +160,8 @@ private static final long serialVersionUID = 0L;
     com.grpc.warehouseService.lastOrdersResponse other = (com.grpc.warehouseService.lastOrdersResponse) obj;
 
     boolean result = true;
-    result = result && (hasProduct() == other.hasProduct());
-    if (hasProduct()) {
-      result = result && getProduct()
-          .equals(other.getProduct());
-    }
+    result = result && getProducts()
+        .equals(other.getProducts());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -170,10 +173,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    if (hasProduct()) {
-      hash = (37 * hash) + PRODUCT_FIELD_NUMBER;
-      hash = (53 * hash) + getProduct().hashCode();
-    }
+    hash = (37 * hash) + PRODUCTS_FIELD_NUMBER;
+    hash = (53 * hash) + getProducts().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -307,12 +308,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      if (productBuilder_ == null) {
-        product_ = null;
-      } else {
-        product_ = null;
-        productBuilder_ = null;
-      }
+      products_ = "";
+
       return this;
     }
 
@@ -339,11 +336,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.grpc.warehouseService.lastOrdersResponse buildPartial() {
       com.grpc.warehouseService.lastOrdersResponse result = new com.grpc.warehouseService.lastOrdersResponse(this);
-      if (productBuilder_ == null) {
-        result.product_ = product_;
-      } else {
-        result.product_ = productBuilder_.build();
-      }
+      result.products_ = products_;
       onBuilt();
       return result;
     }
@@ -392,8 +385,9 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.grpc.warehouseService.lastOrdersResponse other) {
       if (other == com.grpc.warehouseService.lastOrdersResponse.getDefaultInstance()) return this;
-      if (other.hasProduct()) {
-        mergeProduct(other.getProduct());
+      if (!other.getProducts().isEmpty()) {
+        products_ = other.products_;
+        onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -424,121 +418,73 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private com.grpc.orderService.product product_ = null;
-    private com.google.protobuf.SingleFieldBuilderV3<
-        com.grpc.orderService.product, com.grpc.orderService.product.Builder, com.grpc.orderService.productOrBuilder> productBuilder_;
+    private java.lang.Object products_ = "";
     /**
-     * <code>.product product = 1;</code>
+     * <code>string products = 1;</code>
      */
-    public boolean hasProduct() {
-      return productBuilder_ != null || product_ != null;
-    }
-    /**
-     * <code>.product product = 1;</code>
-     */
-    public com.grpc.orderService.product getProduct() {
-      if (productBuilder_ == null) {
-        return product_ == null ? com.grpc.orderService.product.getDefaultInstance() : product_;
+    public java.lang.String getProducts() {
+      java.lang.Object ref = products_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        products_ = s;
+        return s;
       } else {
-        return productBuilder_.getMessage();
+        return (java.lang.String) ref;
       }
     }
     /**
-     * <code>.product product = 1;</code>
+     * <code>string products = 1;</code>
      */
-    public Builder setProduct(com.grpc.orderService.product value) {
-      if (productBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        product_ = value;
-        onChanged();
+    public com.google.protobuf.ByteString
+        getProductsBytes() {
+      java.lang.Object ref = products_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        products_ = b;
+        return b;
       } else {
-        productBuilder_.setMessage(value);
+        return (com.google.protobuf.ByteString) ref;
       }
-
-      return this;
     }
     /**
-     * <code>.product product = 1;</code>
+     * <code>string products = 1;</code>
      */
-    public Builder setProduct(
-        com.grpc.orderService.product.Builder builderForValue) {
-      if (productBuilder_ == null) {
-        product_ = builderForValue.build();
-        onChanged();
-      } else {
-        productBuilder_.setMessage(builderForValue.build());
-      }
-
-      return this;
-    }
-    /**
-     * <code>.product product = 1;</code>
-     */
-    public Builder mergeProduct(com.grpc.orderService.product value) {
-      if (productBuilder_ == null) {
-        if (product_ != null) {
-          product_ =
-            com.grpc.orderService.product.newBuilder(product_).mergeFrom(value).buildPartial();
-        } else {
-          product_ = value;
-        }
-        onChanged();
-      } else {
-        productBuilder_.mergeFrom(value);
-      }
-
-      return this;
-    }
-    /**
-     * <code>.product product = 1;</code>
-     */
-    public Builder clearProduct() {
-      if (productBuilder_ == null) {
-        product_ = null;
-        onChanged();
-      } else {
-        product_ = null;
-        productBuilder_ = null;
-      }
-
-      return this;
-    }
-    /**
-     * <code>.product product = 1;</code>
-     */
-    public com.grpc.orderService.product.Builder getProductBuilder() {
-      
+    public Builder setProducts(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      products_ = value;
       onChanged();
-      return getProductFieldBuilder().getBuilder();
+      return this;
     }
     /**
-     * <code>.product product = 1;</code>
+     * <code>string products = 1;</code>
      */
-    public com.grpc.orderService.productOrBuilder getProductOrBuilder() {
-      if (productBuilder_ != null) {
-        return productBuilder_.getMessageOrBuilder();
-      } else {
-        return product_ == null ?
-            com.grpc.orderService.product.getDefaultInstance() : product_;
-      }
+    public Builder clearProducts() {
+      
+      products_ = getDefaultInstance().getProducts();
+      onChanged();
+      return this;
     }
     /**
-     * <code>.product product = 1;</code>
+     * <code>string products = 1;</code>
      */
-    private com.google.protobuf.SingleFieldBuilderV3<
-        com.grpc.orderService.product, com.grpc.orderService.product.Builder, com.grpc.orderService.productOrBuilder> 
-        getProductFieldBuilder() {
-      if (productBuilder_ == null) {
-        productBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            com.grpc.orderService.product, com.grpc.orderService.product.Builder, com.grpc.orderService.productOrBuilder>(
-                getProduct(),
-                getParentForChildren(),
-                isClean());
-        product_ = null;
-      }
-      return productBuilder_;
+    public Builder setProductsBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      products_ = value;
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

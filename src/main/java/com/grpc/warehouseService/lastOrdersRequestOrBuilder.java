@@ -8,7 +8,15 @@ public interface lastOrdersRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>int32 amountOfOrdersToSearch = 1;</code>
+   * <code>.product product = 1;</code>
    */
-  int getAmountOfOrdersToSearch();
+  boolean hasProduct();
+  /**
+   * <code>.product product = 1;</code>
+   */
+  com.grpc.orderService.product getProduct();
+  /**
+   * <code>.product product = 1;</code>
+   */
+  com.grpc.orderService.productOrBuilder getProductOrBuilder();
 }
