@@ -71,6 +71,7 @@ com\grpc\warehouseService\reportRequest$1.class
 com\grpc\stockCheckerService\lowStockRequest$Builder.class
 com\grpc\warehouseService\WarehouseServer.class
 com\grpc\stockCheckerService\InventoryManagement.class
+com\grpc\warehouseService\WareHouseServerRegistration.class
 com\grpc\orderService\orderRequest.class
 com\grpc\orderService\OrdersServer.class
 com\grpc\warehouseService\reportRequest$Builder.class

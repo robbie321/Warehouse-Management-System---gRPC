@@ -23,6 +23,11 @@ public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBa
 
         //make a channel available for communication
         int port = 50052;
+        String serviceType= "_grpc._tcp.local.";
+        String serviceName = "Warehouse Server";
+        String serviceDescription = "Warehouse Server Service";
+        WareHouseServerRegistration wsr = new WareHouseServerRegistration();
+        wsr.register(port,serviceType,serviceName,serviceDescription);
 
 
         //try catch
@@ -32,6 +37,8 @@ public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBa
                     .addService(warehouseServer)
                     .build()
                     .start();
+
+            System.out.println("Warehouse Server is now running...");
 
             server.awaitTermination();
         }catch (IOException | InterruptedException e){

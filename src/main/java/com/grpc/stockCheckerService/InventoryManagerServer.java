@@ -1,7 +1,6 @@
 package com.grpc.stockCheckerService;
 
 import com.grpc.orderService.OrdersServer;
-import com.grpc.orderService.product;
 import com.grpc.warehouseService.Stock;
 import com.grpc.warehouseService.WarehouseServer;
 import io.grpc.Server;
@@ -25,6 +24,13 @@ public class InventoryManagerServer extends inventoryCheckerServiceGrpc.inventor
 
         //make available channel
         int port = 50053;
+
+        String serviceType= "_grpc._tcp.local.";
+        String serviceName = "Inventory Server";
+        String serviceDescription = "Inventory Server Service";
+
+        InventoryServiceRegistration isr = new InventoryServiceRegistration();
+        isr.register(port,serviceType,serviceName,serviceDescription);
 
         //try catch
         try{

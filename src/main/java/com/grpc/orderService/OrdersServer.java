@@ -30,6 +30,11 @@ public class OrdersServer extends orderServiceGrpc.orderServiceImplBase {
         orders = ws.parseFile();
         //make a channel available for communication
         int port = 50051;
+        String serviceType= "_grpc._tcp.local.";
+        String serviceName = "Warehouse Server";
+        String serviceDescription = "Warehouse Server Service";
+        OrderServiceRegistration osr = new OrderServiceRegistration();
+        osr.register(port,serviceType,serviceName,serviceDescription);
 
         //try catch
         try{

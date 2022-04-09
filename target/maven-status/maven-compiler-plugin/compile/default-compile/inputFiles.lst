@@ -25,6 +25,7 @@ C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\FilterP
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\orderResponseOrBuilder.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\StockQuoteResponseOrBuilder.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\orderRequestOrBuilder.java
+C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\warehouseService\WareHouseServerRegistration.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\warehouseService\lastOrdersResponseOrBuilder.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\stockCheckerService\InventoryManagement.java
 C:\nci\Distributed Systems\CAProject\src\main\java\com\grpc\orderService\StockQuoteResponse.java

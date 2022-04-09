@@ -10,6 +10,7 @@ import io.grpc.stub.StreamObserver;
 import com.grpc.orderService.*;
 import com.grpc.warehouseService.*;
 
+import javax.jmdns.ServiceInfo;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -38,31 +39,40 @@ public  static Stock[] stock;
         System.out.println("Creating Stub");
         ClientController main = new ClientController();
 
-        WarehouseServer ws = new WarehouseServer();
+//        WarehouseServer ws = new WarehouseServer();
+//
+//       stock = ws.makeDatabase();
 
-       stock = ws.makeDatabase();
-
-        products = new String[stock.length];
+//        products = new String[stock.length];
 
         main.run();
     }
 
     private void run() {
+        String host = "localhost";
 
-//        ManagedChannel orderServiceChannel = ManagedChannelBuilder.forAddress("localhost", 50051)
+        ServiceInfo serviceInfoWarehouse, serviceInfoInventory, serviceInfoOrder;
+        String serviceType = "_grpc._tcp.local.";
+        //retrieve service info for each service
+//        serviceInfoWarehouse = WareHouseServiceDiscovery.runjmDNS(serviceType);
+        serviceInfoInventory = InventoryServiceDiscovery.runjmDNS(serviceType);
+//        serviceInfoOrder = OrderServiceDiscovery.runjmDNS(serviceType);
+
+//        int warehousePort = serviceInfoWarehouse.getPort();
+        int inventoryPort = serviceInfoInventory.getPort();
+//        int orderPort = serviceInfoOrder.getPort();
+
+//        ManagedChannel warehouseServiceChannel = ManagedChannelBuilder.forAddress(host, warehousePort)
 //                .usePlaintext() //forces ssl to stop (do not use during development
 //                .build();
-
-        ManagedChannel inventoryServiceChannel = ManagedChannelBuilder.forAddress("localhost", 50053)
+//
+        ManagedChannel inventoryServiceChannel = ManagedChannelBuilder.forAddress(host, inventoryPort)
                 .usePlaintext() //forces ssl to stop (do not use during development
                 .build();
 
-        ManagedChannel warehouseServiceChannel = ManagedChannelBuilder.forAddress("localhost", 50052)
-                .usePlaintext() //forces ssl to stop (do not use during development
-                .build();
-
-//        System.out.println(WarehouseServer.stocks[10]);
-
+//        ManagedChannel orderServiceChannel = ManagedChannelBuilder.forAddress(host, orderPort)
+//                .usePlaintext() //forces ssl to stop (do not use during development
+//                .build();
 
         //OrderService
 //        createOrder(orderServiceChannel);
@@ -76,7 +86,7 @@ public  static Stock[] stock;
         //WarehouseService
 //        generateWarehouseReport(warehouseServiceChannel);
 //        findOrderByOrderNumber(warehouseServiceChannel);
-        checkLastOrders(warehouseServiceChannel);
+//        checkLastOrders(warehouseServiceChannel);
 
     }
 
@@ -504,10 +514,6 @@ public  static Stock[] stock;
 
         return panel;
     }
-
-
-
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
