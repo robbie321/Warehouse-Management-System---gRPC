@@ -17,8 +17,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.time.DateTimeException;
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
@@ -31,7 +29,6 @@ public  static Stock[] stock;
 
     JTextField entry4, reply4;
 
-
     public static void main(String[] args) throws IOException {
         System.out.println("Hello im a GRPC Client");
 
@@ -39,55 +36,13 @@ public  static Stock[] stock;
         System.out.println("Creating Stub");
         ClientController main = new ClientController();
 
-//        WarehouseServer ws = new WarehouseServer();
-//
-//       stock = ws.makeDatabase();
+        WarehouseServer ws = new WarehouseServer();
 
-//        products = new String[stock.length];
+        stock = ws.makeDatabase();
 
-        main.run();
-    }
+        products = new String[stock.length];
 
-    private void run() {
-        String host = "localhost";
-
-        ServiceInfo serviceInfoWarehouse, serviceInfoInventory, serviceInfoOrder;
-        String serviceType = "_grpc._tcp.local.";
-        //retrieve service info for each service
-//        serviceInfoWarehouse = WareHouseServiceDiscovery.runjmDNS(serviceType);
-        serviceInfoInventory = InventoryServiceDiscovery.runjmDNS(serviceType);
-//        serviceInfoOrder = OrderServiceDiscovery.runjmDNS(serviceType);
-
-//        int warehousePort = serviceInfoWarehouse.getPort();
-        int inventoryPort = serviceInfoInventory.getPort();
-//        int orderPort = serviceInfoOrder.getPort();
-
-//        ManagedChannel warehouseServiceChannel = ManagedChannelBuilder.forAddress(host, warehousePort)
-//                .usePlaintext() //forces ssl to stop (do not use during development
-//                .build();
-//
-        ManagedChannel inventoryServiceChannel = ManagedChannelBuilder.forAddress(host, inventoryPort)
-                .usePlaintext() //forces ssl to stop (do not use during development
-                .build();
-
-//        ManagedChannel orderServiceChannel = ManagedChannelBuilder.forAddress(host, orderPort)
-//                .usePlaintext() //forces ssl to stop (do not use during development
-//                .build();
-
-        //OrderService
-//        createOrder(orderServiceChannel);
-//        filterPrice(orderServiceChannel);
-//        produceQuote(orderServiceChannel);
-
-        //InventoryService
-//        addProductToStock(inventoryServiceChannel);
-//        checkLowStock(inventoryServiceChannel);
-
-        //WarehouseService
-//        generateWarehouseReport(warehouseServiceChannel);
-//        findOrderByOrderNumber(warehouseServiceChannel);
-//        checkLastOrders(warehouseServiceChannel);
-
+        main.build();
     }
 
     //Automate Orders Service
@@ -96,15 +51,14 @@ public  static Stock[] stock;
         //create the stub
         orderServiceGrpc.orderServiceBlockingStub stub = orderServiceGrpc.newBlockingStub(channel);
 
-        Scanner in = new Scanner(System.in);
-        String product = "";
-        int quantity = 0;
+        //regex to check if user entered values meet criteria
+        String regex = "^[a-zA-Z]+$";
+        String floatRegex = "^[+-]?([0-9]*[.])?[0-9]+$";
 
-        //replace this with a JPanel showing a list the user can choose from
-        System.out.print("What product: ");
-        product = in.nextLine();
-        System.out.print("How many: ");
-        quantity = in.nextInt();
+        //validate user input
+        String product = validateString("Enter a product: ", regex);
+        String Quantity = validateString("How many to order: ",floatRegex);
+        int quantity = Integer.parseInt(Quantity);
 
         //prepare request
         orderRequest request = orderRequest.newBuilder()
@@ -115,7 +69,8 @@ public  static Stock[] stock;
         //response in blocking manner
         orderResponse response = stub.createOrder(request);
 
-        System.out.println(response.getMessage());
+        //print to user
+        JOptionPane.showMessageDialog(null,response.getMessage());
 
     }
 
@@ -155,19 +110,43 @@ public  static Stock[] stock;
                 }
         );
 
-        int userQuantity = 10;
-        for(int i = 0; i < 3; i++){
-            System.out.println("Sending message " + i);
-            requestObserver.onNext(StockQuoteRequest.newBuilder()
-                    .setProduct(product.newBuilder()
-                            .setCost(stock[i].getCost())
-                            .build())
-                    .setQuantity(userQuantity)
-                    .build());
 
-            userQuantity += 10;
+
+        //format string
+        String formatStr = "%-" + 30 + "s   %-"+30+"s" +"%-"+30+"s\n";
+
+
+        System.out.format(formatStr,"Row 1","Row 2","Row 3");
+        System.out.println("-------------------------------------------------------------------------------------------------");
+        //choose from list
+        for(int i = 0; i < stock.length -4; i+=3){
+            System.out.format(formatStr,"["+i+"]" + stock[i].getProductName() + ", €" + stock[i].getCost(),
+                        "["+(i+1)+"]" + stock[i+1].getProductName() + ", €" + stock[i+1].getCost(),
+                        "["+(i+2)+"]" + stock[i+2].getProductName() + ", €" + stock[i+2].getCost());
         }
 
+        String regex = "^[0-9]+";
+
+        //get user input
+        String Product = validateString("Enter a number from the list: ",regex);
+        int productNo = Integer.parseInt(Product);
+        String Quantity = "";
+        int quantity = 0;
+
+        if(productNo > stock.length)
+            throw new ArrayIndexOutOfBoundsException("No such product exists");
+        else{
+            Quantity = validateString("Quantity: ", regex);
+            quantity = Integer.parseInt(Quantity);
+        }
+
+        //generate response
+        requestObserver.onNext(StockQuoteRequest.newBuilder()
+                .setProduct(product.newBuilder()
+                        .setCost(stock[productNo].getCost())
+                        .build())
+                .setQuantity(quantity)
+                .build());
 
         //tell the server that the client is done streaming
         requestObserver.onCompleted();
@@ -181,12 +160,18 @@ public  static Stock[] stock;
 
     private void filterPrice(ManagedChannel channel) {
 
+        String floatRegex = "^[+-]?([0-9]*[.])?[0-9]+$";
+
         //create the stub
         orderServiceGrpc.orderServiceBlockingStub stub = orderServiceGrpc.newBlockingStub(channel);
 
+        //get filtered value
+        String maxPrice = validateString("Enter max value: ",floatRegex);
+        int max_price = Integer.parseInt(maxPrice);
+
         //prepare request
         FilterPriceRequest priceRequest = FilterPriceRequest.newBuilder()
-                        .setMaxPrice(55).build();
+                        .setMaxPrice(max_price).build();
 
         //stream response in blocking manner
         stub.filterPrice(priceRequest).forEachRemaining(filterPriceResponse -> {
@@ -197,29 +182,35 @@ public  static Stock[] stock;
     //Inventory Management Service
     private void checkLowStock(ManagedChannel inventoryServiceChannel) {
 
-        Scanner in = new Scanner(System.in);
-
         //create stub
         inventoryCheckerServiceGrpc.inventoryCheckerServiceBlockingStub stub = inventoryCheckerServiceGrpc.newBlockingStub(inventoryServiceChannel);
 
+        //number regex
+        String regex = "^[+-]?([0-9]*[.])?[0-9]+$";
+
+        //quantity, convert to int
         int quantity = 0;
 
-        System.out.println("Enter quantity of stock: ");
-        quantity = in.nextInt();
+        //validate user entry
+        String Quantity = validateString("Enter quantity of stock: ", regex);
+        quantity = Integer.parseInt(Quantity);
 
         //prepare request
         lowStockRequest request = lowStockRequest.newBuilder()
                 .setQuantity(quantity)
                 .build();
 
+        JTextArea list = new JTextArea(35,50);
+        list.setEditable(false);
+
         //respond
         stub.checkLowStock(request).forEachRemaining(lowStockResponse -> {
-            System.out.println(lowStockResponse.getMessage());
+            list.append(lowStockResponse.getMessage() + "\n");
         });
 
-        //do something
-        System.out.println("\nShutting down channel");
-        inventoryServiceChannel.shutdown();
+        JOptionPane.showMessageDialog(null,new JScrollPane(list));
+
+
     }
 
     private void addProductToStock(ManagedChannel inventoryServiceChannel) {
@@ -233,28 +224,19 @@ public  static Stock[] stock;
         String regex = "^[a-zA-Z]+$";
         String floatRegex = "^[+-]?([0-9]*[.])?[0-9]+$";
 
-        String productName = "";
-        String cost = "";
-        String quantityAvailable = "";
-
+        //new cost and quantity
         float cst=0;
         int quantity = 0;
 
+        //product name
+        String productName = validateString("Product name: ", regex);
 
-        System.out.println("Product name: ");
-        productName = sc.nextLine();
-        validate(regex, productName);
-
-
-        System.out.println("Product cost: ");
-        cost = sc.nextLine();
-        validate(floatRegex,cost);
+        //cost, convert to float
+        String cost = validateString("Product cost: ",floatRegex);
         cst = Float.parseFloat(cost);
 
-
-        System.out.println("How many in stock: ");
-        quantityAvailable = sc.nextLine();
-        validate(floatRegex,quantityAvailable);
+        //quantity available, convert to int
+        String quantityAvailable = validateString("How many in stock: ",floatRegex);
         quantity = Integer.parseInt(quantityAvailable);
 
 
@@ -268,19 +250,46 @@ public  static Stock[] stock;
         //response
         addStockResponse response = stub.addProductsToStock(request);
 
-        System.out.println(response.getMessage());
+        JOptionPane.showMessageDialog(null,response.getMessage());
 
+    }
 
-        //do something
-        System.out.println("\nShutting down channel");
-        inventoryServiceChannel.shutdown();
+    private String validateString(String message, String regex) {
+
+        //initialise scanner
+//        Scanner in = new Scanner(System.in);
+
+        String result;
+
+        result = JOptionPane.showInputDialog(null,message);
+
+//        System.out.println(message);
+//        result = in.nextLine();
+
+        //validate
+        boolean valid = false;
+
+        //if validate completes, set valid to true,
+        //else print error message and ask again
+        while (!valid){
+            try{
+                validate(regex, result);
+                valid = true;
+
+            }catch (InputMismatchException e){
+                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
+                result = JOptionPane.showInputDialog(null,message);
+            }
+        }
+
+        //return result
+        return result;
     }
 
     private void validate(String regex, String string) {
         //throw error if condition is met
         if(!string.matches(regex))
-            throw new RuntimeException(string + " is not a valid entry!");
-
+            throw new InputMismatchException(string + " is not a valid entry!");
     }
 
     //Update Warehouse Service
@@ -288,13 +297,10 @@ public  static Stock[] stock;
         //create the stub
         warehouseServiceGrpc.warehouseServiceBlockingStub stub = warehouseServiceGrpc.newBlockingStub(channel);
 
-        Scanner sc = new Scanner(System.in);
-
         String date = "";
         String dateRegex = "^\\d{2}/\\d{2}/\\d{4}$";
 
-        System.out.println("Enter a date dd/mm/yyyy");
-        date = sc.nextLine();
+        date = JOptionPane.showInputDialog(null,"Enter a date dd/mm/yyyy: ");
 
         //valid date
         boolean valid = false;
@@ -306,22 +312,28 @@ public  static Stock[] stock;
                 validateDate(dateRegex, date);
                 valid = true;
             }catch (InputMismatchException e){
-                System.out.println(e.getLocalizedMessage());
-                date = sc.nextLine();
+                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
+                date = JOptionPane.showInputDialog(null,"Enter a date dd/mm/yyyy: ");
             }
         }
 
-        sc.close();
 
         //prepare request
         reportRequest request = reportRequest.newBuilder()
                 .setDate(date)
                 .build();
 
+        final String[] result = {""};
+
         //generate response
         stub.generateReportStream(request).forEachRemaining(reportResponse -> {
-            System.out.print(reportResponse.getMessage()); //let this equal text field
+            if(reportResponse == null){
+                JOptionPane.showMessageDialog(null,"No entries found on this date");
+            }else
+                result[0] += reportResponse.getMessage() + "\n"; //let this equal text field
         });
+
+        JOptionPane.showMessageDialog(null,result);
     }
 
     //validate, custom error (Question 2.3)
@@ -333,17 +345,14 @@ public  static Stock[] stock;
 
     private void findOrderByOrderNumber(ManagedChannel warehouseServiceChannel) {
 
+        String numberRegex = "^[+-]?([0-9]*[.])?[0-9]+$";
         //create stub
         warehouseServiceGrpc.warehouseServiceBlockingStub stub = warehouseServiceGrpc.newBlockingStub(warehouseServiceChannel);
 
-        Scanner sc = new Scanner(System.in);
 
-        String orderNumber = "";
+        //validate user input
+        String orderNumber = validateString("\nEnter order number: ", numberRegex);
 
-        System.out.println("Enter order number: ");
-        orderNumber = sc.nextLine();
-
-        sc.close();
 
         //prepare request
         orderNumberRequest request = orderNumberRequest.newBuilder()
@@ -353,33 +362,33 @@ public  static Stock[] stock;
         //prepare response
         orderNumberResponse response = stub.reportAnOrder(request);
 
+        //print the order
         System.out.println(response.getOrder());
 
-        //do something
-        System.out.println("\nShutting down channel");
-        warehouseServiceChannel.shutdown();
     }
 
     private void checkLastOrders(ManagedChannel warehouseServiceChannel){
-            CountDownLatch latch = new CountDownLatch(1);
+        //instantiate the latch
+        CountDownLatch latch = new CountDownLatch(1);
 
-        Scanner sc = new Scanner(System.in);
+        //regex for validation
+        String numberRegex = "^[+-]?([0-9]*[.])?[0-9]+$";
 
-        int amountOfOrders = 0;
-
-        System.out.print("Enter the amount of orders to print: ");
-        amountOfOrders = sc.nextInt();
-
-        sc.close();
+        //validate user input
+        String Amount = validateString("Enter the amount of orders to print: ", numberRegex);
+        //cast string to int
+        int amountOfOrders = Integer.parseInt(Amount);
 
         //async client
         warehouseServiceGrpc.warehouseServiceStub asyncStub = warehouseServiceGrpc.newStub(warehouseServiceChannel);
 
+        final String[] result = new String[1];
+        //make request
         StreamObserver<lastOrdersRequest> requestObserver = asyncStub.checkLastOrders(
                 new StreamObserver<lastOrdersResponse>() {
                     @Override
                     public void onNext(lastOrdersResponse value) {
-                        System.out.println(value.getProducts());
+                        result[0] +=  value.getProducts() + "\n";
                     }
 
                     @Override
@@ -395,11 +404,11 @@ public  static Stock[] stock;
                 }
         );
 
-        String result = "";
 
+        //print out the number of orders the client requests. Start the index at the stock amount - amountOfOrders
         for(int i = stock.length - amountOfOrders; i <= stock.length - 1; i++){
-//            System.out.println("Sending product: " + stock[i]);
 
+            //build the request
             requestObserver.onNext(lastOrdersRequest.newBuilder().setProduct(product.newBuilder()
                     .setProductName(stock[i].getProductName())
                     .setCost(stock[i].getCost())
@@ -419,104 +428,370 @@ public  static Stock[] stock;
             e.printStackTrace();
         }
 
-        //do something
-        System.out.println("\nShutting down channel");
-        warehouseServiceChannel.shutdown();
+        JOptionPane.showMessageDialog(null, result[0]);
+
 
     }
 
     private void build(){
 
-        JFrame frame = new JFrame("Service Controller Sample");
+        JFrame frame = new JFrame("Stock management system");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Set the panel to add buttons
-        JPanel panel = new JPanel();
+        JPanel mainPanel = new JPanel();
+        JPanel menuPanel = new JPanel();
+        JPanel orderPanel = new JPanel();
+        JPanel inventoryPanel = new JPanel();
+        JPanel warehousePanel = new JPanel();
 
-        // Set the BoxLayout to be X_AXIS: from left to right
-        BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
+        //set grid
+        GridLayout grid = new GridLayout(0,2);
+        GridBagConstraints c = new GridBagConstraints();
 
-        panel.setLayout(boxlayout);
+        menuPanel.setLayout(grid);
+        orderPanel.setLayout(grid);
+        inventoryPanel.setLayout(grid);
+        warehousePanel.setLayout(grid);
+
+        c.weightx = 1;
+        c.weighty = 0.25;
+        c.insets = new Insets(5, 5, 5, 5);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.fill = GridBagConstraints.BOTH;
+
+        //Menu Buttons
+        JButton mainMenuButton = new JButton("Main Menu");
+        JButton orderServiceButton = new JButton("Order Service");
+        JButton inventoryServiceButton = new JButton("Inventory Service");
+        JButton warehouseServiceButton = new JButton("Warehouse Service");
+        JButton exitButton = new JButton("Exit");
+
+        //Order buttons
+        JButton createOrderButton = new JButton("Make order");
+        JButton getQuoteButton = new JButton("Get a quote");
+        JButton filterButton = new JButton("Filter Price");
+
+        //Inventory buttons
+        JButton checkLowStockButton = new JButton("Check low stock");
+        JButton addStockButton = new JButton("Add Product");
+
+        //Warehouse buttons
+        JButton generateReportButton = new JButton("Generate Report");
+        JButton findOrderButton = new JButton("Find an order");
+        JButton printSalesButton = new JButton("Print Sales");
+
+        //Channels
+        final ManagedChannel[] orderServiceChannel = {null};
+        final ManagedChannel[] inventoryServiceChannel = {null};
+        final ManagedChannel[] warehouseServiceChannel = {null};
+
+        //service ingo jmDNS
+        String host = "localhost";
+        String serviceType = "_grpc._tcp.local.";
+
+        CardLayout cl = new CardLayout();
+        mainPanel.setLayout(cl);
+
+        //order panel
+        orderPanel.add(createOrderButton,c);
+        orderPanel.add(getQuoteButton,c);
+        orderPanel.add(filterButton,c);
+        orderPanel.add(mainMenuButton,c);
+
+        //Inventory panel
+        inventoryPanel.add(checkLowStockButton,c);
+        inventoryPanel.add(addStockButton);
+        inventoryPanel.add(mainMenuButton,c);
+        inventoryPanel.add(exitButton,c);
+
+        //Warehouse panel
+        warehousePanel.add(generateReportButton,c);
+        warehousePanel.add(findOrderButton,c);
+        warehousePanel.add(printSalesButton,c);
+        warehousePanel.add(mainMenuButton,c);
+
+        //menu panel
+        menuPanel.add(orderServiceButton,c);
+        menuPanel.add(inventoryServiceButton,c);
+        menuPanel.add(warehouseServiceButton,c);
+        menuPanel.add(exitButton,c);
+
+        //container panel
+        mainPanel.add(menuPanel,"1");
+        mainPanel.add(orderPanel,"2");
+        mainPanel.add(inventoryPanel,"3");
+        mainPanel.add(warehousePanel,"4");
+        cl.show(mainPanel,"1");
+
+        //main menu
+        mainMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("menu");
+                cl.show(mainPanel,"1");
+            }
+        });
+        orderServiceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                ServiceInfo serviceInfoOrder;
+
+                //retrieve service info for each service
+                serviceInfoOrder = OrderServiceDiscovery.runjmDNS(serviceType);
+
+                int orderPort = 50051;
+                orderServiceChannel[0] = ManagedChannelBuilder.forAddress(host, orderPort)
+                        .usePlaintext() //forces ssl to stop (do not use during development
+                        .build();
+
+                JLabel load = new JLabel("Loading jmDNS, please wait....");
+
+                menuPanel.add(load);
+
+                frame.revalidate();
+                frame.repaint();
+
+                cl.show(mainPanel,"2");
+            }
+        });
+        inventoryServiceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ServiceInfo inventoryService;
+
+                //retrieve service info for each service
+                inventoryService = InventoryServiceDiscovery.runjmDNS(serviceType);
+
+                int orderPort = 50053;
+                inventoryServiceChannel[0] = ManagedChannelBuilder.forAddress(host, orderPort)
+                        .usePlaintext() //forces ssl to stop (do not use during development
+                        .build();
+
+                JLabel load = new JLabel("Loading jmDNS, please wait....");
+
+                menuPanel.add(load);
+
+                frame.revalidate();
+                frame.repaint();
+
+                cl.show(mainPanel,"3");
+            }
+        });
+        warehouseServiceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                ServiceInfo serviceInfoWarehouse = WareHouseServiceDiscovery.runjmDNS(serviceType);
+
+                int warehousePort = 50052;
+
+                warehouseServiceChannel[0] = ManagedChannelBuilder.forAddress(host, warehousePort)
+                        .usePlaintext() //forces ssl to stop (do not use during development
+                        .build();
+
+                cl.show(mainPanel,"4");
+            }
+        });
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+        //Order Menu
+        createOrderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                createOrder(orderServiceChannel[0]);
+            }
+        });
+        getQuoteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                produceQuote(orderServiceChannel[0]);
+            }
+        });
+        filterButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                filterPrice(orderServiceChannel[0]);
+            }
+        });
+
+        //Inventory Menu
+        checkLowStockButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                checkLowStock(inventoryServiceChannel[0]);
+            }
+        });
+        addStockButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addProductToStock(inventoryServiceChannel[0]);
+            }
+        });
+
+        //Warehouse Menu
+        generateReportButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                generateWarehouseReport(warehouseServiceChannel[0]);
+            }
+        });
+        findOrderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                findOrderByOrderNumber(warehouseServiceChannel[0]);
+            }
+        });
+        printSalesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                checkLastOrders(warehouseServiceChannel[0]);
+            }
+        });
 
         // Set border for the panel
-        panel.setBorder(new EmptyBorder(new Insets(50, 100, 50, 100)));
-
-        panel.add( getQuote() );
-
+        mainPanel.setBorder(new EmptyBorder(new Insets(50, 100, 50, 100)));
 
         // Set size for the frame
-        frame.setSize(300, 300);
+        frame.setSize(600, 600);
 
         // Set the window to be visible as the default to be false
-        frame.add(panel);
+        frame.add(mainPanel);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
     }
 
-    private JPanel getQuote(){
 
-        JPanel panel = new JPanel(new GridLayout(2,3));
+    private JPanel button(String text) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
 
-        JList jList;
-        JList jListForCopy;
-        JButton copyButton;
+        c.weightx = 1;
+        c.weighty = .25;
+        c.insets = new Insets(5, 5, 5, 5);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.fill = GridBagConstraints.BOTH;
 
-        jList = new JList(products);
-        jList.setFixedCellHeight(15);
-        jList.setFixedCellWidth(100);
-        jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jList.setVisibleRowCount(20);
-        panel.add(new JScrollPane(jList));
+        JButton myButton = new JButton(text);
+        myButton.setMargin(new Insets(10,10,10,10));
+        myButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Order made");
+            }
+        });
 
-        jListForCopy = new JList();
-        jListForCopy.setFixedCellHeight(15);
-        jListForCopy.setFixedCellWidth(100);
-        jList.setVisibleRowCount(20);
-        jList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        panel.add(new JScrollPane(jListForCopy));
+        panel.add(myButton,c);
 
-        copyButton = new JButton("Move selected items");
-        panel.add(copyButton);
-
-
-
-
-
-//        BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
-
-
-//        JLabel label = new JLabel("Choose a product\n");
-//        panel.add(label);
-//        panel.add(Box.createRigidArea(new Dimension(10, 0)));
-//        JComboBox<String> jComboBox = new JComboBox<String>(products);
-//        panel.add(jComboBox);
-//        panel.add(Box.createRigidArea(new Dimension(10, 0)));
-//
-//        JLabel quantiyLabel = new JLabel("Quantity: ");
-//        entry4 = new JTextField("", 10);
-//        panel.add(Box.createRigidArea(new Dimension(10, 0)));
-//
-//        entry4 .setEditable(true);
-//        panel.add(quantiyLabel);
-//        panel.add(entry4 );
-//        panel.add(Box.createRigidArea(new Dimension(10, 0)));
-
-
-//        JButton button = new JButton("");
-//        button.addActionListener(this);
-//        panel.add(button);
-//        panel.add(Box.createRigidArea(new Dimension(10, 0)));
-
-
-
-//        panel.setLayout(boxlayout);
 
         return panel;
     }
 
+    private JPanel createOrder(){
+        JPanel jPanel = new JPanel();
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        c.weightx = 1;
+        c.weighty = .25;
+        c.insets = new Insets(5, 5, 5, 5);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.fill = GridBagConstraints.BOTH;
+
+        JTextField product, productReply;
+        JTextField quantity, quantityReply;
+
+        JLabel label = new JLabel("Enter product");
+        product = new JTextField("",10);
+
+        panel.add(label);
+        panel.add(product);
+
+        return  jPanel;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
+        JButton button = (JButton)e.getSource();
+        String label = button.getActionCommand();
 
+        if(label.equals("Close application")){
+            System.exit(0);
+        }
+        else if(label.equals("Order Service")){
+
+            String host = "localhost";
+
+            ServiceInfo serviceInfoOrder;
+            String serviceType = "_grpc._tcp.local.";
+            //retrieve service info for each service
+            serviceInfoOrder = OrderServiceDiscovery.runjmDNS(serviceType);
+
+            int orderPort = 50051;
+
+            ManagedChannel orderServiceChannel = ManagedChannelBuilder.forAddress(host, orderPort)
+                    .usePlaintext() //forces ssl to stop (do not use during development
+                    .build();
+//            OrderService
+            createOrder(orderServiceChannel);
+            filterPrice(orderServiceChannel);
+            produceQuote(orderServiceChannel);
+        }
+        else if(label.equals("Inventory Service")){
+            String host = "localhost";
+
+            String serviceType = "_grpc._tcp.local.";
+
+            ServiceInfo serviceInfoInventory;
+            serviceInfoInventory = InventoryServiceDiscovery.runjmDNS(serviceType);
+            int inventoryPort = serviceInfoInventory.getPort();
+
+            ManagedChannel inventoryServiceChannel = ManagedChannelBuilder.forAddress(host, inventoryPort)
+            .usePlaintext() //forces ssl to stop (do not use during development
+            .build();
+
+            //InventoryService
+            addProductToStock(inventoryServiceChannel);
+            checkLowStock(inventoryServiceChannel);
+
+            //do something
+            System.out.println("\nShutting down channel");
+            inventoryServiceChannel.shutdown();
+        }
+        else if(label.equals("Warehouse Service")){
+            String host = "localhost";
+
+            ServiceInfo serviceInfoWarehouse;
+            String serviceType = "_grpc._tcp.local.";
+            //retrieve service info for each service
+            serviceInfoWarehouse = WareHouseServiceDiscovery.runjmDNS(serviceType);
+
+            int warehousePort = serviceInfoWarehouse.getPort();
+
+            ManagedChannel warehouseServiceChannel = ManagedChannelBuilder.forAddress(host, warehousePort)
+                    .usePlaintext() //forces ssl to stop (do not use during development
+                    .build();
+
+            //WarehouseService
+            generateWarehouseReport(warehouseServiceChannel);
+            findOrderByOrderNumber(warehouseServiceChannel);
+            checkLastOrders(warehouseServiceChannel);
+
+            //do something
+            System.out.println("\nShutting down channel");
+            warehouseServiceChannel.shutdown();
+        }
     }
 }

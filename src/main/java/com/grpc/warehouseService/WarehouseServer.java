@@ -1,6 +1,5 @@
 package com.grpc.warehouseService;
 
-import com.grpc.orderService.OrdersServer;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
@@ -159,7 +158,6 @@ public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBa
 
         String dateRegex = "^\\d{2}/\\d{2}/\\d{4}$";
 
-
         validateDate(dateRegex,from_date);
 
         //add each row to result
@@ -190,6 +188,20 @@ public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBa
                     responseObserver.onNext(response);
                 }
             }
+
+            if (result.equals("")){
+                result = "No entries found on this date: " + from_date + "\n";
+
+                //create the response
+                reportResponse response = reportResponse.newBuilder()
+                        .setMessage(result)
+                        .build();
+
+                //call onNext by the observer
+                responseObserver.onNext(response);
+            }
+
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -259,17 +271,22 @@ public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBa
     public StreamObserver<lastOrdersRequest> checkLastOrders(StreamObserver<lastOrdersResponse> responseObserver) {
 
 
+        //create stream observer
         StreamObserver<lastOrdersRequest> requestObserver = new StreamObserver<lastOrdersRequest>() {
             @Override
             public void onNext(lastOrdersRequest value) {
+                //value will be the product sent from request.
+                //get data and assign to result
                 String result = "Product: " + value.getProduct().getProductName()
                         + "\nCost: " + value.getProduct().getCost()
                         +"\nStock available: " + value.getProduct().getQuantityAvailable() +"\n";
 
+                //build response. Set the product to be result and build.
                 lastOrdersResponse response = lastOrdersResponse.newBuilder()
                         .setProducts(result)
                         .build();
 
+                //move to next response
                 responseObserver.onNext(response);
             }
 
@@ -284,6 +301,7 @@ public class WarehouseServer extends warehouseServiceGrpc.warehouseServiceImplBa
             }
         };
 
+        //return request observer
         return requestObserver;
     }
 }

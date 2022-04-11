@@ -56,18 +56,15 @@ public class InventoryManagerServer extends inventoryCheckerServiceGrpc.inventor
         float cost = request.getCost();
         int quantity = request.getQuantityAvailable();
 
-        System.out.println("Array " + stock.length);
-
         //last stock number + 1
         int stock_no = stock[stock.length -1].getStockNo() + 1;
+        //convert stock num to string
+        String stockNo = String.valueOf(stock_no);
 
         try{
             //write to a file
             File directory = new File("src/main/java/com/grpc");
             String name = directory.getAbsolutePath() + "//stock.csv";
-
-            //convert stock num to string
-            String stockNo = String.valueOf(stock_no);
 
             //initialise bufferedWriter
             BufferedWriter writer = new BufferedWriter(new FileWriter(name, true));
@@ -82,6 +79,7 @@ public class InventoryManagerServer extends inventoryCheckerServiceGrpc.inventor
             e.printStackTrace();
         }
 
+        //build response
         addStockResponse response = addStockResponse.newBuilder()
                 .setMessage("New item added to stock \n" +
                         "Product Name: " + productName + "\nCost: " + cost +
@@ -109,7 +107,8 @@ public class InventoryManagerServer extends inventoryCheckerServiceGrpc.inventor
                 if(stock[i].getQuantity_available() <= stockLevelToCheck) {
 
                     //let result equal to stock listing
-                    result ="Product: " + stock[i].getProductName() + " ,Stock remaining: "+stock[i].getQuantity_available();
+                    result ="Product: " + stock[i].getProductName() +
+                            " ,Stock remaining: "+stock[i].getQuantity_available();
 
                     //build response
                     lowStockResponse response = lowStockResponse.newBuilder()

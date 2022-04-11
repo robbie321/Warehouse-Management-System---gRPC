@@ -100,7 +100,7 @@ public class WareHouseServiceDiscovery {
 
 
             //sleep for 1 seconds
-            Thread.sleep(1000);
+            Thread.sleep(10);
 
             //now get the service info
             serviceInfo = msl.getServiceInfo();

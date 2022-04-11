@@ -24,7 +24,7 @@ public class WareHouseServerRegistration {
             System.out.printf("jmDNS: registering service with type: %s and name: %s on port %d ", serviceType, serviceName, servicePort);
 
             //sleep for 10 seconds
-            Thread.sleep(1000);
+            Thread.sleep(10);
             System.out.println("\njmDNS: Service Registered");
         }catch (UnknownHostException e) {
             e.printStackTrace();

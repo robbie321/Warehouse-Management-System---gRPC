@@ -12,9 +12,10 @@ public class OrderServiceRegistration {
             //create instance of jmdns
             JmDNS jmDNS = JmDNS.create(InetAddress.getLocalHost());
 
-            //build info to create service info object
+
             int servicePort = port;
 
+            //create service info
             ServiceInfo serviceInfo = ServiceInfo.create(serviceType,serviceName,servicePort,serviceDescription);
 
             //register service
@@ -23,7 +24,7 @@ public class OrderServiceRegistration {
             System.out.printf("jmDNS: registering service with type: %s and name: %s on port %d ", serviceType, serviceName, servicePort);
 
             //sleep for 10 seconds
-            Thread.sleep(1000);
+            Thread.sleep(10);
             System.out.println("\njmDNS: Service Registered");
         }catch (UnknownHostException e) {
             e.printStackTrace();

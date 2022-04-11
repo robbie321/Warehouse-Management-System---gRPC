@@ -31,8 +31,8 @@ public class OrdersServer extends orderServiceGrpc.orderServiceImplBase {
         //make a channel available for communication
         int port = 50051;
         String serviceType= "_grpc._tcp.local.";
-        String serviceName = "Warehouse Server";
-        String serviceDescription = "Warehouse Server Service";
+        String serviceName = "Orders Server";
+        String serviceDescription = "Orders Server Service";
         OrderServiceRegistration osr = new OrderServiceRegistration();
         osr.register(port,serviceType,serviceName,serviceDescription);
 
@@ -102,8 +102,6 @@ public class OrdersServer extends orderServiceGrpc.orderServiceImplBase {
 
     @Override
     public StreamObserver<StockQuoteRequest> streamStockQuote(StreamObserver<StockQuoteResponse> responseObserver) {
-
-
 
         //create stream observer
         StreamObserver<StockQuoteRequest> requestStreamObserver = new StreamObserver<StockQuoteRequest>() {

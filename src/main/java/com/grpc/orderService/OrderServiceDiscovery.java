@@ -1,6 +1,7 @@
 package com.grpc.orderService;
 
 import com.grpc.stockCheckerService.InventoryServiceDiscovery;
+import com.grpc.warehouseService.WareHouseServiceDiscovery;
 
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;
@@ -83,22 +84,19 @@ public class OrderServiceDiscovery {
         ServiceInfo serviceInfo = null;
         // get an instance of jmDNS
 
-
         try {
             JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
 
             //will discover the service based on service type
             //String service_type = "_grpc._tcp.local";
 
-            //need to listen for services added/removed etc.
-
-            //jmdns.addServiceListener(service_type, new MyServiceListener());         //listen for specified type
+            //listen for specified type
             MyServiceListener msl = new MyServiceListener();
             jmdns.addServiceListener(service_type, msl);
 
 
             //sleep for 1 seconds
-            Thread.sleep(1000);
+            Thread.sleep(10);
 
             //now get the service info
             serviceInfo = msl.getServiceInfo();
@@ -106,7 +104,6 @@ public class OrderServiceDiscovery {
             System.out.println("This is the port retrieved from jmDNS: " + port);
 
             jmdns.close();
-
 
         } catch (UnknownHostException e) {
 
