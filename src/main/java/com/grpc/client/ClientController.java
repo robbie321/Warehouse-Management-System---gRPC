@@ -27,8 +27,6 @@ public class ClientController implements ActionListener {
 public static String[] products;
 public  static Stock[] stock;
 
-    JTextField entry4, reply4;
-
     public static void main(String[] args) throws IOException {
         System.out.println("Hello im a GRPC Client");
 
@@ -160,10 +158,11 @@ public  static Stock[] stock;
 
     private void filterPrice(ManagedChannel channel) {
 
-        String floatRegex = "^[+-]?([0-9]*[.])?[0-9]+$";
-
         //create the stub
         orderServiceGrpc.orderServiceBlockingStub stub = orderServiceGrpc.newBlockingStub(channel);
+
+        //set regex
+        String floatRegex = "^[+-]?([0-9]*[.])?[0-9]+$";
 
         //get filtered value
         String maxPrice = validateString("Enter max value: ",floatRegex);
@@ -256,18 +255,13 @@ public  static Stock[] stock;
 
     private String validateString(String message, String regex) {
 
-        //initialise scanner
-//        Scanner in = new Scanner(System.in);
-
-        String result;
-
-        result = JOptionPane.showInputDialog(null,message);
-
-//        System.out.println(message);
-//        result = in.nextLine();
-
         //validate
         boolean valid = false;
+        //return this
+        String result = "";
+
+        //get input from user
+        result = JOptionPane.showInputDialog(null,message);
 
         //if validate completes, set valid to true,
         //else print error message and ask again
@@ -349,7 +343,6 @@ public  static Stock[] stock;
         //create stub
         warehouseServiceGrpc.warehouseServiceBlockingStub stub = warehouseServiceGrpc.newBlockingStub(warehouseServiceChannel);
 
-
         //validate user input
         String orderNumber = validateString("\nEnter order number: ", numberRegex);
 
@@ -363,7 +356,7 @@ public  static Stock[] stock;
         orderNumberResponse response = stub.reportAnOrder(request);
 
         //print the order
-        System.out.println(response.getOrder());
+       JOptionPane.showMessageDialog(null,response.getOrder());
 
     }
 
@@ -374,10 +367,27 @@ public  static Stock[] stock;
         //regex for validation
         String numberRegex = "^[+-]?([0-9]*[.])?[0-9]+$";
 
+        int amountOfOrders = 0;
+        String Amount = "";
+        boolean valid = false;
+
         //validate user input
-        String Amount = validateString("Enter the amount of orders to print: ", numberRegex);
-        //cast string to int
-        int amountOfOrders = Integer.parseInt(Amount);
+        while(!valid){
+            try{
+                Amount = validateString("Enter the amount of orders to print: ", numberRegex);
+                //cast string to int
+                amountOfOrders = Integer.parseInt(Amount);
+
+                if (amountOfOrders > stock.length)
+                    throw new IndexOutOfBoundsException("There is not enough orders to complete this request. Please try again!");
+                else
+                    valid = true;
+            }catch (IndexOutOfBoundsException e){
+                JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
+            }
+
+        }
+
 
         //async client
         warehouseServiceGrpc.warehouseServiceStub asyncStub = warehouseServiceGrpc.newStub(warehouseServiceChannel);
@@ -443,28 +453,24 @@ public  static Stock[] stock;
         JPanel menuPanel = new JPanel();
         JPanel orderPanel = new JPanel();
         JPanel inventoryPanel = new JPanel();
+        JPanel InventoryPanel = new JPanel();
         JPanel warehousePanel = new JPanel();
 
         //set grid
         GridLayout grid = new GridLayout(0,2);
-        GridBagConstraints c = new GridBagConstraints();
 
         menuPanel.setLayout(grid);
         orderPanel.setLayout(grid);
         inventoryPanel.setLayout(grid);
         warehousePanel.setLayout(grid);
-
-        c.weightx = 1;
-        c.weighty = 0.25;
-        c.insets = new Insets(5, 5, 5, 5);
-        c.gridwidth = GridBagConstraints.REMAINDER;
-        c.fill = GridBagConstraints.BOTH;
+        InventoryPanel.setLayout(grid);
 
         //Menu Buttons
         JButton mainMenuButton = new JButton("Main Menu");
         JButton orderServiceButton = new JButton("Order Service");
         JButton inventoryServiceButton = new JButton("Inventory Service");
         JButton warehouseServiceButton = new JButton("Warehouse Service");
+        JButton inButton = new JButton("Inventory test");
         JButton exitButton = new JButton("Exit");
 
         //Order buttons
@@ -494,28 +500,32 @@ public  static Stock[] stock;
         mainPanel.setLayout(cl);
 
         //order panel
-        orderPanel.add(createOrderButton,c);
-        orderPanel.add(getQuoteButton,c);
-        orderPanel.add(filterButton,c);
-        orderPanel.add(mainMenuButton,c);
+        orderPanel.add(createOrderButton);
+        orderPanel.add(getQuoteButton);
+        orderPanel.add(filterButton);
+        orderPanel.add(mainMenuButton);
 
         //Inventory panel
-        inventoryPanel.add(checkLowStockButton,c);
+        inventoryPanel.add(mainMenuButton);
+        inventoryPanel.add(exitButton);
+        inventoryPanel.add(checkLowStockButton);
         inventoryPanel.add(addStockButton);
-        inventoryPanel.add(mainMenuButton,c);
-        inventoryPanel.add(exitButton,c);
+
+        InventoryPanel.add(mainMenuButton);
+        InventoryPanel.add(exitButton);
+
 
         //Warehouse panel
-        warehousePanel.add(generateReportButton,c);
-        warehousePanel.add(findOrderButton,c);
-        warehousePanel.add(printSalesButton,c);
-        warehousePanel.add(mainMenuButton,c);
+        warehousePanel.add(generateReportButton);
+        warehousePanel.add(findOrderButton);
+        warehousePanel.add(printSalesButton);
+        warehousePanel.add(mainMenuButton);
 
         //menu panel
-        menuPanel.add(orderServiceButton,c);
-        menuPanel.add(inventoryServiceButton,c);
-        menuPanel.add(warehouseServiceButton,c);
-        menuPanel.add(exitButton,c);
+        menuPanel.add(orderServiceButton);
+        menuPanel.add(inventoryServiceButton);
+        menuPanel.add(warehouseServiceButton);
+        menuPanel.add(exitButton);
 
         //container panel
         mainPanel.add(menuPanel,"1");
@@ -546,13 +556,6 @@ public  static Stock[] stock;
                         .usePlaintext() //forces ssl to stop (do not use during development
                         .build();
 
-                JLabel load = new JLabel("Loading jmDNS, please wait....");
-
-                menuPanel.add(load);
-
-                frame.revalidate();
-                frame.repaint();
-
                 cl.show(mainPanel,"2");
             }
         });
@@ -569,21 +572,14 @@ public  static Stock[] stock;
                         .usePlaintext() //forces ssl to stop (do not use during development
                         .build();
 
-                JLabel load = new JLabel("Loading jmDNS, please wait....");
-
-                menuPanel.add(load);
-
-                frame.revalidate();
-                frame.repaint();
-
                 cl.show(mainPanel,"3");
             }
         });
         warehouseServiceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                ServiceInfo serviceInfoWarehouse = WareHouseServiceDiscovery.runjmDNS(serviceType);
+                ServiceInfo serviceInfoWarehouse;
+                serviceInfoWarehouse = WareHouseServiceDiscovery.runjmDNS(serviceType);
 
                 int warehousePort = 50052;
 
@@ -592,6 +588,12 @@ public  static Stock[] stock;
                         .build();
 
                 cl.show(mainPanel,"4");
+            }
+        });
+        inButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(mainPanel,"5");
             }
         });
         exitButton.addActionListener(new ActionListener() {
@@ -670,128 +672,76 @@ public  static Stock[] stock;
 
     }
 
-
-    private JPanel button(String text) {
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-
-        c.weightx = 1;
-        c.weighty = .25;
-        c.insets = new Insets(5, 5, 5, 5);
-        c.gridwidth = GridBagConstraints.REMAINDER;
-        c.fill = GridBagConstraints.BOTH;
-
-        JButton myButton = new JButton(text);
-        myButton.setMargin(new Insets(10,10,10,10));
-        myButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Order made");
-            }
-        });
-
-        panel.add(myButton,c);
-
-
-        return panel;
-    }
-
-    private JPanel createOrder(){
-        JPanel jPanel = new JPanel();
-
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-
-        c.weightx = 1;
-        c.weighty = .25;
-        c.insets = new Insets(5, 5, 5, 5);
-        c.gridwidth = GridBagConstraints.REMAINDER;
-        c.fill = GridBagConstraints.BOTH;
-
-        JTextField product, productReply;
-        JTextField quantity, quantityReply;
-
-        JLabel label = new JLabel("Enter product");
-        product = new JTextField("",10);
-
-        panel.add(label);
-        panel.add(product);
-
-        return  jPanel;
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton button = (JButton)e.getSource();
-        String label = button.getActionCommand();
-
-        if(label.equals("Close application")){
-            System.exit(0);
-        }
-        else if(label.equals("Order Service")){
-
-            String host = "localhost";
-
-            ServiceInfo serviceInfoOrder;
-            String serviceType = "_grpc._tcp.local.";
-            //retrieve service info for each service
-            serviceInfoOrder = OrderServiceDiscovery.runjmDNS(serviceType);
-
-            int orderPort = 50051;
-
-            ManagedChannel orderServiceChannel = ManagedChannelBuilder.forAddress(host, orderPort)
-                    .usePlaintext() //forces ssl to stop (do not use during development
-                    .build();
-//            OrderService
-            createOrder(orderServiceChannel);
-            filterPrice(orderServiceChannel);
-            produceQuote(orderServiceChannel);
-        }
-        else if(label.equals("Inventory Service")){
-            String host = "localhost";
-
-            String serviceType = "_grpc._tcp.local.";
-
-            ServiceInfo serviceInfoInventory;
-            serviceInfoInventory = InventoryServiceDiscovery.runjmDNS(serviceType);
-            int inventoryPort = serviceInfoInventory.getPort();
-
-            ManagedChannel inventoryServiceChannel = ManagedChannelBuilder.forAddress(host, inventoryPort)
-            .usePlaintext() //forces ssl to stop (do not use during development
-            .build();
-
-            //InventoryService
-            addProductToStock(inventoryServiceChannel);
-            checkLowStock(inventoryServiceChannel);
-
-            //do something
-            System.out.println("\nShutting down channel");
-            inventoryServiceChannel.shutdown();
-        }
-        else if(label.equals("Warehouse Service")){
-            String host = "localhost";
-
-            ServiceInfo serviceInfoWarehouse;
-            String serviceType = "_grpc._tcp.local.";
-            //retrieve service info for each service
-            serviceInfoWarehouse = WareHouseServiceDiscovery.runjmDNS(serviceType);
-
-            int warehousePort = serviceInfoWarehouse.getPort();
-
-            ManagedChannel warehouseServiceChannel = ManagedChannelBuilder.forAddress(host, warehousePort)
-                    .usePlaintext() //forces ssl to stop (do not use during development
-                    .build();
-
-            //WarehouseService
-            generateWarehouseReport(warehouseServiceChannel);
-            findOrderByOrderNumber(warehouseServiceChannel);
-            checkLastOrders(warehouseServiceChannel);
-
-            //do something
-            System.out.println("\nShutting down channel");
-            warehouseServiceChannel.shutdown();
-        }
+//        JButton button = (JButton)e.getSource();
+//        String label = button.getActionCommand();
+//
+//        if(label.equals("Close application")){
+//            System.exit(0);
+//        }
+//        else if(label.equals("Order Service")){
+//
+//            String host = "localhost";
+//
+//            ServiceInfo serviceInfoOrder;
+//            String serviceType = "_grpc._tcp.local.";
+//            //retrieve service info for each service
+//            serviceInfoOrder = OrderServiceDiscovery.runjmDNS(serviceType);
+//
+//            int orderPort = 50051;
+//
+//            ManagedChannel orderServiceChannel = ManagedChannelBuilder.forAddress(host, orderPort)
+//                    .usePlaintext() //forces ssl to stop (do not use during development
+//                    .build();
+////            OrderService
+//            createOrder(orderServiceChannel);
+//            filterPrice(orderServiceChannel);
+//            produceQuote(orderServiceChannel);
+//        }
+//        else if(label.equals("Inventory Service")){
+//            String host = "localhost";
+//
+//            String serviceType = "_grpc._tcp.local.";
+//
+//            ServiceInfo serviceInfoInventory;
+//            serviceInfoInventory = InventoryServiceDiscovery.runjmDNS(serviceType);
+//            int inventoryPort = serviceInfoInventory.getPort();
+//
+//            ManagedChannel inventoryServiceChannel = ManagedChannelBuilder.forAddress(host, inventoryPort)
+//            .usePlaintext() //forces ssl to stop (do not use during development
+//            .build();
+//
+//            //InventoryService
+//            addProductToStock(inventoryServiceChannel);
+//            checkLowStock(inventoryServiceChannel);
+//
+//            //do something
+//            System.out.println("\nShutting down channel");
+//            inventoryServiceChannel.shutdown();
+//        }
+//        else if(label.equals("Warehouse Service")){
+//            String host = "localhost";
+//
+//            ServiceInfo serviceInfoWarehouse;
+//            String serviceType = "_grpc._tcp.local.";
+//            //retrieve service info for each service
+//            serviceInfoWarehouse = WareHouseServiceDiscovery.runjmDNS(serviceType);
+//
+//            int warehousePort = serviceInfoWarehouse.getPort();
+//
+//            ManagedChannel warehouseServiceChannel = ManagedChannelBuilder.forAddress(host, warehousePort)
+//                    .usePlaintext() //forces ssl to stop (do not use during development
+//                    .build();
+//
+//            //WarehouseService
+//            generateWarehouseReport(warehouseServiceChannel);
+//            findOrderByOrderNumber(warehouseServiceChannel);
+//            checkLastOrders(warehouseServiceChannel);
+//
+//            //do something
+//            System.out.println("\nShutting down channel");
+//            warehouseServiceChannel.shutdown();
+//        }
     }
 }

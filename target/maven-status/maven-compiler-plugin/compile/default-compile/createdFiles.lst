@@ -20,6 +20,7 @@ com\grpc\orderService\FilterPriceRequest$Builder.class
 com\grpc\stockCheckerService\addStockResponseOrBuilder.class
 com\grpc\orderService\orderResponseOrBuilder.class
 com\grpc\warehouseService\orderNumberRequest.class
+com\grpc\client\ClientController$14.class
 com\grpc\stockCheckerService\addStockResponse.class
 com\grpc\orderService\orderRequest$Builder.class
 com\grpc\stockCheckerService\InventoryManagement$1.class
@@ -66,10 +67,12 @@ com\grpc\orderService\FilterPriceRequest$1.class
 com\grpc\orderService\product$Builder.class
 com\grpc\orderService\StockQuoteResponse$Builder.class
 com\grpc\client\ClientController$5.class
+com\grpc\client\ClientController$15.class
 com\grpc\orderService\FilterPriceRequestOrBuilder.class
 com\grpc\warehouseService\warehouseServiceGrpc$warehouseServiceMethodDescriptorSupplier.class
 com\grpc\orderService\orderServiceGrpc.class
 com\grpc\orderService\AutomateOrdersImpl$1.class
+com\grpc\client\ClientController$13.class
 com\grpc\warehouseService\orderNumberResponse.class
 com\grpc\warehouseService\warehouseServiceGrpc$warehouseServiceBaseDescriptorSupplier.class
 com\grpc\client\ClientController$8.class
@@ -77,6 +80,7 @@ com\grpc\orderService\StockQuoteResponse.class
 com\grpc\warehouseService\lastOrdersResponse.class
 com\grpc\client\ClientController.class
 com\grpc\stockCheckerService\inventoryCheckerServiceGrpc$inventoryCheckerServiceFutureStub.class
+com\grpc\client\ClientController$16.class
 com\grpc\orderService\orderRequest$1.class
 com\grpc\stockCheckerService\inventoryCheckerServiceGrpc$MethodHandlers.class
 com\grpc\warehouseService\reportRequest$1.class
@@ -99,6 +103,7 @@ com\grpc\warehouseService\orderNumberResponseOrBuilder.class
 com\grpc\warehouseService\warehouseServiceGrpc$warehouseServiceFileDescriptorSupplier.class
 com\grpc\warehouseService\orderNumberRequest$1.class
 com\grpc\warehouseService\lastOrdersRequest.class
+com\grpc\client\ClientController$10.class
 com\grpc\orderService\productOrBuilder.class
 com\grpc\orderService\orderServiceGrpc$orderServiceFutureStub.class
 com\grpc\stockCheckerService\inventoryCheckerServiceGrpc$inventoryCheckerServiceMethodDescriptorSupplier.class
@@ -112,6 +117,7 @@ com\grpc\orderService\StockQuoteRequestOrBuilder.class
 com\grpc\warehouseService\reportResponse$Builder.class
 com\grpc\warehouseService\reportResponse.class
 com\grpc\warehouseService\orderNumberRequestOrBuilder.class
+com\grpc\client\ClientController$11.class
 com\grpc\orderService\StockQuoteRequest$Builder.class
 com\grpc\warehouseService\WareHouseServiceDiscovery.class
 com\grpc\client\ClientController$3.class
@@ -120,6 +126,7 @@ com\grpc\warehouseService\lastOrdersRequestOrBuilder.class
 com\grpc\stockCheckerService\addStockResponse$Builder.class
 com\grpc\client\ClientController$2.class
 com\grpc\orderService\OrderServiceDiscovery$1.class
+com\grpc\client\ClientController$12.class
 com\grpc\orderService\orderServiceGrpc$orderServiceBlockingStub.class
 com\grpc\stockCheckerService\lowStockResponse$1.class
 com\grpc\client\ClientController$9.class
